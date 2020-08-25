@@ -1,0 +1,53 @@
+.r-m-e {
+    // Font size
+    &.s {
+        font-size: 12px;
+    }
+
+    @for $i from 9 through 18 {
+        &.s#{$i} {
+            font-size: $i + px;
+        }
+    }
+
+    // Font weight
+    $weights: 100, 200, 300, 400, 500, 600, 700, 800, 900;
+    @each $weight in $weights {
+        &.w#{$weight} {
+            font-weight: $weight;
+        }
+    }
+
+    // Font lines
+    &.l {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        -webkit-line-clamp: 1;
+    }
+
+    $lines: 1, 2, 3, 4, 5;
+    @each $l in $lines {
+        &.l#{$l} {
+            -webkit-line-clamp: $l;
+        }
+    }
+
+    &.underline {
+        text-decoration: underline;
+    }
+
+    &.lineThrough {
+        text-decoration: line-through;
+    }
+
+    &.hoverUnderline {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &.pointer {
+        cursor: pointer;
+    }
+}

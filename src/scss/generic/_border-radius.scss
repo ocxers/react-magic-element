@@ -1,0 +1,15 @@
+.r-m-e {
+    $radius:
+            r 100%,
+            r1 1px,
+            r2 2px,
+            r3 3px,
+            r4 4px,
+            r5 5px,
+            r10 10px;
+    @each $n, $r in $radius {
+        &--#{$n} {
+            border-radius: $r;
+        }
+    }
+}

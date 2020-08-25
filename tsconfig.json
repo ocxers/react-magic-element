@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "./build",
+    "rootDir": "src",
+    "esModuleInterop": true,
+    "jsx": "react",
+    "strict": true,
+    "lib": ["es6"],
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "target": "es6"
+  },
+  "compileOnSave": true,
+  "include": ["src"],
+  "files": [
+    "node_modules/typescript/lib/lib.es6.d.ts"
+  ],
+  "exclude": ["node_modules"]
+}
