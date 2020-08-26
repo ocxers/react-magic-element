@@ -1,0 +1,28 @@
+.rme {
+    &--alert {
+        display: flex;
+        padding: 10px 15px;
+        border-radius: 2px;
+        border: 1px solid;
+        justify-content: space-between;
+    }
+}
+
+$colors:
+        primary $primary $white,
+        secondary $secondary $white,
+        success $success $white,
+        danger $danger $white,
+        warning $warning $dark,
+        info $info $white,
+        light $light $dark,
+        dark $dark $white,
+        white $white $dark,
+        transparent $transparent $dark;
+
+@each $n, $c, $t in $colors {
+    .rme--alert.rme--#{$n} {
+        color: $c;
+        background-color: rgba($c, .2);
+    }
+}

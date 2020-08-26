@@ -1,4 +1,4 @@
-.r-m-e {
+.rme {
     $colors:
             primary $primary $white,
             secondary $secondary $white,
@@ -14,9 +14,14 @@
         &--#{$n} {
             color: $c;
         }
+
         &--bg-#{$n} {
             color: $tc;
             background-color: $c;
+        }
+
+        &--bc-#{$n} {
+            border-color: $c!important;
         }
     }
 }

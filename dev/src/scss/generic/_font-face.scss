@@ -1,26 +1,27 @@
-.r-m-e {
+.rme {
     // Font size
-    &.s {
+    &--fs {
         font-size: 12px;
     }
 
-    @for $i from 9 through 18 {
-        &.s#{$i} {
-            font-size: $i + px;
+    $sizes: 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 24, 32, 48, 64, 72;
+    @each $s in $sizes {
+        &--fs#{$s} {
+            font-size: $s + px;
         }
     }
 
     // Font weight
     $weights: 100, 200, 300, 400, 500, 600, 700, 800, 900;
     @each $weight in $weights {
-        &.w#{$weight} {
+        &--fw#{$weight} {
             font-weight: $weight;
         }
     }
 
     // Font lines
-    &.l {
-        display: -webkit-box;
+    &--l {
+        display: -webkit-box !important;
         -webkit-box-orient: vertical;
         overflow: hidden;
         -webkit-line-clamp: 1;
@@ -28,26 +29,43 @@
 
     $lines: 1, 2, 3, 4, 5;
     @each $l in $lines {
-        &.l#{$l} {
+        &--l#{$l} {
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
             -webkit-line-clamp: $l;
         }
     }
 
-    &.underline {
+    &--underline {
         text-decoration: underline;
     }
 
-    &.lineThrough {
+    &--lineThrough {
         text-decoration: line-through;
     }
 
-    &.hoverUnderline {
+    &--hoverUnderline {
         &:hover {
             text-decoration: underline;
         }
     }
 
-    &.pointer {
+    &--pointer {
         cursor: pointer;
+    }
+
+    &--center {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+    &--left {
+        text-align: right;
+        justify-content: flex-start;
+    }
+    &--right {
+        text-align: right;
+        justify-content: flex-end;
     }
 }

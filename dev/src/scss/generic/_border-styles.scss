@@ -1,0 +1,56 @@
+.rme {
+    $radius:
+            r 100%,
+            r1 1px,
+            r2 2px,
+            r3 3px,
+            r4 4px,
+            r5 5px,
+            r6 6px,
+            r7 7px,
+            r8 8px,
+            r9 9px,
+            r10 10px;
+    @each $n, $r in $radius {
+        &--#{$n} {
+            border-radius: $r;
+        }
+    }
+
+    &--border {
+        border: 1px solid;
+    }
+
+    @for $i from 1 through 10 {
+        &--bw#{$i} {
+            border-width: $i + px;
+        }
+        &--btw#{$i} {
+            border-top-width: $i + px;
+        }
+        &--brw#{$i} {
+            border-right-width: $i + px;
+        }
+        &--bbw#{$i} {
+            border-bottom-width: $i + px;
+        }
+        &--blw#{$i} {
+            border-left-width: $i + px;
+        }
+        &--bhw#{$i} {
+            border-left-width: $i + px;
+            border-right-width: $i + px;
+        }
+        &--bvw#{$i} {
+            border-top-width: $i + px;
+            border-bottom-width: $i + px;
+        }
+    }
+
+    $borderStyles: none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial, inherit;
+    @each $bs in $borderStyles {
+        &--bs-#{$bs} {
+            border-style: $bs;
+        }
+    }
+}

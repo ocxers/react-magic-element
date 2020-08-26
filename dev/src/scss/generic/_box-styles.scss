@@ -1,0 +1,18 @@
+.rme {
+    $sizes: tiny 12px, mini 16px, small 24px, medium 32px, big 48px,large 64px, huge 96px, gigantic 128px;
+
+    @each $n, $s in $sizes {
+        &--#{$n} {
+            width: $s;
+            height: $s;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+    }
+
+    &--shadow {
+        box-shadow: 5px 5px 10px rgba($dark, .2);
+    }
+}
