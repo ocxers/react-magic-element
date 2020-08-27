@@ -2,8 +2,16 @@ import React from 'react'
 import '../../scss/main.scss'
 import cx from 'classnames'
 
-const elements = ['a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'section', 'address']
+const elements = ['button', 'btn', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'section', 'address']
+const elementsMapping = {
+    btn: 'button',
+    button: 'button',
+    a: 'a'
+}
 const fontColors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white', 'transparent']
+const buttons = {
+    btn: ['button', 'btn']
+}
 const fontSizes = {
     fs: ['fontSize', 'fontSize9', 'fontSize10', 'fontSize11', 'fontSize12', 'fontSize13', 'fontSize14', 'fontSize15', 'fontSize16', 'fontSize17', 'fontSize18', 'fontSize24', 'fontSize32', 'fontSize48', 'fontSize64', 'fontSize72', 'fs', 'fs9', 'fs10', 'fs11', 'fs12', 'fs13', 'fs14', 'fs15', 'fs16', 'fs17', 'fs18', 'fs24', 'fs32', 'fs48', 'fs64', 'fs72']
 }
@@ -26,7 +34,7 @@ const borderWidths = {
     bhw: ['borderHorizontalWidth', 'borderHorizontalWidth1', 'borderHorizontalWidth2', 'borderHorizontalWidth3', 'borderHorizontalWidth4', 'borderHorizontalWidth5', 'borderHorizontalWidth6', 'borderHorizontalWidth7', 'borderHorizontalWidth8', 'borderHorizontalWidth9', 'borderHorizontalWidth10', 'bhw', 'bhw1', 'bhw2', 'bhw3', 'bhw4', 'bhw5', 'bhw6', 'bhw7', 'bhw8', 'bhw9', 'bhw10'],
     bvw: ['borderVerticalWidth', 'borderVerticalWidth1', 'borderVerticalWidth2', 'borderVerticalWidth3', 'borderVerticalWidth4', 'borderVerticalWidth5', 'borderVerticalWidth6', 'borderVerticalWidth7', 'borderVerticalWidth8', 'borderVerticalWidth9', 'borderVerticalWidth10', 'bvw', 'bvw1', 'bvw2', 'bvw3', 'bvw4', 'bvw5', 'bvw6', 'bvw7', 'bvw8', 'bvw9', 'bvw10']
 }
-const borderStyle = ['bsNone', 'bsHidden', 'bsDotted', 'bsDashed', 'bsSolid', 'bsDouble', 'bsGroove', 'bsRidge', 'bsInset', 'bsOutset', 'bsInitial', 'bsInherit']
+const borderStyle = ['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset', 'initial', 'inherit']
 const borderRadius = {
     r: ['radius', 'radius1', 'radius2', 'radius3', 'radius4', 'radius5', 'radius6', 'radius7', 'radius8', 'radius9', 'radius10', 'r', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10']
 }
@@ -61,6 +69,8 @@ const shapes = ['circle']
 const superLabel = (props: any) => {
     // const [classes, setClasses] = useState([] as any)
     const {
+        // default className
+        className,
         // Font weight
         fontWeight,
         fw,
@@ -107,7 +117,11 @@ const superLabel = (props: any) => {
         h1, h2, h3, h4, h5, h6,
         width, width100, height, height100, // height100 => height = 100%
         // Flex direction
-        row, col, fill
+        row, col, fill,
+        // Button
+        button, btn, plain, link,
+        // Disabled
+        disabled
     } = props
 
     const isBoolean = (b: any) => {
@@ -227,6 +241,10 @@ const superLabel = (props: any) => {
             (isBoolean(tag)) && 'rme--tag',
             // alert
             isBoolean(alert) && 'rme--alert',
+            // button
+            (button || btn || link) && 'rme--btn',
+            plain && 'rme--plain',
+            link && 'rme--link',
             // Font
             // Color
             getFontColorClass(),
@@ -275,6 +293,9 @@ const superLabel = (props: any) => {
             row && 'rme--row',
             col && 'rme--col',
             fill && 'rme--fill',
+
+            // disabled
+            disabled && 'rme--disabled'
         ]
     }
 
@@ -342,15 +363,20 @@ const superLabel = (props: any) => {
         let currElement = isBoolean(tag) ? 'span' : 'div'
         elements.map((el: any) => {
             if (props[el]) {
-                currElement = el
+                currElement = el === 'btn' ? 'button' : el
+                if (props.link && props.href) {
+                    currElement = 'a'
+                }
             }
         })
 
         let computerProps: any = {
-            href: props.href,
-            target: props.target,
-            className: cx('rme', ...getClasses()),
+            className: cx('rme', className, ...getClasses()),
             style: getStyles()
+        }
+
+        if (props.onClick) {
+            computerProps.onClick = props.onClick
         }
 
         if (props.href) {

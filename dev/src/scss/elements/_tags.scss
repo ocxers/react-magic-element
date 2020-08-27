@@ -1,5 +1,27 @@
 .rme {
     &--tag {
         display: inline-block;
+        font-feature-settings: 'tnum';
+        height: auto;
+        padding: 0 7px;
+        font-size: 12px;
+        line-height: 20px;
+        white-space: nowrap;
+        border: 1px solid $bdColor;
+        border-radius: 4px;
+        cursor: default;
+        opacity: 1;
+
+        &:not(:last-child) {
+            margin-right: 8px;
+        }
+    }
+}
+
+@each $n, $c, $tc, $ptc in $colors {
+    .rme--tag.rme--#{$n} {
+        border-color: $c;
+        background-color: $c;
+        color: $tc;
     }
 }

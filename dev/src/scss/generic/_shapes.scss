@@ -2,7 +2,8 @@
     &--circle {
         position: relative;
         display: flex;
-        border-radius: 100%;
+        box-sizing: border-box!important;
+        border-radius: 100%!important;
         .rme--circle-container {
             position: absolute;
             top: 0;
@@ -13,7 +14,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-sizing: border-box;
+            box-sizing: border-box!important;
         }
     }
 }

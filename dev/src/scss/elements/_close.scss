@@ -1,15 +1,17 @@
 .rme-close {
     display: inline-block;
-    font-size: inherit;
+    font-size: 1.2em;
     cursor: pointer;
     border-radius: 2px;
     padding: 0 5px 3px;
     margin-left: auto;
     align-self: flex-start;
+    opacity: .6;
     transition: all .3s;
 
     &:hover {
-        color: #fff;
-        background-color: rgba($dark, .4);
+        //color: #fff;
+        //background-color: rgba($dark, .4);
+        opacity: 1;
     }
 }

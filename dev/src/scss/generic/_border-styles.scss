@@ -1,16 +1,15 @@
 .rme {
-    $radius:
-            r 100%,
-            r1 1px,
-            r2 2px,
-            r3 3px,
-            r4 4px,
-            r5 5px,
-            r6 6px,
-            r7 7px,
-            r8 8px,
-            r9 9px,
-            r10 10px;
+    $radius: r 100%,
+    r1 1px,
+    r2 2px,
+    r3 3px,
+    r4 4px,
+    r5 5px,
+    r6 6px,
+    r7 7px,
+    r8 8px,
+    r9 9px,
+    r10 10px;
     @each $n, $r in $radius {
         &--#{$n} {
             border-radius: $r;
@@ -23,34 +22,34 @@
 
     @for $i from 1 through 10 {
         &--bw#{$i} {
-            border-width: $i + px;
+            border-width: $i + px !important;
         }
         &--btw#{$i} {
-            border-top-width: $i + px;
+            border-top-width: $i + px !important;
         }
         &--brw#{$i} {
-            border-right-width: $i + px;
+            border-right-width: $i + px !important;
         }
         &--bbw#{$i} {
-            border-bottom-width: $i + px;
+            border-bottom-width: $i + px !important;
         }
         &--blw#{$i} {
-            border-left-width: $i + px;
+            border-left-width: $i + px !important;
         }
         &--bhw#{$i} {
-            border-left-width: $i + px;
-            border-right-width: $i + px;
+            border-left-width: $i + px !important;
+            border-right-width: $i + px !important;
         }
         &--bvw#{$i} {
-            border-top-width: $i + px;
-            border-bottom-width: $i + px;
+            border-top-width: $i + px !important;
+            border-bottom-width: $i + px !important;
         }
     }
 
     $borderStyles: none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial, inherit;
     @each $bs in $borderStyles {
-        &--bs-#{$bs} {
-            border-style: $bs;
+        &--#{$bs} {
+            border-style: $bs !important;
         }
     }
 }

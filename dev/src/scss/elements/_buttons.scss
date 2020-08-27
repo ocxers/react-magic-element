@@ -1,0 +1,103 @@
+.rme {
+    &--btn {
+        border: 1px solid $dark;
+        background-color: $white;
+        color: $dark;
+        height: 32px;
+        padding: 0 15px;
+        font-size: 14px;
+        border-radius: 4px;
+        line-height: 1.499;
+        position: relative;
+        display: inline-block;
+        font-weight: 400;
+        white-space: nowrap;
+        text-align: center;
+        background-image: none;
+        transition: all .3s;
+        cursor: pointer;
+        box-sizing: content-box;
+
+        &:hover {
+            color: $primary;
+            border-color: rgba($primary, .7);
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &--link {
+        border-color: transparent !important;
+        background-color: transparent !important;
+        color: $primary;
+        align-items: center;
+        display: flex;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+@each $n, $c, $tc, $ptc in $colors {
+    .rme--btn.rme--#{$n} {
+        border-color: $c;
+        background-color: $c;
+        color: $tc;
+
+        &:hover {
+            color: $tc;
+            border-color: rgba($c, .8);
+            background-color: rgba($c, .8);
+        }
+    }
+    .rme--btn.rme--plain.rme--#{$n} {
+        border-color: $c;
+        background-color: $white;
+        color: $ptc;
+
+        &:hover {
+            color: $tc;
+            border-color: rgba($c, .8);
+            background-color: rgba($c, .8);
+        }
+    }
+    .rme--btn.rme--link.rme--#{$n} {
+        border-color: $c;
+        background-color: $c;
+        color: $c;
+
+        &:hover {
+            color: $c;
+            border-color: rgba($c, .8);
+            background-color: rgba($c, .8);
+        }
+    }
+}
+
+$btnSizes:
+/*  name        height      padding     font size   border radius*/
+    tiny        24px        7px         14px        4px,
+    mini        24px        7px         14px        4px,
+    small       24px        7px         14px        4px,
+    medium      32px        15px        14px        4px,
+    default     32px        15px        14px        4px,
+    big         40px        15px        16px        4px,
+    large       40px        15px        16px        4px,
+    huge        64px        24px        24px        4px,
+    gigantic    64px        24px        24px        4px;
+
+@each $n, $h, $p, $s, $r in $btnSizes {
+    .rme--btn.rme--#{$n} {
+        height: $h!important;
+        padding-left: $p;
+        padding-right: $p;
+        font-size: $s;
+        border-radius: $r;
+    }
+    .rme--btn.rme--#{$n}:not(.rme--circle) {
+        width: auto!important;
+    }
+}

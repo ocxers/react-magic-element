@@ -1,15 +1,4 @@
 .rme {
-    $colors:
-            primary $primary $white,
-            secondary $secondary $white,
-            success $success $white,
-            danger $danger $white,
-            warning $warning $dark,
-            info $info $white,
-            light $light $dark,
-            dark $dark $white,
-            white $white $dark,
-            transparent $transparent $dark;
     @each $n, $c, $tc in $colors {
         &--#{$n} {
             color: $c;
