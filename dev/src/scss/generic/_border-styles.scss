@@ -1,18 +1,20 @@
 .rme {
-    $radius: r 100%,
-    r1 1px,
-    r2 2px,
-    r3 3px,
-    r4 4px,
-    r5 5px,
-    r6 6px,
-    r7 7px,
-    r8 8px,
-    r9 9px,
-    r10 10px;
+    $radius:
+            r 100%,
+            r1 1px,
+            r2 2px,
+            r3 3px,
+            r4 4px,
+            r5 5px,
+            r6 6px,
+            r7 7px,
+            r8 8px,
+            r9 9px,
+            r10 10px;
     @each $n, $r in $radius {
         &--#{$n} {
             border-radius: $r;
+            overflow: hidden;
         }
     }
 

@@ -4,4 +4,10 @@
         background-size: cover;
         background-repeat: no-repeat;
     }
+
+    @each $n, $c in $colors {
+        &--bgc-#{$n} {
+            background-color: $c;
+        }
+    }
 }

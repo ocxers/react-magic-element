@@ -3,8 +3,8 @@
 
     @each $n, $s in $sizes {
         &--#{$n} {
-            width: $s;
-            height: $s;
+            width: $s!important;
+            height: $s!important;
             align-items: center;
             justify-content: center;
             overflow: hidden;
