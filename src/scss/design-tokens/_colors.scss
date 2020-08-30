@@ -8,3 +8,17 @@ $light:         #f8f9fa;
 $dark:          #343a40;
 $white:         #fff;
 $transparent:   transparent;
+$bdColor:       #d9d9d9;
+
+$colors:
+/*  color name      color          text color   plain text color  */
+    primary         $primary       $white       $primary,
+    secondary       $secondary     $white       $secondary,
+    success         $success       $white       $success,
+    danger          $danger        $white       $danger,
+    warning         $warning       $dark        $warning,
+    info            $info          $white       $info,
+    light           $light         $dark        $dark,
+    dark            $dark          $white       $dark,
+    white           $white         $dark        $dark,
+    transparent     $transparent   $dark        $transparent;

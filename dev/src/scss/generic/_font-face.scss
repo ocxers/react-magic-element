@@ -41,11 +41,11 @@
         text-decoration: underline;
     }
 
-    &--lineThrough {
+    &--line-through {
         text-decoration: line-through;
     }
 
-    &--hoverUnderline {
+    &--hover-underline {
         &:hover {
             text-decoration: underline;
         }

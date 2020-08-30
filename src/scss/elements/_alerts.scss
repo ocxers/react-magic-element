@@ -1,0 +1,16 @@
+.rme {
+    &--alert {
+        display: flex;
+        padding: 10px 15px;
+        border-radius: 2px;
+        border: 1px solid;
+        justify-content: space-between;
+    }
+}
+
+@each $n, $c, $t in $colors {
+    .rme--alert.rme--#{$n} {
+        color: $c;
+        background-color: rgba($c, .2);
+    }
+}

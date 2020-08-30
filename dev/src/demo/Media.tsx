@@ -4,11 +4,11 @@ import RME from "../components/ReactMagicElement"
 const img = 'https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/01/02/b1/0102b189-c0e8-1725-aeb1-a7d5b63e59ec/source/256x256bb.jpg'
 export default (props: any) => {
     return (
-        <RME p30 h100>
-            <RME section row mb15>
-                <RME avatar w={64} h={64} mr={21} circle fc={'primary'} bgImg={img}></RME>
+        <RME p30>
+            <RME section row mb15 w650>
+                <RME avatar w120 h120 mr={21} circle success bgImg={img}>Yes</RME>
                 <RME col fill>
-                    <RME h2 m0 mb5 primary>RME H2</RME>
+                    <RME h2 m0 mb5 primary hoverUnderline lineThrough pointer>RME H2</RME>
                     <RME>Warning Text Warning Text Warning Text Warning Text
                         Warning Text Warning TextWarning Text Warning Text Warning Text
                         Warning Text Warning TextWarning Text</RME>

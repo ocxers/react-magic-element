@@ -1,0 +1,41 @@
+.rme {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    width: 100%;
+
+    &--row {
+        flex-direction: row;
+    }
+
+    &--col {
+        flex-direction: column;
+        align-items: initial;
+    }
+
+    &--fill {
+        flex: 1 1;
+    }
+
+    &-container {
+        display: flex;
+        flex: 1 1;
+        flex-direction: row;
+        align-items: normal;
+    }
+
+    &--tag, &--btn {
+        width: initial;
+    }
+
+    &-align-items-center {
+        align-items: center;
+    }
+}
+
+span, button {
+    &.rme {
+        width: auto;
+    }
+}

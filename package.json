@@ -1,13 +1,17 @@
 {
   "name": "react-magic-element",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.3",
+  "description": "React magic element, with RME, you can layout, tag, alert, media etc.",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "scripts": {
     "build": "webpack"
   },
-  "author": "ocxers",
+  "author": {
+    "name": "ShengXing Chi",
+    "email": "ocxers@gmail.com",
+    "url": "https://github.com/ocxers"
+  },
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.7.5",

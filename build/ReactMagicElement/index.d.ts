@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import '../scss/main.scss';
-declare const superLabel: {
+declare const ReactMagicElement: {
     (props: any): JSX.Element;
     displayName: string;
 };
-export default superLabel;
+export default ReactMagicElement;

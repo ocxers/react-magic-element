@@ -1,27 +1,19 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import '../../scss/main.scss'
 import cx from 'classnames'
 import utils from './utils'
 
-const fontColors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white', 'transparent']
-
 const {elements, styleMappings, builtinClasses} = utils.mappingsAndClasses()
 const ReactMagicElement = (props: any) => {
-    const [elementType, setElementType] = useState('div')
-
-    useEffect(() => {
-        let currType = elementType
-        elements.map((el: any) => {
-            if (props[el]) {
-                currType = el === 'btn' ? 'button' : el
-                if (props.link && props.href) {
-                    currType = 'a'
-                }
+    let elementType = 'div'
+    elements.map((el: any) => {
+        if (props[el]) {
+            elementType = el === 'btn' ? 'button' : el
+            if (props.link && props.href) {
+                elementType = 'a'
             }
-        })
-
-        setElementType(currType)
-    }, [])
+        }
+    })
 
     const getPercentageHandler = (k: string) => {
         let arr = k.split(/-/g)
@@ -33,7 +25,7 @@ const ReactMagicElement = (props: any) => {
     }
 
     const getPixelHandler = (k: string) => {
-        let arr = k.split(/\d+/g)
+        let arr = k.split(/(\d+)/g)
         if (arr.length > 0 && arr[0] !== k) {
             return arr
         }
@@ -60,68 +52,69 @@ const ReactMagicElement = (props: any) => {
 
     let classNameList: Array<any> = []
     let styleList: any = {}
+    const loopCssProperties = (key: string, val: string) => {
+        let cssProperties: Array<string> = styleMappings[key]?.split(',') || []
+        cssProperties.map(k => {
+            styleList[k] = val
+        })
+    }
     const initialClassesAndStyles = () => {
-        classNameList = [
-            // tag
-            (isBoolean(props.tag)) && 'rme--tag',
-            // alert
-            isBoolean(props.alert) && 'rme--alert',
-            // button
-            (props.button || props.btn || props.link) && 'rme--btn',
-            props.plain && 'rme--plain',
-            props.link && 'rme--link',
-            // Text align
-            props.center && 'rme--center', props.right && 'rme--right', props.left && 'rme--left',
-            // Decoration
-            props.underline && 'rme--underline', props.hoverUnderline && 'rme--hoverUnderline', props.lineThrough && 'rme--lineThrough',
-            props.pointer && 'rme--pointer',
-            // // Background
-            (props.avatar || props.bgImg) && 'rme--bg-img',
-
-            // Box size
-            props.h100 && 'rme--h100',
-            props['h-100'] && 'rme--h-100',
-            props.w100 && 'rme--w100',
-            // flex direction
-            props.row && 'rme--row',
-            props.col && 'rme--col',
-            props.fill && 'rme--fill',
-
-            // disabled
-            props.disabled && 'rme--disabled',
-
-            // group
-            props.group && 'rme--group'
-        ]
+        classNameList = []
 
         styleList = {}
         let keys: Array<string> = Object.keys(props)
 
         keys.map((key: string) => {
             let fmtKey = utils.formatKey(key)
+            if (['button', 'btn', 'link'].indexOf(fmtKey) > -1) {
+                classNameList.push('rme--btn')
+            }
+            if (fmtKey === 'hover-underline') {
+                classNameList.push('rme--hover-underline')
+            }
+            if (fmtKey === 'line-through') {
+                classNameList.push('rme--line-through')
+            }
+            if (fmtKey === 'bg-img') {
+                classNameList.push('rme--bg-img')
+            }
 
-            if (isBoolean(props[key]) && builtinClasses?.includes(fmtKey)) {
-                classNameList.push('rme--' + fmtKey)
-            } else {
-                if (key === 'b') {
-                    styleList[styleMappings[key]] = props[key]
+            if (!(utils.reservedWord.indexOf(key) > -1)) {
+                let gridKey = utils.checkGridKey(key)
+
+                if (gridKey) {
+                    classNameList.push('rme--' + gridKey)
+                } else if (isBoolean(props[key]) && builtinClasses?.includes(fmtKey)) {
+                    classNameList.push('rme--' + fmtKey)
                 } else {
-                    let percentage = getPercentageHandler(key)
-                    if (percentage) {
-                        styleList[percentage[0]] = percentage[1] + '%'
-                    } else {
-                        if (Object.keys(styleMappings).includes(key)) {
-                            styleList[styleMappings[key]] = getValue(props[key])
-                        }
-                    }
-
-                    let pixel = getPixelHandler(key)
-                    if (pixel) {
-                        styleList[pixel[0]] = pixel[1] + 'px'
-                    } else {
-                        if (Object.keys(styleMappings).includes(key)) {
-                            styleList[styleMappings[key]] = getValue(props[key])
-                        }
+                    switch (key) {
+                        case 'b':
+                            loopCssProperties(key, props[key])
+                            break
+                        default:
+                            if (!isBoolean(props[key])) {
+                                loopCssProperties(key, props[key])
+                            } else {
+                                if (key.indexOf('-') > -1) {
+                                    let percentage = getPercentageHandler(key)
+                                    if (percentage) {
+                                        loopCssProperties(percentage[0], percentage[1] + '%')
+                                    } else {
+                                        if (Object.keys(styleMappings).indexOf(key) > -1) {
+                                            loopCssProperties(key, getValue(props[key]))
+                                        }
+                                    }
+                                } else {
+                                    let pixel = getPixelHandler(key)
+                                    if (pixel) {
+                                        loopCssProperties(pixel[0], pixel[1] + 'px')
+                                    } else {
+                                        if (Object.keys(styleMappings).indexOf(key) > -1) {
+                                            loopCssProperties(key, getValue(props[key]))
+                                        }
+                                    }
+                                }
+                            }
                     }
                 }
             }
@@ -131,13 +124,15 @@ const ReactMagicElement = (props: any) => {
     initialClassesAndStyles()
 
     const getCloseIcon = () => {
-            if (props.closable || props.onClose) {
-                return (
-                    <span onClick={props.onClose}
-                          className={'rme-close'}>&times;</span>
-                )
-            }
+        if (props.closable || props.onClose) {
+            return (
+                <span onClick={props.onClose}
+                      className={'rme-close'}>&times;</span>
+            )
+        } else {
+            return <></>
         }
+    }
 
     const getChildren = () => {
         if (props.alert) {
