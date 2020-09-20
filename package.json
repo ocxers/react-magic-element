@@ -1,6 +1,6 @@
 {
   "name": "react-magic-element",
-  "version": "0.0.3",
+  "version": "0.0.6",
   "description": "React magic element, with RME, you can layout, tag, alert, media etc.",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -28,7 +28,6 @@
     "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@material/react-button": "^0.15.0",
     "@types/classnames": "^2.2.10",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",

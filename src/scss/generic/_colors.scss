@@ -12,5 +12,16 @@
         &--bc-#{$n} {
             border-color: $c!important;
         }
+
+        .rme--plain.rme--#{$n} {
+            border-color: $c;
+            background-color: transparent!important;
+            color: $c;
+
+            &:hover {
+                color: rgba($c, .8);
+                border-color: rgba($c, .8);
+            }
+        }
     }
 }

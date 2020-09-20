@@ -9,12 +9,14 @@
         flex-direction: row;
     }
 
-    &--col {
+    &--d-row {
+        flex-direction: row;
+    }
+    &--d-col {
         flex-direction: column;
-        align-items: initial;
     }
 
-    &--fill {
+    &--fill, &--rest {
         flex: 1 1;
     }
 

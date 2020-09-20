@@ -8,6 +8,8 @@ let cssProperties: any = {
         values: [
             // color
             'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white', 'transparent',
+            // color
+            'bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-light', 'bg-dark', 'bg-white', 'bg-transparent',
             // circle
             'circle',
             // tag
@@ -19,11 +21,11 @@ let cssProperties: any = {
             // link
             'link',
             // text align
-            'left', 'center', 'right',
+            'left', 'center', 'right', 'top', 'middle', 'bottom',
             // text decoration
             'underline', 'hover-underline', 'line-through', 'pointer',
-            // row, col, fill
-            'row', 'col', 'fill',
+            // row, col, fill, rest
+            'row', 'col', 'fill', 'rest', 'd-row', 'd-col',
             // disabled
             'disabled',
             // group
@@ -123,15 +125,6 @@ const formatHVValue = (val: string) => {
 }
 
 const initialBuiltinClassAndStyleMappings = () => {
-    let ls = JSON.parse(localStorage.getItem('rme_builtin_class_style_mappings') || '{}')
-    if (ls && ls.styleMappings && false) {
-        return {
-            elements: elements,
-            styleMappings: ls.styleMappings,
-            builtinClasses: ls.builtinClasses
-        }
-    }
-
     let keys = Object.keys(cssProperties)
     let groups: any = {}
     let mappings: any = {}
@@ -146,6 +139,7 @@ const initialBuiltinClassAndStyleMappings = () => {
             mappings[cssProperties[key].shortcut] = formatHVValue(key)
             if (cssProperties[key].directions) {
                 cssProperties[key].directions.map((d: string) => {
+                    mappings[cssProperties[key].shortcut + d.charAt(0)] = formatHVValue(key + capitalize(d))
                     if (cssProperties[key].attributes) {
                         cssProperties[key].attributes.map((a: string) => {
                             groups[cssProperties[key].shortcut + a.charAt(0)] = 1
@@ -185,12 +179,10 @@ const initialBuiltinClassAndStyleMappings = () => {
         }
     })
 
-    let rme_builtin_class_style_mappings = {elements, styleMappings: mappings, builtinClasses: Object.keys(groups)}
-    localStorage.setItem('rme_builtin_class_style_mappings', JSON.stringify(rme_builtin_class_style_mappings))
-    return rme_builtin_class_style_mappings
+    return {elements, styleMappings: mappings, builtinClasses: Object.keys(groups)}
 }
 
-export default {
+const utils =  {
     mappingsAndClasses: initialBuiltinClassAndStyleMappings,
     formatKey(key: string) {
         return key.replace(/[A-Z]/g, match => {
@@ -210,5 +202,65 @@ export default {
             return null
         }
     },
+    getPercentageHandler(k: string) {
+        let arr = k.split(/-/g)
+        if (arr.length > 0 && arr[0] !== k) {
+            return arr
+        }
+
+        return null
+    },
+    getPixelHandler(k: string) {
+        let arr = k.split(/(\d+)/g)
+        if (arr.length > 0 && arr[0] !== k) {
+            return arr
+        }
+
+        return null
+    },
+    isBoolean(b: any) {
+        return typeof b === 'boolean'
+    },
+    setConfig(config: any) {
+        let colorCssProperties: any = {}
+        Object.keys(config.colors).map((key: any) => {
+            const color = config.colors[key]
+            colorCssProperties['rme--' + key] = {
+                color: color[0]
+            }
+            colorCssProperties['rme--bg-' + key] = {
+                backgroundColor: color[0]
+            }
+            colorCssProperties['rme--btn-tag'] = {
+                borderColor: color[0],
+                backgroundColor: color[0],
+                color: color[1]
+            }
+            colorCssProperties['rme--btn-tag-plain'] = {
+                borderColor: color[0],
+                color: color[0]
+            }
+        })
+
+        // rmeConfig = config
+        utils.rmeConfig.colors = colorCssProperties
+    },
+    getValue(val: any) {
+        if (!utils.isBoolean(val) && val) {
+            val = val.toString()
+            if (val.indexOf('%') > -1) {
+                return val
+            } else {
+                return val.replace(/px/, '') + 'px'
+            }
+        } else {
+            return val
+        }
+    },
+    rmeConfig: {
+        colors: {} as any
+    } as any,
     reservedWord: elements
 }
+
+export default utils

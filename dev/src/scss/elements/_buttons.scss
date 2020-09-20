@@ -41,22 +41,11 @@
     }
 }
 
-@each $n, $c, $tc, $ptc in $colors {
+@each $n, $c, $tc in $colors {
     .rme--btn.rme--#{$n} {
         border-color: $c;
         background-color: $c;
         color: $tc;
-
-        &:hover {
-            color: $tc;
-            border-color: rgba($c, .8);
-            background-color: rgba($c, .8);
-        }
-    }
-    .rme--btn.rme--plain.rme--#{$n} {
-        border-color: $c;
-        background-color: $white;
-        color: $ptc;
 
         &:hover {
             color: $tc;

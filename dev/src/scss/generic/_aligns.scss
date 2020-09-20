@@ -1,0 +1,30 @@
+.rme {
+    &--center {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+
+        > rme {
+            margin-top: auto;
+            margin-left: auto;
+        }
+    }
+    &--left {
+        text-align: right;
+        justify-content: flex-start;
+    }
+    &--right {
+        text-align: right;
+        justify-content: flex-end;
+    }
+    &--top {
+        margin-bottom: auto;
+    }
+    &--middle {
+        margin-bottom: auto;
+        margin-top: auto;
+    }
+    &--bottom {
+        margin-top: auto;
+    }
+}

@@ -1,2 +1,2 @@
-import ReactMagicElement from './ReactMagicElement';
-export default ReactMagicElement;
+import RME from './ReactMagicElement';
+export default RME;

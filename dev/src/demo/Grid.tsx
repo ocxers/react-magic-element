@@ -5,7 +5,9 @@ import RME from "../components/ReactMagicElement"
 export default (props: any) => {
     return (
         <RME>
-            <RME xs1 bgc-primary>1</RME>
+            <RME w-86 b3 btw6 bc='red'>
+                <RME md5 sm12 xs16 bgc-primary>md5 sm12 xs16</RME>
+            </RME>
             <RME col2 bgc-danger>2</RME>
             <RME col3 bgc-primary>3</RME>
             <RME col4 bgc-danger>4</RME>

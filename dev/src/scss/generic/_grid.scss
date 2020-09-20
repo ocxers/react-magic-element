@@ -28,61 +28,29 @@
             flex: 0 0 $pp;
         }
 
-        // width px
-        &--w#{$p} {
-            flex: 0 0 $p + px;
-        }
-
         // height percent
-        &--h#{$p} {
+        &--h-#{$p} {
             height: $pp!important;
             overflow-y: auto;
         }
+    }
 
-        // width px
-        &--h-#{$p} {
-            height: $p + px;
+    &--g {
+        //margin-left: attr(gutter);
+        margin-left: var(--gutter);
+        margin-right: var(--gutter);
+        box-sizing: border-box;
+        &.rme {
+            width: auto;
+        }
+        >.rme {
+            padding-left: var(--child-gutter);
+            padding-right: var(--child-gutter);
         }
     }
 
     @include make-grid();       //
     //@include make-grid(-xs);  // <576px
-
-    // Extra Extra Large grid
-    //
-    // Columns, offsets, pushes, and pulls for the full hd device range.
-    @media (min-width: $screen-xxl-min) {
-        @include make-grid(-xxl);       // >= 1600px
-    }
-
-    // Extra Large grid
-    //
-    // Columns, offsets, pushes, and pulls for the full hd device range.
-    @media (max-width: $screen-xl-max) {
-        @include make-grid(-xl);        // >= 1200px
-    }
-
-    // Large grid
-    //
-    // Columns, offsets, pushes, and pulls for the large desktop device range.
-    @media (max-width: $screen-lg-max) {
-        @include make-grid(-lg);        // >= 992px
-    }
-
-    // Medium grid
-    //
-    // Columns, offsets, pushes, and pulls for the desktop device range.
-    @media (max-width: $screen-md-max) {
-        @include make-grid(-md);        // >= 768px
-    }
-
-    // Small grid
-    //
-    // Columns, offsets, pushes, and pulls for the small device range, from phones
-    // to tablets.
-    @media (max-width: $screen-sm-max) {
-        @include make-grid(-sm);        // >= 576px
-    }
 
     // Extra Small grid
     //
@@ -90,5 +58,41 @@
     // to tablets.
     @media (max-width: $screen-xs-max) {
         @include make-grid(-xs);        // < 576px
+    }
+
+    // Small grid
+    //
+    // Columns, offsets, pushes, and pulls for the small device range, from phones
+    // to tablets.
+    @media (min-width: $screen-sm-min) {
+        @include make-grid(-sm);        // >= 576px
+    }
+
+    // Medium grid
+    //
+    // Columns, offsets, pushes, and pulls for the desktop device range.
+    @media (min-width: $screen-md-min) {
+        @include make-grid(-md);        // >= 768px
+    }
+
+    // Large grid
+    //
+    // Columns, offsets, pushes, and pulls for the large desktop device range.
+    @media (min-width: $screen-lg-min) {
+        @include make-grid(-lg);        // >= 992px
+    }
+
+    // Extra Large grid
+    //
+    // Columns, offsets, pushes, and pulls for the full hd device range.
+    @media (min-width: $screen-xl-min) {
+        @include make-grid(-xl);        // >= 1200px
+    }
+
+    // Extra Extra Large grid
+    //
+    // Columns, offsets, pushes, and pulls for the full hd device range.
+    @media (min-width: $screen-xxl-min) {
+        @include make-grid(-xxl);       // >= 1600px
     }
 }

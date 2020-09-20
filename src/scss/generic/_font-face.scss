@@ -54,18 +54,4 @@
     &--pointer {
         cursor: pointer;
     }
-
-    &--center {
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-    }
-    &--left {
-        text-align: right;
-        justify-content: flex-start;
-    }
-    &--right {
-        text-align: right;
-        justify-content: flex-end;
-    }
 }
