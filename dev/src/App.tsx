@@ -31,27 +31,27 @@ const img = 'https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/01/02/b1/0102
 
 function App() {
     return (
-        <RME primary h300 center bg-img={img}>
-            {/*<RME w1024>*/}
-            {/*    <RME bg-primary txt-right>primary</RME>*/}
-            {/*    <RME bg-light center>*/}
-            {/*        <RME w120 bg-success txt-center>success</RME>*/}
-            {/*        <RME w120 bg-secondary txt-center>secondary</RME>*/}
-            {/*    </RME>*/}
-            {/*    <RME bg-danger>danger</RME>*/}
-            {/*    <RME bg-success>success</RME>*/}
-            {/*    <RME bg-secondary>secondary</RME>*/}
-            {/*</RME>*/}
-            {/*<Layout/>*/}
-            {/*/!*<Main/>*!/*/}
-            {/*<Media/>*/}
-            {/*<Tag/>*/}
-            {/*<Button/>*/}
-            {/*<Alert/>*/}
-            {/*<Grid/>*/}
-            {/*<RME tc fr bg-primary w240>width-100</RME>*/}
-            {/*<RME tc fr bg-gray xs24 sm16 md12 lg10 xl8 xxl6>xs12 sm8 md6 lg5 xl4 xxl2</RME>*/}
-            {/*<RME tc fr bg-primary rest>width-100</RME>*/}
+        <RME primary h300 center>
+            <RME w1024>
+                <RME bg-primary txt-right>primary</RME>
+                <RME bg-light center>
+                    <RME w120 bg-success txt-center>success</RME>
+                    <RME w120 bg-secondary txt-center>secondary</RME>
+                </RME>
+                <RME bg-danger bg-img={img}>danger</RME>
+                <RME bg-success>success</RME>
+                <RME bg-secondary>secondary</RME>
+            </RME>
+            <Layout/>
+            {/*<Main/>*/}
+            <Media/>
+            <Tag/>
+            <Button/>
+            <Alert/>
+            <Grid/>
+            <RME tc fr bg-primary w240>width-100</RME>
+            <RME tc fr bg-gray xs24 sm16 md12 lg10 xl8 xxl6>xs12 sm8 md6 lg5 xl4 xxl2</RME>
+            <RME tc fr bg-primary rest>width-100</RME>
         </RME>
     )
 }

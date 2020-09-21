@@ -1,8 +1,6 @@
 import React from 'react'
 import '../../scss/main.scss'
-import cx from 'classnames'
 import utils from './utils'
-import _ from 'lodash'
 
 const {elements, styleMappings, builtinClasses} = utils.mappingsAndClasses()
 const RME = (props: any) => {
@@ -18,10 +16,9 @@ const RME = (props: any) => {
         }
     })
 
-    let keys = _.keys(props)
+    let keys = Object.keys(props)
     let classNameList: Array<any> = []
     let styleList: any = {}
-    let gutter: any = ''
     const loopCssProperties = (key: string, val: string) => {
         (styleMappings[key]?.split(',') || []).map((k: any) => {
             styleList[k] = val
@@ -34,8 +31,6 @@ const RME = (props: any) => {
 
         Object.keys(props).map((key: string) => {
             let fmtKey = utils.formatKey(key)
-
-            console.log(fmtKey)
             if (['button', 'btn', 'link'].indexOf(fmtKey) > -1) {
                 classNameList.push('rme--btn')
             }
@@ -104,7 +99,6 @@ const RME = (props: any) => {
         })
     }
 
-    console.log('initialClassesAndStyles')
     initialClassesAndStyles()
 
     const getCloseIcon = () => {
@@ -119,16 +113,18 @@ const RME = (props: any) => {
     }
 
     const getChildren = () => {
+        let classNames = ['rme-container', props.col ? 'rme--col' : '', props.row ? 'rme--row' : ''].join(' ')
         if (props.alert) {
             return (
-                <div className={cx('rme-container', props.col ? 'rme--col' : '', props.row ? 'rme--row' : '')}>
+                <div className={classNames}>
                     {props.children}
                 </div>
             )
         }
         if (props.circle) {
+            classNames = ['rme--circle-container', props.col ? 'rme--col' : '', props.row ? 'rme--row' : ''].join(' ')
             return (
-                <div className={cx('rme--circle-container', props.col ? 'rme--col' : '', props.row ? 'rme--row' : '')}>
+                <div className={classNames}>
                     {props.children}
                 </div>
             )
@@ -139,7 +135,7 @@ const RME = (props: any) => {
 
     const renderElement = () => {
         let computerProps: any = {
-            className: cx('rme', props.className, ...classNameList),
+            className: ['rme', props.className, ...classNameList].join(' '),
             style: styleList
         }
 
@@ -153,7 +149,7 @@ const RME = (props: any) => {
         if (props.target) {
             computerProps.target = props.target
         }
-        if (_.intersection(keys, ['bgImg', 'bg-img']).length) {
+        if (keys.indexOf('bgImg') > -1 || keys.indexOf('bg-img') > -1) {
             computerProps.style.backgroundImage = 'url(' + (props.bgImg || props['bg-img']) + ')'
         }
 
