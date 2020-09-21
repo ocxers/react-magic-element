@@ -2,6 +2,7 @@ import React from 'react'
 import '../scss/main.scss'
 import cx from 'classnames'
 import utils from './utils'
+import _ from 'lodash'
 
 const {elements, styleMappings, builtinClasses} = utils.mappingsAndClasses()
 const RME = (props: any) => {
@@ -17,6 +18,7 @@ const RME = (props: any) => {
         }
     })
 
+    let keys = _.keys(props)
     let classNameList: Array<any> = []
     let styleList: any = {}
     let gutter: any = ''
@@ -82,8 +84,7 @@ const RME = (props: any) => {
                                                 // @ts-ignore
                                                 styleList['--child-gutter'] = `${pixel[1] / 2}px`
                                             }
-                                        }
-                                        if (pixel[0] === 'b' || pixel[0] === 'border') {
+                                        } else if (pixel[0] === 'b' || pixel[0] === 'border') {
                                             loopCssProperties(pixel[0], pixel[1] + 'px solid')
                                         } else {
                                             loopCssProperties(pixel[0], pixel[1] + 'px')
@@ -149,8 +150,8 @@ const RME = (props: any) => {
         if (props.target) {
             computerProps.target = props.target
         }
-        if (props.bgImg) {
-            computerProps.style.backgroundImage = 'url(' + props.bgImg + ')'
+        if (_.intersection(keys, ['bgImg', 'bg-img']).length) {
+            computerProps.style.backgroundImage = 'url(' + (props.bgImg || props['bg-img']) + ')'
         }
 
         Object.keys(utils.rmeConfig.colors).map((key: any) => {

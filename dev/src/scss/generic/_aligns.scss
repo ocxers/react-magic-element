@@ -1,6 +1,5 @@
 .rme {
     &--center {
-        text-align: center;
         justify-content: center;
         align-items: center;
 
@@ -26,5 +25,14 @@
     }
     &--bottom {
         margin-top: auto;
+    }
+    &--txt-center {
+        justify-content: center;
+    }
+    &--txt-left {
+        justify-content: flex-start;
+    }
+    &--txt-right {
+        justify-content: flex-end;
     }
 }

@@ -20,8 +20,10 @@ let cssProperties: any = {
             'plain',
             // link
             'link',
-            // text align
+            // block align
             'left', 'center', 'right', 'top', 'middle', 'bottom',
+            // text align
+            'txt-left', 'txt-center', 'txt-right',
             // text decoration
             'underline', 'hover-underline', 'line-through', 'pointer',
             // row, col, fill, rest
