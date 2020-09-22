@@ -1,18 +1,27 @@
 .rme {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    //display: flex;
+    //flex-direction: row;
+    //flex-wrap: wrap;
     box-sizing: border-box;
-    width: 100%;
+    //width: 100%;
+
+    &--flex {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 
     &--row {
+        display: flex;
         flex-direction: row;
     }
 
     &--d-row {
+        display: flex;
         flex-direction: row;
     }
     &--d-col {
+        display: flex;
         flex-direction: column;
     }
 

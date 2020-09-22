@@ -29,7 +29,7 @@ let cssProperties: any = {
             // text decoration
             'underline', 'hover-underline', 'line-through', 'pointer',
             // row, col, fill, rest
-            'row', 'col', 'fill', 'rest', 'd-row', 'd-col',
+            'row', 'col', 'flex', 'fill', 'rest', 'd-row', 'd-col',
             // disabled
             'disabled',
             // group

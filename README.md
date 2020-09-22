@@ -142,7 +142,7 @@ import RME from 'react-magic-element
 
 const App = () => {
     <>
-        <RME h360 bg-success>
+        <RME h360 bg-success rest>
             height=360px
             <RME h-36 bottom>height=parent's 36% height</RME>
         </RME>
@@ -183,5 +183,24 @@ const App = () => {
 }
 ```
 #### Border
+```tsx
+import RME from 'react-magic-element
+
+const App = () => {
+    <>
+        <RME h1 b-danger>Border</RME>
+        <RME b-primary btw5 btc={'red'} brw11 brs={'dashed'}>
+            <ul>
+                <li>Border:</li>
+                <li>b-primary: border-color: primary</li>
+                <li>btw5: border-top-width: 5pxy</li>
+                <li>btc={'red'}: border-top-color: red</li>
+                <li>brw11: border-right-width: 11px</li>
+                <li>brs={'dashed'}: border-right-style: dashed</li>
+            </ul>
+        </RME>
+    </>
+}
+```
 #### BackgroundColor
 #### BackgroundImage

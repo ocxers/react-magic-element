@@ -153,6 +153,10 @@ const RME = (props: any) => {
             computerProps.style.backgroundImage = 'url(' + (props.bgImg || props['bg-img']) + ')'
         }
 
+        if (props.style) {
+            Object.assign(computerProps.style, props.style)
+        }
+
         Object.keys(utils.rmeConfig.colors).map((key: any) => {
             if (computerProps.className.indexOf(key) > -1) {
                 if (computerProps.className.indexOf('rme--btn') > -1 || computerProps.className.indexOf('rme--tag') > -1) {

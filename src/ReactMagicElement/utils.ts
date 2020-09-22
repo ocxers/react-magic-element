@@ -1,4 +1,4 @@
-const elements = ['nav', 'header', 'footer', 'button', 'btn', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'span', 'section', 'address']
+const elements = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'nav', 'label', 'header', 'footer', 'button', 'btn', 'a', 'ul', 'ol', 'li', 'span', 'section', 'address']
 const colors = ['-primary', '-secondary', '-success', '-danger', '-warning', '-info', '-light', '-dark', '-white', '-transparent']
 const gridKeys: Array<string> = ['col', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 
@@ -8,8 +8,10 @@ let cssProperties: any = {
         values: [
             // color
             'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white', 'transparent',
-            // color
+            // background color
             'bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-light', 'bg-dark', 'bg-white', 'bg-transparent',
+            // border color 1px solid
+            'b-primary', 'b-secondary', 'b-success', 'b-danger', 'b-warning', 'b-info', 'b-light', 'b-dark', 'b-white', 'b-transparent',
             // circle
             'circle',
             // tag
@@ -27,7 +29,7 @@ let cssProperties: any = {
             // text decoration
             'underline', 'hover-underline', 'line-through', 'pointer',
             // row, col, fill, rest
-            'row', 'col', 'fill', 'rest', 'd-row', 'd-col',
+            'row', 'col', 'flex', 'fill', 'rest', 'd-row', 'd-col',
             // disabled
             'disabled',
             // group
@@ -134,49 +136,55 @@ const initialBuiltinClassAndStyleMappings = () => {
     keys.map(key => {
         if (key === 'defaultProperties') {
             cssProperties.defaultProperties.values.map((v: string) => {
+                console.log(v)
+                if (v === 'flex') {
+                    debugger
+                }
                 groups[v] = 1
             })
         } else {
-            groups[cssProperties[key].shortcut] = 1
-            mappings[cssProperties[key].shortcut] = formatHVValue(key)
-            if (cssProperties[key].directions) {
-                cssProperties[key].directions.map((d: string) => {
-                    mappings[cssProperties[key].shortcut + d.charAt(0)] = formatHVValue(key + capitalize(d))
-                    if (cssProperties[key].attributes) {
-                        cssProperties[key].attributes.map((a: string) => {
-                            groups[cssProperties[key].shortcut + a.charAt(0)] = 1
-                            mappings[cssProperties[key].shortcut + a.charAt(0)] = formatHVValue(key + capitalize(a))
-                            mappings[cssProperties[key].shortcut + getShortcut(d) + a.charAt(0)] = formatHVValue(key + capitalize(d) + capitalize(a))
-                            if (!cssProperties[key][a + 'Values']) {
-                                cssProperties[key].values.map((v: any) => {
+            let cssProps = cssProperties[key]
+            let cssShort = cssProps.shortcut
+            groups[cssShort] = 1
+            mappings[cssShort] = formatHVValue(key)
+            if (cssProps.directions) {
+                cssProps.directions.map((d: string) => {
+                    mappings[cssShort + d.charAt(0)] = formatHVValue(key + capitalize(d))
+                    if (cssProps.attributes) {
+                        cssProps.attributes.map((a: string) => {
+                            groups[cssShort + a.charAt(0)] = 1
+                            mappings[cssShort + a.charAt(0)] = formatHVValue(key + capitalize(a))
+                            mappings[cssShort + getShortcut(d) + a.charAt(0)] = formatHVValue(key + capitalize(d) + capitalize(a))
+                            if (!cssProps[a + 'Values']) {
+                                cssProps.values.map((v: any) => {
                                     // for width: border top width => btw, btw0
-                                    groups[cssProperties[key].shortcut + getShortcut(d) + a.charAt(0)] = 1
-                                    groups[cssProperties[key].shortcut + getShortcut(d) + a.charAt(0) + v] = 1
+                                    groups[cssShort + getShortcut(d) + a.charAt(0)] = 1
+                                    groups[cssShort + getShortcut(d) + a.charAt(0) + v] = 1
                                 })
                             } else {
-                                cssProperties[key][a + 'Values'].map((v: string) => {
-                                    groups[cssProperties[key].shortcut + getShortcut(d) + a.charAt(0)] = 1
-                                    groups[cssProperties[key].shortcut + getShortcut(d) + a.charAt(0) + v] = 1
+                                cssProps[a + 'Values'].map((v: string) => {
+                                    groups[cssShort + getShortcut(d) + a.charAt(0)] = 1
+                                    groups[cssShort + getShortcut(d) + a.charAt(0) + v] = 1
                                 })
                             }
                         })
                     } else {
-                        cssProperties[key].values?.map((v: any) => {
-                            groups[cssProperties[key].shortcut + v] = 1
-                            groups[cssProperties[key].shortcut + getShortcut(d)] = 1
-                            groups[cssProperties[key].shortcut + getShortcut(d) + v] = 1
-                            mappings[cssProperties[key].shortcut + getShortcut(d)] = formatHVValue(key + capitalize(d))
+                        cssProps.values?.map((v: any) => {
+                            groups[cssShort + v] = 1
+                            groups[cssShort + getShortcut(d)] = 1
+                            groups[cssShort + getShortcut(d) + v] = 1
+                            mappings[cssShort + getShortcut(d)] = formatHVValue(key + capitalize(d))
                         })
                     }
                 })
             } else {
-                cssProperties[key].values?.map((v: any) => {
-                    groups[cssProperties[key].shortcut + v] = 1
+                cssProps.values?.map((v: any) => {
+                    groups[cssShort + v] = 1
                 })
             }
 
-            cssProperties[key].percentValues?.map((v: any) => {
-                groups[cssProperties[key].shortcut + '-' + v] = 1
+            cssProps.percentValues?.map((v: any) => {
+                groups[cssShort + '-' + v] = 1
             })
         }
     })
@@ -231,6 +239,9 @@ const utils =  {
                 color: color[0]
             }
             colorCssProperties['rme--bg-' + key] = {
+                backgroundColor: color[0]
+            }
+            colorCssProperties['rme--bgc-' + key] = {
                 backgroundColor: color[0]
             }
             colorCssProperties['rme--btn-tag'] = {

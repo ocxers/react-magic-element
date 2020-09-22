@@ -19,7 +19,7 @@
     }
 }
 
-@each $n, $c, $tc, $ptc in $colors {
+@each $n, $c, $tc in $colors {
     .rme--tag.rme--#{$n} {
         border-color: $c;
         background-color: $c;
