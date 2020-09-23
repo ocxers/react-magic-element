@@ -136,10 +136,6 @@ const initialBuiltinClassAndStyleMappings = () => {
     keys.map(key => {
         if (key === 'defaultProperties') {
             cssProperties.defaultProperties.values.map((v: string) => {
-                console.log(v)
-                if (v === 'flex') {
-                    debugger
-                }
                 groups[v] = 1
             })
         } else {
@@ -189,6 +185,7 @@ const initialBuiltinClassAndStyleMappings = () => {
         }
     })
 
+    console.log(mappings)
     return {elements, styleMappings: mappings, builtinClasses: Object.keys(groups)}
 }
 

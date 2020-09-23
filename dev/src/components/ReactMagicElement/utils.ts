@@ -11,7 +11,25 @@ let cssProperties: any = {
             // background color
             'bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-light', 'bg-dark', 'bg-white', 'bg-transparent',
             // border color 1px solid
-            'b-primary', 'b-secondary', 'b-success', 'b-danger', 'b-warning', 'b-info', 'b-light', 'b-dark', 'b-white', 'b-transparent',
+            'bc-primary', 'bc-secondary', 'bc-success', 'bc-danger', 'bc-warning', 'bc-info', 'bc-light', 'bc-dark', 'bc-white', 'bc-transparent',
+            'btc-primary', 'btc-secondary', 'btc-success', 'btc-danger', 'btc-warning', 'btc-info', 'btc-light', 'btc-dark', 'btc-white', 'btc-transparent',
+            'brc-primary', 'brc-secondary', 'brc-success', 'brc-danger', 'brc-warning', 'brc-info', 'brc-light', 'brc-dark', 'brc-white', 'brc-transparent',
+            'bbc-primary', 'bbc-secondary', 'bbc-success', 'bbc-danger', 'bbc-warning', 'bbc-info', 'bbc-light', 'bbc-dark', 'bbc-white', 'bbc-transparent',
+            'blc-primary', 'blc-secondary', 'blc-success', 'blc-danger', 'blc-warning', 'blc-info', 'blc-light', 'blc-dark', 'blc-white', 'blc-transparent',
+            'bhc-primary', 'bhc-secondary', 'bhc-success', 'bhc-danger', 'bhc-warning', 'bhc-info', 'bhc-light', 'bhc-dark', 'bhc-white', 'bhc-transparent',
+            'bvc-primary', 'bvc-secondary', 'bvc-success', 'bvc-danger', 'bvc-warning', 'bvc-info', 'bvc-light', 'bvc-dark', 'bvc-white', 'bvc-transparent',
+            'bs-none', 'bts-none', 'brs-none', 'bbs-none', 'bls-none', 'bhs-none', 'bvs-none',
+            'bs-hidden', 'bts-hidden', 'brs-hidden', 'bbs-hidden', 'bls-hidden', 'bhs-hidden', 'bvs-hidden',
+            'bs-dotted', 'bts-dotted', 'brs-dotted', 'bbs-dotted', 'bls-dotted', 'bhs-dotted', 'bvs-dotted',
+            'bs-dashed', 'bts-dashed', 'brs-dashed', 'bbs-dashed', 'bls-dashed', 'bhs-dashed', 'bvs-dashed',
+            'bs-solid', 'bts-solid', 'brs-solid', 'bbs-solid', 'bls-solid', 'bhs-solid', 'bvs-solid',
+            'bs-double', 'bts-double', 'brs-double', 'bbs-double', 'bls-double', 'bhs-double', 'bvs-double',
+            'bs-groove', 'bts-groove', 'brs-groove', 'bbs-groove', 'bls-groove', 'bhs-groove', 'bvs-groove',
+            'bs-ridge', 'bts-ridge', 'brs-ridge', 'bbs-ridge', 'bls-ridge', 'bhs-ridge', 'bvs-ridge',
+            'bs-inset', 'bts-inset', 'brs-inset', 'bbs-inset', 'bls-inset', 'bhs-inset', 'bvs-inset',
+            'bs-outset', 'bts-outset', 'brs-outset', 'bbs-outset', 'bls-outset', 'bhs-outset', 'bvs-outset',
+            'bs-initial', 'bts-initial', 'brs-initial', 'bbs-initial', 'bls-initial', 'bhs-initial', 'bvs-initial',
+            'bs-inherit', 'bts-inherit', 'brs-inherit', 'bbs-inherit', 'bls-inherit', 'bhs-inherit', 'bvs-inherit',
             // circle
             'circle',
             // tag
@@ -145,11 +163,23 @@ const initialBuiltinClassAndStyleMappings = () => {
             mappings[cssShort] = formatHVValue(key)
             if (cssProps.directions) {
                 cssProps.directions.map((d: string) => {
-                    mappings[cssShort + d.charAt(0)] = formatHVValue(key + capitalize(d))
+                    let formattedkey = utils.formatKey(d).split('-')
+                    if (formattedkey[0] === d) {
+                        mappings[cssShort + d.charAt(0)] = formatHVValue(key + capitalize(d))
+                    } else {
+                        let fkey = [cssShort]
+                        formattedkey.map((k: string) => {
+                            fkey.push(k.split('').shift())
+                        })
+
+                        // border radius
+                        mappings[fkey.join('')] = formatHVValue('border' + capitalize(d) + 'Radius')
+                    }
                     if (cssProps.attributes) {
                         cssProps.attributes.map((a: string) => {
                             groups[cssShort + a.charAt(0)] = 1
                             mappings[cssShort + a.charAt(0)] = formatHVValue(key + capitalize(a))
+                            // console.log(cssShort + a.charAt(0))
                             mappings[cssShort + getShortcut(d) + a.charAt(0)] = formatHVValue(key + capitalize(d) + capitalize(a))
                             if (!cssProps[a + 'Values']) {
                                 cssProps.values.map((v: any) => {
@@ -169,7 +199,11 @@ const initialBuiltinClassAndStyleMappings = () => {
                             groups[cssShort + v] = 1
                             groups[cssShort + getShortcut(d)] = 1
                             groups[cssShort + getShortcut(d) + v] = 1
-                            mappings[cssShort + getShortcut(d)] = formatHVValue(key + capitalize(d))
+                            if (key === 'borderRadius') {
+                                mappings[cssShort + getShortcut(d)] = formatHVValue('border' + capitalize(d) + 'Radius')
+                            } else {
+                                mappings[cssShort + getShortcut(d)] = formatHVValue(key + capitalize(d))
+                            }
                         })
                     }
                 })
@@ -185,10 +219,11 @@ const initialBuiltinClassAndStyleMappings = () => {
         }
     })
 
+    console.log(mappings.rtr, '-', groups.rtr)
     return {elements, styleMappings: mappings, builtinClasses: Object.keys(groups)}
 }
 
-const utils =  {
+const utils = {
     mappingsAndClasses: initialBuiltinClassAndStyleMappings,
     formatKey(key: string) {
         return key.replace(/[A-Z]/g, match => {

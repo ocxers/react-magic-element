@@ -3,9 +3,9 @@ import RME from "../components"
 
 export default (props: any) => {
     return (
-        <>
+        <RME p15>
             <RME h1 b-danger>Border</RME>
-            <RME b-primary btw5 btc={'red'} brw11 brs={'dashed'}>
+            <RME b bw={'13px'} rtr13 rbl={'17px'} bts={'double'} bc-success btc-danger bc={'red'}>
                 <ul>
                     <li>Border:</li>
                     <li>b-primary: border-color: primary</li>
@@ -15,6 +15,6 @@ export default (props: any) => {
                     <li>brs={'dashed'}: border-right-style: dashed</li>
                 </ul>
             </RME>
-        </>
+        </RME>
     )
 }

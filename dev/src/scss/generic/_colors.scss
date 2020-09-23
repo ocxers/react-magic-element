@@ -4,8 +4,48 @@
             color: $c;
         }
 
-        &--b-#{$n} {
-            border: 1px solid $c;
+        &--bc-#{$n} {
+            &.rme--b {
+                border-color: $c;
+            }
+        }
+
+        &--btc-#{$n} {
+            &.rme--b {
+                border-top-color: $c;
+            }
+        }
+
+        &--brc-#{$n} {
+            &.rme--b {
+                border-right-color: $c;
+            }
+        }
+
+        &--bbc-#{$n} {
+            &.rme--b {
+                border-left-color: $c;
+            }
+        }
+
+        &--blc-#{$n} {
+            &.rme--b {
+                border-bottom-color: $c;
+            }
+        }
+
+        &--bhc-#{$n} {
+            &.rme--b {
+                border-left-color: $c;
+                border-right-color: $c;
+            }
+        }
+
+        &--bvc-#{$n} {
+            &.rme--b {
+                border-top-color: $c;
+                border-bottom-color: $c;
+            }
         }
 
         &--bg-#{$n} {
@@ -13,13 +53,9 @@
             background-color: $c;
         }
 
-        &--bc-#{$n} {
-            border-color: $c!important;
-        }
-
         .rme--plain.rme--#{$n} {
             border-color: $c;
-            background-color: transparent!important;
+            background-color: transparent !important;
             color: $c;
 
             &:hover {

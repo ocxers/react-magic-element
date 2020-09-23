@@ -1,24 +1,34 @@
 .rme {
     $radius:
-            r 100%,
-            r1 1px,
-            r2 2px,
-            r3 3px,
-            r4 4px,
-            r5 5px,
-            r6 6px,
-            r7 7px,
-            r8 8px,
-            r9 9px,
-            r10 10px;
+            1 1px,
+            2 2px,
+            3 3px,
+            4 4px,
+            5 5px,
+            6 6px,
+            7 7px,
+            8 8px,
+            9 9px,
+            10 10px;
     @each $n, $r in $radius {
-        &--#{$n} {
+        &--r#{$n} {
             border-radius: $r;
-            overflow: hidden;
+        }
+        &--rtl#{$n} {
+            border-top-left-radius: $r;
+        }
+        &--rtr#{$n} {
+            border-top-right-radius: $r;
+        }
+        &--rbl#{$n} {
+            border-bottom-left-radius: $r;
+        }
+        &--rbr#{$n} {
+            border-bottom-right-radius: $r;
         }
     }
 
-    &--border {
+    &--border, &--b {
         border: 1px solid;
     }
 
@@ -50,8 +60,28 @@
 
     $borderStyles: none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial, inherit;
     @each $bs in $borderStyles {
-        &--#{$bs} {
+        &--bs-#{$bs} {
             border-style: $bs !important;
+        }
+        &--bts-#{$bs} {
+            border-top-style: $bs !important;
+        }
+        &--brs-#{$bs} {
+            border-right-style: $bs !important;
+        }
+        &--bbs-#{$bs} {
+            border-bottom-style: $bs !important;
+        }
+        &--bls-#{$bs} {
+            border-left-style: $bs !important;
+        }
+        &--bhs-#{$bs} {
+            border-left-style: $bs !important;
+            border-right-style: $bs !important;
+        }
+        &--bvs-#{$bs} {
+            border-top-style: $bs !important;
+            border-bottom-style: $bs !important;
         }
     }
 }
