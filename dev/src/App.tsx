@@ -1,6 +1,7 @@
 import React from 'react'
 import './App.css'
 import RME from './components'
+import Button from "./demo/Button"
 import Padding from "./demo/Padding"
 import Margin from "./demo/Margin"
 import Elements from "./demo/Elements"
@@ -12,7 +13,7 @@ import FontSize from "./demo/FontSize"
 import FontWeight from "./demo/FontWeight"
 import TextLines from "./demo/TextLines"
 import BoxSizing from "./demo/BoxSizing"
-// import BackgroundColor from "./demo/BackgroundColor"
+import BackgroundColor from "./demo/BackgroundColor"
 import BackgroundImage from "./demo/BackgroundImage"
 
 RME.config({
@@ -41,19 +42,19 @@ function App() {
     }
     return (
         <RME>
-            {/*<Padding />*/}
-            {/*<Margin />*/}
-            {/*<Elements />*/}
-            {/*<Width />*/}
-            {/*<Height />*/}
-            {/*<Border />*/}
+            <Padding />
+            <Margin />
+            <Elements />
+            <Width />
+            <Height />
+            <Border />
             <Color />
-            {/*<FontSize/>*/}
-            {/*<FontWeight/>*/}
-            {/*<BoxSizing />*/}
-            {/*<BackgroundColor />*/}
-            {/*<BackgroundImage />*/}
-            {/*<TextLines />*/}
+            <FontSize/>
+            <FontWeight/>
+            <BoxSizing />
+            <BackgroundColor />
+            <BackgroundImage />
+            <TextLines />
             {/*<RME h300 p30>*/}
             {/*<RME h64 bgc-primary b={'1px solid red'} ph15 style={{*/}
             {/*    borderWidth: '23px'*/}
@@ -72,7 +73,7 @@ function App() {
             {/*<Main/>*/}
             {/*<Media/>*/}
             {/*<Tag/>*/}
-            {/*<Button/>*/}
+            <Button/>
             {/*<Alert/>*/}
             {/*<Grid/>*/}
             {/*<RME tc fr bg-primary w240>width-100</RME>*/}

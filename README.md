@@ -874,7 +874,7 @@ export default () => {
     </tbody>
 </table>
 
-#### BackgroundColor
+#### BackgroundColor [Open in CodeSandbox](https://codesandbox.io/s/condescending-albattani-rq464)
 ```tsx
 import RME from 'react-magic-element
 
