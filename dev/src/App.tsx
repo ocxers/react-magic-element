@@ -7,6 +7,13 @@ import Elements from "./demo/Elements"
 import Width from "./demo/Width"
 import Height from "./demo/Height"
 import Border from "./demo/Border"
+import Color from "./demo/Color"
+import FontSize from "./demo/FontSize"
+import FontWeight from "./demo/FontWeight"
+import TextLines from "./demo/TextLines"
+import BoxSizing from "./demo/BoxSizing"
+// import BackgroundColor from "./demo/BackgroundColor"
+import BackgroundImage from "./demo/BackgroundImage"
 
 RME.config({
     colors: {
@@ -38,9 +45,15 @@ function App() {
             {/*<Margin />*/}
             {/*<Elements />*/}
             {/*<Width />*/}
-            <Height />
+            {/*<Height />*/}
             {/*<Border />*/}
-
+            <Color />
+            {/*<FontSize/>*/}
+            {/*<FontWeight/>*/}
+            {/*<BoxSizing />*/}
+            {/*<BackgroundColor />*/}
+            {/*<BackgroundImage />*/}
+            {/*<TextLines />*/}
             {/*<RME h300 p30>*/}
             {/*<RME h64 bgc-primary b={'1px solid red'} ph15 style={{*/}
             {/*    borderWidth: '23px'*/}

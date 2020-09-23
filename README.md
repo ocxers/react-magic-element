@@ -60,22 +60,24 @@ RME.config({
 ```tsx
 import RME from 'react-magic-element
 
-const App = () => {
-    <RME b-success g32>
-        <RME xs24 sm16 md12 lg8 xl4 xxl2>
-            <RME bgc-primary>xs24 sm16 md12 lg8 xl4 xxl2</RME>
-        </RME>
-        <RME xs24 rest>
-            <RME>
-                <RME col12>
-                    <RME bgc-secondary>col12</RME>
-                </RME>
-                <RME rest>
-                    <RME bgc-danger>rest</RME>
+export default () => {
+    return (
+        <RME b-success g32>
+            <RME xs24 sm16 md12 lg8 xl4 xxl2>
+                <RME bgc-primary>xs24 sm16 md12 lg8 xl4 xxl2</RME>
+            </RME>
+            <RME xs24 rest>
+                <RME>
+                    <RME col12>
+                        <RME bgc-secondary>col12</RME>
+                    </RME>
+                    <RME rest>
+                        <RME bgc-danger>rest</RME>
+                    </RME>
                 </RME>
             </RME>
         </RME>
-    </RME>
+    )
 }
 ```
 #### Responsive
@@ -84,44 +86,46 @@ const App = () => {
 | \<576px | \>=576px | \>=768px | \>=992px | \>=1200px | \>=1600px |
 | xs | sm | md | lg | xl | xxl |
 #### Columns
-- xs1-24        -> 1/24 - 24/24, step: 1/24
-- sm1-24
-- md1-24
-- lg1-24
-- xl1-24
-- xxl1-24
-- col1-24
+- xs[1-24]        -> 1/24 - 24/24, step: 1/24
+- sm[1-24]
+- md[1-24]
+- lg[1-24]
+- xl[1-24]
+- xxl[1-24]
+- col[1-24]
 - rest          -> the rest width of the row
 ### Elements
 ```tsx
 import RME from 'react-magic-element
 
-const App = () => {
-    <>
-        <RME>Default render as div</RME>
-        <RME h1>Render as h1</RME>
-        <RME h2>Render as h2</RME>
-        <RME h3>Render as h3</RME>
-        <RME h4>Render as h4</RME>
-        <RME h5>Render as h5</RME>
-        <RME h6>Render as h6</RME>
-        <RME p>Render as p</RME>
-        <RME span>Render as span</RME>
-        <RME nav>Render as nav</RME>
-        <RME label>Render as label</RME>
-        <RME header>Render as header</RME>
-        <RME footer>Render as footer</RME>
-        <RME button>Render as button</RME>
-        <RME btn>Render as button</RME>
-        <RME a>Render as a</RME>
-        <RME ul>Render as ul</RME>
-        <RME ol>Render as ol</RME>
-        <RME li>Render as li</RME>
-        <RME section>Render as section</RME>
-        <RME address>Render as address</RME>
-        <RME tag>Render as tat</RME>
-        <RME alert>Render as alert</RME>
-    </>
+export default () => {
+    return (
+        <>
+            <RME>Default render as div</RME>
+            <RME h1>Render as h1</RME>
+            <RME h2>Render as h2</RME>
+            <RME h3>Render as h3</RME>
+            <RME h4>Render as h4</RME>
+            <RME h5>Render as h5</RME>
+            <RME h6>Render as h6</RME>
+            <RME p>Render as p</RME>
+            <RME span>Render as span</RME>
+            <RME nav>Render as nav</RME>
+            <RME label>Render as label</RME>
+            <RME header>Render as header</RME>
+            <RME footer>Render as footer</RME>
+            <RME button>Render as button</RME>
+            <RME btn>Render as button</RME>
+            <RME a>Render as a</RME>
+            <RME ul>Render as ul</RME>
+            <RME ol>Render as ol</RME>
+            <RME li>Render as li</RME>
+            <RME section>Render as section</RME>
+            <RME address>Render as address</RME>
+            <RME tag>Render as tat</RME>
+            <RME alert>Render as alert</RME>
+        </>
+    )
 }
 ```
 ### Styles
@@ -129,11 +133,15 @@ const App = () => {
 ```tsx
 import RME from 'react-magic-element
 
-const App = () => {
-    <>
-        <RME w1024>width=1024px</RME>
-        <RME w-80>width=80%</RME>
-    </>
+export default () => {
+    return (
+        <>
+            <RME w1024>width=1024px</RME>
+            <RME w={'80px'}>width=80px</RME>
+            <RME w-80>width=80%</RME>
+            <RME w={'80%'}>width=80%</RME>
+        </>
+    )
 }
 ```
 <table>
@@ -180,13 +188,15 @@ const App = () => {
 ```tsx
 import RME from 'react-magic-element
 
-const App = () => {
-    <>
-        <RME h360 bg-success rest>
-            height=360px
-            <RME h-36 bottom>height=parent's 36% height</RME>
-        </RME>
-    </>
+export default () => {
+    return (
+        <>
+            <RME h360 bg-success rest>
+                height=360px
+                <RME h-36 bottom>height=parent's 36% height</RME>
+            </RME>
+        </>
+    )
 }
 ```
 <table>
@@ -233,16 +243,18 @@ const App = () => {
 ```tsx
 import RME from 'react-magic-element
 
-const App = () => {
-    <>
-        <RME p15>padding=15px</RME>
-        <RME pv15>padding-top=15px; padding-bottom=15px;</RME>
-        <RME ph15>padding-left=15px; padding-right=15px;</RME>
-        <RME pt15>padding-top=15px;</RME>
-        <RME pr15>padding-right=15px;</RME>
-        <RME pb15>padding-bottom=15px;</RME>
-        <RME pl15>padding-left=15px;</RME>
-    </>
+export default () => {
+    return (
+        <>
+            <RME p15>padding=15px</RME>
+            <RME pv15>padding-top=15px; padding-bottom=15px;</RME>
+            <RME ph15>padding-left=15px; padding-right=15px;</RME>
+            <RME pt15>padding-top=15px;</RME>
+            <RME pr15>padding-right=15px;</RME>
+            <RME pb15>padding-bottom=15px;</RME>
+            <RME pl15>padding-left=15px;</RME>
+        </>
+    )
 }
 ```
 <table>
@@ -321,16 +333,18 @@ const App = () => {
 ```tsx
 import RME from 'react-magic-element
 
-const App = () => {
-    <>
-        <RME m15>margin=15px</RME>
-        <RME mv15>margin-top=15px; margin-bottom=15px;</RME>
-        <RME mh15>margin-left=15px; margin-right=15px;</RME>
-        <RME mt15>margin-top=15px;</RME>
-        <RME mr15>margin-right=15px;</RME>
-        <RME mb15>margin-bottom=15px;</RME>
-        <RME ml15>margin-left=15px;</RME>
-    </>
+export default () => {
+    return (
+        <>
+            <RME m15>margin=15px</RME>
+            <RME mv15>margin-top=15px; margin-bottom=15px;</RME>
+            <RME mh15>margin-left=15px; margin-right=15px;</RME>
+            <RME mt15>margin-top=15px;</RME>
+            <RME mr15>margin-right=15px;</RME>
+            <RME mb15>margin-bottom=15px;</RME>
+            <RME ml15>margin-left=15px;</RME>
+        </>
+    )
 }
 
 ```
@@ -409,20 +423,22 @@ const App = () => {
 ```tsx
 import RME from 'react-magic-element
 
-const App = () => {
-    <>
-        <RME h1 b-danger>Border</RME>
-        <RME b-primary btw5 btc={'red'} brw11 brs={'dashed'}>
-            <ul>
-                <li>Border:</li>
-                <li>b-primary: border-color: primary</li>
-                <li>btw5: border-top-width: 5pxy</li>
-                <li>btc={'red'}: border-top-color: red</li>
-                <li>brw11: border-right-width: 11px</li>
-                <li>brs={'dashed'}: border-right-style: dashed</li>
-            </ul>
-        </RME>
-    </>
+export default () => {
+    return (
+        <>
+            <RME h1 b-danger>Border</RME>
+            <RME b-primary btw5 btc={'red'} brw11 brs={'dashed'}>
+                <ul>
+                    <li>Border:</li>
+                    <li>b-primary: border-color: primary</li>
+                    <li>btw5: border-top-width: 5pxy</li>
+                    <li>btc={'red'}: border-top-color: red</li>
+                    <li>brw11: border-right-width: 11px</li>
+                    <li>brs={'dashed'}: border-right-style: dashed</li>
+                </ul>
+            </RME>
+        </>
+    )
 }
 ```
 <table>
@@ -618,6 +634,332 @@ const App = () => {
     </tbody>
 </table>
 
+#### Color
+```tsx
+import RME from 'react-magic-element
+
+export default () => {
+    return (
+        <>
+            <RME h1 primary>Color</RME>
+            <RME primary>color: #007bff;</RME>
+            <RME fc={'#FF3456'}>color=#FF3456</RME>
+        </>
+    )
+}
+```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="3">Font Color</td>
+        <td>fc={value}</td>
+        <td>color</td>
+        <td>color: value</td>
+        <td>
+            fc='red' -> color: red <br>
+        </td>
+    </tr>
+    <tr>
+        <td>[primary, secondary, success, danger, warning, info, light, dark, white, transparent]</td>
+        <td>color</td>
+        <td>rme--[primary, secondary, success, danger, warning, info, light, dark, white, transparent]</td>
+        <td>
+            primary -> rme--primary <br>
+            secondary -> rme--secondary <br>
+            success -> rme--success <br>
+            danger -> rme--danger <br>
+            warning -> rme--warning <br>
+            info -> rme--info <br>
+            light -> rme--light <br>
+            dark -> rme--dark <br>
+            white -> rme--white <br>
+            transparent -> rme--transparent
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+#### FontSize
+```tsx
+import RME from 'react-magic-element
+
+export default () => {
+    return (
+        <>
+            <RME h1 primary>Font Size</RME>
+            <RME fs32>rme--fs32</RME>
+            <RME fs={23}>font-size: 23px;</RME>
+            <RME fs23>font-size: 23px;</RME>
+        </>
+    )
+}
+```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="2">Font Size</td>
+        <td>fs={value}</td>
+        <td>font-size</td>
+        <td>font-size: value</td>
+        <td>
+            fs='23' -> font-size: 23px <br>
+        </td>
+    </tr>
+    <tr>
+        <td>fs-['9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '24', '32', '48', '64', '72']</td>
+        <td>font-size</td>
+        <td>rme--fs[builtin value]</td>
+        <td>
+            rme--fs32
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+#### FontWeight
+```tsx
+import RME from 'react-magic-element
+
+export default () => {
+    return (
+        <>
+            <RME h1 primary>Font Weight</RME>
+            <RME fw100>rme--fw100</RME>
+            <RME fw={150}>font-weight: 150;</RME>
+            <RME fw200>font-weight: 200;</RME>
+        </>
+    )
+}
+```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="2">Font Weight</td>
+        <td>fw[100, 200, 300, 400, 500, 600, 700, 800, 900]</td>
+        <td>font-weight</td>
+        <td>rme--fw200</td>
+        <td>
+            fw200 -> rme--fw200
+        </td>
+    </tr>
+    <tr>
+        <td>fw=[100~900]</td>
+        <td>font-weight</td>
+        <td>font-weight: number</td>
+        <td>
+            fw=150 -> font-weight: 150
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+#### Ellipsis text lines count
+```tsx
+import RME from 'react-magic-element
+
+export default () => {
+    return (
+        <>
+            <RME h1 primary>Ellipsis text lines count</RME>
+            <RME primary fs24 mb15 w240 l1>l1: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME secondary fs24 mb15 w240 l2>l2: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME success fs24 mb15 w240 l3>l3: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME danger fs24 mb15 w240 l4>l4: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME warning fs24 mb15 w240 l5>l5: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME info fs24 mb15 w240 l={7}>l=7: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+        </>
+    )
+}
+```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="2">Ellipsis text lines count</td>
+        <td>l[1, 2, 3, 4, 5]</td>
+        <td>-webkit-line-clamp</td>
+        <td>rme--l2</td>
+        <td>
+            l2 -> rme--l2
+        </td>
+    </tr>
+    <tr>
+        <td>l={number}</td>
+        <td>-webkit-line-clamp</td>
+        <td>-webkit-line-clamp: [number]</td>
+        <td>
+            l=7 -> -webkit-line-clamp: 7
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+#### boxSizing
+```tsx
+import RME from 'react-magic-element
+
+export default () => {
+    return (
+        <>
+            <RME h1 primary>Box Sizing</RME>
+            <RME b bc-primary tiny>tiny box: 12px x 12px</RME>
+            <RME b bc-secondary mini>mini box: 16px x 16px.</RME>
+            <RME b bc-success small>small box: 24px x 24px.</RME>
+            <RME b bc-danger medium>medium box: 32px x 32px.</RME>
+            <RME b bc-warning big>big box: 48px x 48px.</RME>
+            <RME b bc-info large>large box: 64px x 64px.</RME>
+            <RME b bc-light huge>huge box:96px x 96px.</RME>
+            <RME b bc-dark gigantic>gigantic box: 128px x 128px.</RME>
+            <RME b bc-dark w234 h234>other box: 234px x 234px.</RME>
+        </>
+    )
+}
+```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Box Sizing</td>
+        <td>['tiny', 'mini', 'small', 'medium', 'big', 'large', 'huge', 'gigantic']</td>
+        <td>width, height</td>
+        <td>rme--big</td>
+        <td>
+            big -> rme--big
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 #### BackgroundColor
+```tsx
+import RME from 'react-magic-element
+
+export default () => {
+    return (
+        <>
+            <RME h1 primary>Background Color</RME>
+            <RME b bgc-primary>bgc-primary -> rme--bgc-primary</RME>
+            <RME b bgc-secondary>bgc-secondary -> rme--bgc-secondary</RME>
+            <RME b bgc-success>bgc-success -> rme--bgc-success</RME>
+            <RME b bgc-danger>bgc-danger -> rme--bgc-danger</RME>
+            <RME b bgc-warning>bgc-warning -> rme--bgc-warning</RME>
+            <RME b bgc-info>bgc-info -> rme--bgc-info</RME>
+            <RME b bgc-light>bgc-light -> rme--bgc-light</RME>
+            <RME b bgc-dark>bgc-dark -> rme--bgc-dark</RME>
+            <RME b bgc-white>bgc-white -> rme--bgc-white</RME>
+            <RME b bgc-transparent>bgc-transparent -> rme--bgc-transparent</RME>
+            <RME b bgc={'red'}>bgc={'red'} -> background-color: red;</RME>
+        </>
+    )
+}
+```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Background Color</td>
+        <td>bgc-['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white', 'transparent']</td>
+        <td>background-color</td>
+        <td>rme--big-['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white', 'transparent']</td>
+        <td>
+            bgc-primary -> rme--bgc-primary
+        </td>
+    </tr>
+    <tr>
+        <td>bgc={value}</td>
+        <td>background-color</td>
+        <td>background-color: value</td>
+        <td>
+            bgc={'red'} -> background-color: red
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 #### BackgroundImage
+```tsx
+import RME from 'react-magic-element
+
+export default () => {
+    return (
+        <>
+            <RME h1 primary>Background Image</RME>
+            <RME bgi={img} w200 h200>background-image: url(img)</RME>
+        </>
+    )
+}
+```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Background Image</td>
+        <td>bgi={imageUrl}</td>
+        <td>background-image</td>
+        <td>background-image: url(imageUrl)</td>
+        <td>
+            bgi={imageUrl} -> background-image: url(imageUrl)
+        </td>
+    </tr>
+    </tbody>
+</table>

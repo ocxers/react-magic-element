@@ -24,7 +24,7 @@ export default (props: any) => {
                         <RME button success>See More</RME>
                     </RME>
                 </RME>
-                <RME avatar w={360} bgImg={img}></RME>
+                <RME avatar w={360} bg-img={img}></RME>
             </RME>
         </RME>
     )

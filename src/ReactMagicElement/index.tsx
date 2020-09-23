@@ -11,7 +11,7 @@ const RME = (props: any) => {
     }
 
     elements.map((el: any) => {
-        if (props[el]) {
+        if (props[el] && utils.isBoolean(props[el])) {
             elementType = el === 'btn' ? 'button' : el
         }
     })
@@ -40,11 +40,14 @@ const RME = (props: any) => {
             if (fmtKey === 'line-through') {
                 classNameList.push('rme--line-through')
             }
-            if (fmtKey === 'bg-img') {
+            if (fmtKey === 'l') {
+                classNameList.push('rme--l')
+            }
+            if (['bg-img', 'bgi'].indexOf(fmtKey) > -1) {
                 classNameList.push('rme--bg-img')
             }
 
-            if (!(utils.reservedWord.indexOf(key) > -1)) {
+            if (utils.reservedWord.indexOf(key) <= -1 || !utils.isBoolean(props[key])) {
                 let gridKey = utils.checkGridKey(key)
 
                 if (gridKey) {
@@ -149,8 +152,8 @@ const RME = (props: any) => {
         if (props.target) {
             computerProps.target = props.target
         }
-        if (keys.indexOf('bgImg') > -1 || keys.indexOf('bg-img') > -1) {
-            computerProps.style.backgroundImage = 'url(' + (props.bgImg || props['bg-img']) + ')'
+        if (keys.indexOf('bgImg') > -1 || keys.indexOf('bg-img') > -1 || keys.indexOf('bgi') > -1) {
+            computerProps.style.backgroundImage = 'url(' + (props.bgImg || props['bg-img'] || props['bgi']) + ')'
         }
 
         if (props.style) {

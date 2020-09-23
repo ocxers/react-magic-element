@@ -4,8 +4,57 @@
             color: $c;
         }
 
-        &--b-#{$n} {
-            border: 1px solid $c;
+        &--bc-#{$n} {
+            border-color: $c;
+            &.rme--b {
+                border-color: $c;
+            }
+        }
+
+        &--btc-#{$n} {
+            border-top-color: $c;
+            &.rme--b {
+                border-top-color: $c;
+            }
+        }
+
+        &--brc-#{$n} {
+            border-right-color: $c;
+            &.rme--b {
+                border-right-color: $c;
+            }
+        }
+
+        &--bbc-#{$n} {
+            border-left-color: $c;
+            &.rme--b {
+                border-left-color: $c;
+            }
+        }
+
+        &--blc-#{$n} {
+            border-bottom-color: $c;
+            &.rme--b {
+                border-bottom-color: $c;
+            }
+        }
+
+        &--bhc-#{$n} {
+            border-left-color: $c;
+            border-right-color: $c;
+            &.rme--b {
+                border-left-color: $c;
+                border-right-color: $c;
+            }
+        }
+
+        &--bvc-#{$n} {
+            border-top-color: $c;
+            border-bottom-color: $c;
+            &.rme--b {
+                border-top-color: $c;
+                border-bottom-color: $c;
+            }
         }
 
         &--bg-#{$n} {
@@ -13,13 +62,9 @@
             background-color: $c;
         }
 
-        &--bc-#{$n} {
-            border-color: $c!important;
-        }
-
         .rme--plain.rme--#{$n} {
             border-color: $c;
-            background-color: transparent!important;
+            background-color: transparent !important;
             color: $c;
 
             &:hover {

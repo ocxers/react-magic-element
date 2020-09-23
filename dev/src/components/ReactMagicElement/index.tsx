@@ -40,7 +40,10 @@ const RME = (props: any) => {
             if (fmtKey === 'line-through') {
                 classNameList.push('rme--line-through')
             }
-            if (fmtKey === 'bg-img') {
+            if (fmtKey === 'l') {
+                classNameList.push('rme--l')
+            }
+            if (['bg-img', 'bgi'].indexOf(fmtKey) > -1) {
                 classNameList.push('rme--bg-img')
             }
 
@@ -149,8 +152,8 @@ const RME = (props: any) => {
         if (props.target) {
             computerProps.target = props.target
         }
-        if (keys.indexOf('bgImg') > -1 || keys.indexOf('bg-img') > -1) {
-            computerProps.style.backgroundImage = 'url(' + (props.bgImg || props['bg-img']) + ')'
+        if (keys.indexOf('bgImg') > -1 || keys.indexOf('bg-img') > -1 || keys.indexOf('bgi') > -1) {
+            computerProps.style.backgroundImage = 'url(' + (props.bgImg || props['bg-img'] || props['bgi']) + ')'
         }
 
         if (props.style) {

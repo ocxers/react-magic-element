@@ -55,7 +55,7 @@ let cssProperties: any = {
             // size
             'tiny', 'mini', 'small', 'medium', 'big', 'large', 'huge', 'gigantic',
             // bgImg
-            'bgImg', 'bg-img',
+            'bgi', 'bgImg', 'bg-img',
         ]
     },
     width: {
@@ -91,7 +91,7 @@ let cssProperties: any = {
         directions: ['topRight', 'bottomRight', 'topLeft', 'bottomLeft'],
         values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
-    fontColor: {
+    color: {
         shortcut: 'fc',
         values: colors
     },
@@ -160,7 +160,11 @@ const initialBuiltinClassAndStyleMappings = () => {
             let cssProps = cssProperties[key]
             let cssShort = cssProps.shortcut
             groups[cssShort] = 1
-            mappings[cssShort] = formatHVValue(key)
+            if (key === 'textLines') {
+                mappings[cssShort] = 'WebkitLineClamp'
+            } else {
+                mappings[cssShort] = formatHVValue(key)
+            }
             if (cssProps.directions) {
                 cssProps.directions.map((d: string) => {
                     let formattedkey = utils.formatKey(d).split('-')
@@ -179,7 +183,6 @@ const initialBuiltinClassAndStyleMappings = () => {
                         cssProps.attributes.map((a: string) => {
                             groups[cssShort + a.charAt(0)] = 1
                             mappings[cssShort + a.charAt(0)] = formatHVValue(key + capitalize(a))
-                            // console.log(cssShort + a.charAt(0))
                             mappings[cssShort + getShortcut(d) + a.charAt(0)] = formatHVValue(key + capitalize(d) + capitalize(a))
                             if (!cssProps[a + 'Values']) {
                                 cssProps.values.map((v: any) => {
@@ -219,7 +222,6 @@ const initialBuiltinClassAndStyleMappings = () => {
         }
     })
 
-    console.log(mappings.p, '-', groups.p)
     return {elements, styleMappings: mappings, builtinClasses: Object.keys(groups)}
 }
 
