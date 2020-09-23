@@ -38,8 +38,8 @@ function App() {
             {/*<Margin />*/}
             {/*<Elements />*/}
             {/*<Width />*/}
-            {/*<Height />*/}
-            <Border />
+            <Height />
+            {/*<Border />*/}
 
             {/*<RME h300 p30>*/}
             {/*<RME h64 bgc-primary b={'1px solid red'} ph15 style={{*/}

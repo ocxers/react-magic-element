@@ -219,7 +219,7 @@ const initialBuiltinClassAndStyleMappings = () => {
         }
     })
 
-    console.log(mappings.rtr, '-', groups.rtr)
+    console.log(mappings.p, '-', groups.p)
     return {elements, styleMappings: mappings, builtinClasses: Object.keys(groups)}
 }
 

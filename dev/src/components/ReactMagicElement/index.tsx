@@ -11,7 +11,7 @@ const RME = (props: any) => {
     }
 
     elements.map((el: any) => {
-        if (props[el]) {
+        if (props[el] && utils.isBoolean(props[el])) {
             elementType = el === 'btn' ? 'button' : el
         }
     })
@@ -44,7 +44,7 @@ const RME = (props: any) => {
                 classNameList.push('rme--bg-img')
             }
 
-            if (!(utils.reservedWord.indexOf(key) > -1)) {
+            if (utils.reservedWord.indexOf(key) <= -1 || !utils.isBoolean(props[key])) {
                 let gridKey = utils.checkGridKey(key)
 
                 if (gridKey) {

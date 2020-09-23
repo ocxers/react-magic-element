@@ -136,6 +136,46 @@ const App = () => {
     </>
 }
 ```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="3">Width</td>
+        <td>w[number]</td>
+        <td>width</td>
+        <td>width: [number]px</td>
+        <td>
+            w13 -> width: 13px <br>
+        </td>
+    </tr>
+    <tr>
+        <td>w={value}</td>
+        <td>width</td>
+        <td>width: value</td>
+        <td>
+            w=13 -> width: 13px <br>
+            w='13%' -> width: 13%
+        </td>
+    </tr>
+    <tr>
+        <td>w-[number]</td>
+        <td>width</td>
+        <td>width: [number]%</td>
+        <td>
+            w-13 -> width: 13% <br>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 #### Height
 ```tsx
 import RME from 'react-magic-element
@@ -149,6 +189,46 @@ const App = () => {
     </>
 }
 ```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="3">Height</td>
+        <td>h[number]</td>
+        <td>height</td>
+        <td>height: [number]px</td>
+        <td>
+            h13 -> height: 13px <br>
+        </td>
+    </tr>
+    <tr>
+        <td>h={value}</td>
+        <td>height</td>
+        <td>height: value</td>
+        <td>
+            h=13 -> height: 13px <br>
+            h='13%' -> height: 13%
+        </td>
+    </tr>
+    <tr>
+        <td>h-[number]</td>
+        <td>height</td>
+        <td>height: [number]%</td>
+        <td>
+            h-13 -> height: 13% <br>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 #### Padding
 ```tsx
 import RME from 'react-magic-element
@@ -165,6 +245,77 @@ const App = () => {
     </>
 }
 ```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="6">Padding</td>
+        <td>p[t/r/b/l][number]</td>
+        <td>padding[-top/right/bottom/left]</td>
+        <td>padding[-top/right/bottom/left]: [number]px</td>
+        <td>
+            p13 -> padding: 13px <br>
+            pt13 -> padding-top: 13px <br>
+            pr13 -> padding-right: 13px <br>
+            pb13 -> padding-bottom: 13px <br>
+            pl13 -> padding-left: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>p[t/r/b/l]={value}</td>
+        <td>padding[-top/right/bottom/left]</td>
+        <td>padding[-top/right/bottom/left]: [number]px</td>
+        <td>
+            p=13 -> padding: 13px <br>
+            pt=13 -> padding-top: 13px <br>
+            pr=13 -> padding-right: 13px <br>
+            pb=13 -> padding-bottom: 13px <br>
+            pl=13 -> padding-left: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>ph[number]</td>
+        <td>padding-left, padding-right</td>
+        <td>padding-left: 13px; padding-right: [number]px</td>
+        <td>
+            ph13 -> padding-left: 13px; padding-right: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>ph={value}</td>
+        <td>padding-left, padding-right</td>
+        <td>padding-left: 13px; padding-right: value</td>
+        <td>
+            ph=13 -> padding-left: 13px; padding-right: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>pv[number]</td>
+        <td>padding-top, padding-bottom</td>
+        <td>padding-top: 13px; padding-bottom: [number]px</td>
+        <td>
+            pv13 -> padding-top: 13px; padding-bottom: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>pv={value}</td>
+        <td>padding-top, padding-bottom</td>
+        <td>padding-top: 13px; padding-bottom: value</td>
+        <td>
+            pv=13 -> padding-top: 13px; padding-bottom: 13px
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 #### Margin
 
 ```tsx
@@ -181,7 +332,79 @@ const App = () => {
         <RME ml15>margin-left=15px;</RME>
     </>
 }
+
 ```
+<table>
+    <thead>
+    <tr>
+        <th></th>
+        <th>Property</th>
+        <th>CSS property</th>
+        <th>Render as</th>
+        <th>Example</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td rowspan="6">Margin</td>
+        <td>m[t/r/b/l][number]</td>
+        <td>margin[-top/right/bottom/left]</td>
+        <td>margin[-top/right/bottom/left]: [number]px</td>
+        <td>
+            p13 -> margin: 13px <br>
+            mt13 -> margin-top: 13px <br>
+            mr13 -> margin-right: 13px <br>
+            mb13 -> margin-bottom: 13px <br>
+            ml13 -> margin-left: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>m[t/r/b/l]={value}</td>
+        <td>margin[-top/right/bottom/left]</td>
+        <td>margin[-top/right/bottom/left]: [number]px</td>
+        <td>
+            m=13 -> margin: 13px <br>
+            mt=13 -> margin-top: 13px <br>
+            mr=13 -> margin-right: 13px <br>
+            mb=13 -> margin-bottom: 13px <br>
+            ml=13 -> margin-left: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>mh[number]</td>
+        <td>margin-left, margin-right</td>
+        <td>margin-left: 13px; margin-right: [number]px</td>
+        <td>
+            mh13 -> margin-left: 13px; margin-right: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>mh={value}</td>
+        <td>margin-left, margin-right</td>
+        <td>margin-left: 13px; margin-right: value</td>
+        <td>
+            mh=13 -> margin-left: 13px; margin-right: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>mv[number]</td>
+        <td>margin-top, margin-bottom</td>
+        <td>margin-top: 13px; margin-bottom: [number]px</td>
+        <td>
+            mv13 -> margin-top: 13px; margin-bottom: 13px
+        </td>
+    </tr>
+    <tr>
+        <td>mv={value}</td>
+        <td>margin-top, margin-bottom</td>
+        <td>margin-top: 13px; margin-bottom: value</td>
+        <td>
+            mv=13 -> margin-top: 13px; margin-bottom: 13px
+        </td>
+    </tr>
+    </tbody>
+</table>
+
 #### Border
 ```tsx
 import RME from 'react-magic-element
@@ -396,4 +619,5 @@ const App = () => {
 </table>
 
 #### BackgroundColor
+
 #### BackgroundImage
