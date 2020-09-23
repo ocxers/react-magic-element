@@ -216,70 +216,34 @@ const App = () => {
     <tr>
         <td>border</td>
         <td>b</td>
-        <td>border</td>
+        <td>rme--b</td>
         <td>border: 1px solid</td>
         <td></td>
     </tr>
     <tr>
-        <td rowspan="14">border width</td>
-        <td>bw[number]</td>
-        <td>border-width</td>
-        <td>border-width: [number]px</td>
-        <td>bw4 -> border-width: 4px</td>
+        <td rowspan="6">border width</td>
+        <td>b[t/r/b/l]w[number]</td>
+        <td>border[-top/right/bottom/left]-width</td>
+        <td>border[-top/right/bottom/left]-width: [number]px</td>
+        <td>
+            bw4 -> border-width: 4px <br>
+            btw4 -> border-top-width: 4px <br>
+            brw4 -> border-right-width: 4px <br>
+            bbw4 -> border-bottom-width: 4px <br>
+            blw4 -> border-left-width: 4px
+        </td>
     </tr>
     <tr>
-        <td>bw=[value]</td>
-        <td>border-width</td>
-        <td>border-width: value</td>
-        <td>bw=4px -> border-width: 4px</td>
-    </tr>
-    <tr>
-        <td>btw[number]</td>
-        <td>border-top-width</td>
-        <td>border-top-width: [number]px</td>
-        <td>btw4 -> border-top-width: 4px</td>
-    </tr>
-    <tr>
-        <td>btw=[value]</td>
-        <td>border-top-width</td>
-        <td>border-top-width: value</td>
-        <td>btw=4px -> border-top-width: 4px</td>
-    </tr>
-    <tr>
-        <td>brw[number]</td>
-        <td>border-right-width</td>
-        <td>border-right-width: [number]px</td>
-        <td>brw4 -> border-right-width: 4px</td>
-    </tr>
-    <tr>
-        <td>brw=[value]</td>
-        <td>border-right-width</td>
-        <td>border-right-width: value</td>
-        <td>brw=4px -> border-right-width: 4px</td>
-    </tr>
-    <tr>
-        <td>bbw[number]</td>
-        <td>border-bottom-width</td>
-        <td>border-bottom-width: [number]px</td>
-        <td>bbw4 -> border-bottom-width: 4px</td>
-    </tr>
-    <tr>
-        <td>bbw=[value]</td>
-        <td>border-bottom-width</td>
-        <td>border-bottom-width: value</td>
-        <td>bbw=4px -> border-bottom-width: 4px</td>
-    </tr>
-    <tr>
-        <td>blw[number]</td>
-        <td>border-left-width</td>
-        <td>border-left-width: [number]px</td>
-        <td>blw4 -> border-left-width: 4px</td>
-    </tr>
-    <tr>
-        <td>blw=[value]</td>
-        <td>border-left-width</td>
-        <td>border-left-width: value</td>
-        <td>blw=4px -> border-left-width: 4px</td>
+        <td>b[t/r/b/l]w={value}</td>
+        <td>border[-top/right/bottom/left]-width</td>
+        <td>border[-top/right/bottom/left]-width: value</td>
+        <td>
+            bw=4px -> border-width: 4px <br>
+            btw=4px -> border-top-width: 4px <br>
+            brw=4px -> border-right-width: 4px <br>
+            bbw=4px -> border-bottom-width: 4px <br>
+            blw=4px -> border-left-width: 4px
+        </td>
     </tr>
     <tr>
         <td>bhw[number]</td>
@@ -288,7 +252,7 @@ const App = () => {
         <td>bhw4 -> border-left-width: 4px; border-right-width: 4px</td>
     </tr>
     <tr>
-        <td>bhw=[value]</td>
+        <td>bhw={value}</td>
         <td>border-left-width, border-right-width</td>
         <td>border-left-width: value; border-right-width: value</td>
         <td>bhw=4px -> border-left-width: 4px; border-right-width: value</td>
@@ -300,71 +264,35 @@ const App = () => {
         <td>bvw4 -> border-top-width: 4px; border-bottom-width: 4px</td>
     </tr>
     <tr>
-        <td>bvw=[value]</td>
+        <td>bvw={value}</td>
         <td>border-top-width, border-bottom-width</td>
         <td>border-top-width: value; border-bottom-width: value</td>
         <td>bvw=4px -> border-top-width: 4px; border-bottom-width: value</td>
     </tr>
     <tr>
-        <td rowspan="14">border style</td>
-        <td>bs-[style]</td>
-        <td>border-style</td>
-        <td>rme--bs-[style]</td>
-        <td>rme--bs-dotted</td>
+        <td rowspan="6">border style</td>
+        <td>b[t/r/b/l]s-[style]</td>
+        <td>border[-top/right/bottom/left]-[style]</td>
+        <td>rme--b[t/r/b/l]s-[style]</td>
+        <td>
+            rme--bs-dotted <br>
+            rme--bts-dotted <br>
+            rme--brs-dotted <br>
+            rme--bbs-dotted <br>
+            rme--bls-dotted <br>
+        </td>
     </tr>
     <tr>
-        <td>bs=[style]</td>
-        <td>border-style</td>
-        <td>border-style: [style]</td>
-        <td>border-style: double</td>
-    </tr>
-    <tr>
-        <td>bts-[style]</td>
-        <td>border-top-style</td>
-        <td>rme--bts-[style]</td>
-        <td>rme--bts-dotted</td>
-    </tr>
-    <tr>
-        <td>bts=[style]</td>
-        <td>border-top-style</td>
-        <td>border-top-style: [style]</td>
-        <td>border-top-style: double</td>
-    </tr>
-    <tr>
-        <td>brs-[style]</td>
-        <td>border-right-style</td>
-        <td>rme--brs-[style]</td>
-        <td>rme--brs-dotted</td>
-    </tr>
-    <tr>
-        <td>brs=[style]</td>
-        <td>border-right-style</td>
-        <td>border-right-style: [style]</td>
-        <td>border-right-style: double</td>
-    </tr>
-    <tr>
-        <td>bbs-[style]</td>
-        <td>border-bottom-style</td>
-        <td>rme--bbs-[style]</td>
-        <td>rme--bbs-dotted</td>
-    </tr>
-    <tr>
-        <td>bbs=[style]</td>
-        <td>border-bottom-style</td>
-        <td>border-bottom-style: [style]</td>
-        <td>border-bottom-style: double</td>
-    </tr>
-    <tr>
-        <td>bls-[style]</td>
-        <td>border-left-style</td>
-        <td>rme--bls-[style]</td>
-        <td>rme--bls-dotted</td>
-    </tr>
-    <tr>
-        <td>bls=[style]</td>
-        <td>border-left-style</td>
-        <td>border-left-style: [style]</td>
-        <td>border-left-style: double</td>
+        <td>b[t/r/b/l]s={style}</td>
+        <td>border[-top/right/bottom/left]-style</td>
+        <td>border[-top/right/bottom/left]-style: [style]</td>
+        <td>
+            border-style: double <br>
+            border-top-style: double <br>
+            border-right-style: double <br>
+            border-bottom-style: double <br>
+            border-left-style: double <br>
+        </td>
     </tr>
     <tr>
         <td>bhs-[style]</td>
@@ -373,7 +301,7 @@ const App = () => {
         <td>rme--bhs-dotted</td>
     </tr>
     <tr>
-        <td>bhs=[style]</td>
+        <td>bhs={style}</td>
         <td>border-left-style, border-right-style</td>
         <td>border-left-style: [style]; border-right-style: [style]</td>
         <td>border-left-style: double; border-right-style: double</td>
@@ -385,71 +313,35 @@ const App = () => {
         <td>rme--bvs-dotted</td>
     </tr>
     <tr>
-        <td>bvs=[style]</td>
+        <td>bvs={style}</td>
         <td>border-top-style, border-bottom-style</td>
         <td>border-top-style: [style]; border-bottom-style: [style]</td>
         <td>border-top-style: double; border-bottom-style: double</td>
     </tr>
     <tr>
-        <td rowspan="14">border color</td>
-        <td>bc-[builtin-color]</td>
-        <td>border-color</td>
-        <td>rme--bc-[builtin-color]</td>
-        <td>rme--bc-primary</td>
+        <td rowspan="6">border color</td>
+        <td>b[t/r/b/l]c-[builtin-color]</td>
+        <td>border[-top/right/bottom/left]-color</td>
+        <td>rme--b[t/r/b/l]c-[builtin-color]</td>
+        <td>
+            rme--bc-primary <br>
+            rme--btc-primary <br>
+            rme--brc-primary <br>
+            rme--bbc-primary <br>
+            rme--blc-primary
+        </td>
     </tr>
     <tr>
-        <td>bc=[color]</td>
-        <td>border-color</td>
-        <td>border-color=[color]</td>
-        <td>border-color='#ff0000'</td>
-    </tr>
-    <tr>
-        <td>btc-[builtin-color]</td>
-        <td>border-top-color</td>
-        <td>rme--btc-[builtin-color]</td>
-        <td>rme--btc-primary</td>
-    </tr>
-    <tr>
-        <td>btc=[color]</td>
-        <td>border-top-color</td>
-        <td>border-top-color=[color]</td>
-        <td>border-top-color='#ff0000'</td>
-    </tr>
-    <tr>
-        <td>brs-[builtin-color]</td>
-        <td>border-right-color</td>
-        <td>rme--brs-[builtin-color]</td>
-        <td>rme--brs-primary</td>
-    </tr>
-    <tr>
-        <td>brc=[color]</td>
-        <td>border-right-color</td>
-        <td>border-right-color=[color]</td>
-        <td>border-right-color='#ff0000'</td>
-    </tr>
-    <tr>
-        <td>bbs-[builtin-color]</td>
-        <td>border-bottom-color</td>
-        <td>rme--bbs-[builtin-color]</td>
-        <td>rme--bbs-primary</td>
-    </tr>
-    <tr>
-        <td>bbc=[color]</td>
-        <td>border-bottom-color</td>
-        <td>border-bottom-color=[color]</td>
-        <td>border-bottom-color='#ff0000'</td>
-    </tr>
-    <tr>
-        <td>bls-[builtin-color]</td>
-        <td>border-left-color</td>
-        <td>rme--bls-[builtin-color]</td>
-        <td>rme--bls-primary</td>
-    </tr>
-    <tr>
-        <td>blc=[color]</td>
-        <td>border-left-color</td>
-        <td>border-left-color=[color]</td>
-        <td>border-left-color='#ff0000'</td>
+        <td>b[t/r/b/l]c={color}</td>
+        <td>border[-top/right/bottom/left]-color</td>
+        <td>border[-top/right/bottom/left]-color=[color]</td>
+        <td>
+            border-color='#ff0000' <br>
+            border-top-color='#ff0000' <br>
+            border-right-color='#ff0000' <br>
+            border-bottom-color='#ff0000' <br>
+            border-left-color='#ff0000'
+        </td>
     </tr>
     <tr>
         <td>bhs-[builtin-color]</td>
@@ -458,7 +350,7 @@ const App = () => {
         <td>rme--bhs-primary</td>
     </tr>
     <tr>
-        <td>bhc=[color]</td>
+        <td>bhc={color}</td>
         <td>border-left-color, border-right-color</td>
         <td>border-left-color=[color], border-right-color=[color]</td>
         <td>border-left-color='#ff0000'; border-right-color='#ff0000'</td>
@@ -470,49 +362,38 @@ const App = () => {
         <td>rme--bvs-primary</td>
     </tr>
     <tr>
-        <td>bvc=[color]</td>
+        <td>bvc={color}</td>
         <td>border-top-color, border-right-color</td>
         <td>border-top-color=[color], border-right-color=[color]</td>
         <td>border-top-color='#ff0000'; border-right-color='#ff0000'</td>
     </tr>
     <tr>
-        <td rowspan="14">border radius</td>
-        <td>r[number]</td>
-        <td>border-radius</td>
-        <td>border-radius: [number]</td>
-        <td>border-radius: 12px</td>
+        <td rowspan="2">border radius</td>
+        <td>r[tl/tr/bl/br][number]</td>
+        <td>border[-top-left/top-right/bottom-left/bottom-right]-radius</td>
+        <td>border[-top-left/top-right/bottom-left/bottom-right]-radius: [number]</td>
+        <td>
+            border-radius: 12px <br>
+            border-top-left-radius: 12px <br>
+            border-top-right-radius: 12px <br>
+            border-bottom-left-radius: 12px <br>
+            border-bottom-right-radius: 12px
+        </td>
     </tr>
     <tr>
-        <td>r=[value]</td>
-        <td>border-radius</td>
-        <td>border-radius: [value]</td>
-        <td>border-radius: 12px</td>
-    </tr>
-    <tr>
-        <td>rtl[number]</td>
-        <td>border-top-left-radius</td>
-        <td>border-top-left-radius: [number]</td>
-        <td>border-top-left-radius: 12px</td>
-    </tr>
-    <tr>
-        <td>rtr=[value]</td>
-        <td>border-top-right-radius</td>
-        <td>border-top-right-radius: [value]</td>
-        <td>border-top-right-radius: 12px</td>
-    </tr>
-    <tr>
-        <td>rbl[number]</td>
-        <td>border-bottom-left-radius</td>
-        <td>border-bottom-left-radius: [number]</td>
-        <td>border-bottom-left-radius: 12px</td>
-    </tr>
-    <tr>
-        <td>rbr=[value]</td>
-        <td>border-bottom-right-radius</td>
-        <td>border-bottom-right-radius: [value]</td>
-        <td>border-bottom-right-radius: 12px</td>
+        <td>r[tl/tr/bl/br]={value}</td>
+        <td>border[-top-left/top-right/bottom-left/bottom-right]-radius</td>
+        <td>border[-top-left/top-right/bottom-left/bottom-right]-radius: [value]</td>
+        <td>
+            border-radius: 12px <br>
+            border-top-left-radius: 12px <br>
+            border-top-right-radius: 12px <br>
+            border-bottom-left-radius: 12px <br>
+            border-bottom-right-radius: 12px
+        </td>
     </tr>
     </tbody>
 </table>
+
 #### BackgroundColor
 #### BackgroundImage
