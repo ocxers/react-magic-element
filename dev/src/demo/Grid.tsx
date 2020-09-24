@@ -4,7 +4,7 @@ import RME from "../components/ReactMagicElement"
 
 export default (props: any) => {
     return (
-        <RME>
+        <RME flex row>
             <RME w-86 b3 btw6 bc='red'>
                 <RME md5 sm12 xs16 bgc-primary>md5 sm12 xs16</RME>
             </RME>

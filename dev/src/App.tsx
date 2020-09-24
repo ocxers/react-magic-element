@@ -15,6 +15,7 @@ import TextLines from "./demo/TextLines"
 import BoxSizing from "./demo/BoxSizing"
 import BackgroundColor from "./demo/BackgroundColor"
 import BackgroundImage from "./demo/BackgroundImage"
+import Grid from "./demo/Grid"
 
 RME.config({
     colors: {
@@ -41,20 +42,34 @@ function App() {
         console.log('click')
     }
     return (
-        <RME>
-            <Padding />
-            <Margin />
-            <Elements />
-            <Width />
-            <Height />
-            <Border />
-            <Color />
-            <FontSize/>
-            <FontWeight/>
-            <BoxSizing />
-            <BackgroundColor />
-            <BackgroundImage />
-            <TextLines />
+        <>
+            <div style={{padding: '15px', width: '1024px'}}>
+                {/*<RME row g36>*/}
+                {/*    <RME col12>*/}
+                {/*        <RME bgc-secondary>col12</RME>*/}
+                {/*    </RME>*/}
+                {/*    <RME rest>*/}
+                {/*        <RME bgc-danger>rest</RME>*/}
+                {/*    </RME>*/}
+                {/*</RME>*/}
+                <RME b bc-primary row g32>
+                    <RME b col12> ROW COL</RME>
+                    <RME b col12 bsz-tiny> ROW COL</RME>
+                </RME>
+            </div>
+            {/*<Padding />*/}
+            {/*<Margin />*/}
+            {/*<Elements />*/}
+            {/*<Width />*/}
+            {/*<Height />*/}
+            {/*<Border />*/}
+            {/*<Color />*/}
+            {/*<FontSize/>*/}
+            {/*<FontWeight/>*/}
+            {/*<BoxSizing />*/}
+            {/*<BackgroundColor />*/}
+            {/*<BackgroundImage />*/}
+            {/*<TextLines />*/}
             {/*<RME h300 p30>*/}
             {/*<RME h64 bgc-primary b={'1px solid red'} ph15 style={{*/}
             {/*    borderWidth: '23px'*/}
@@ -73,7 +88,7 @@ function App() {
             {/*<Main/>*/}
             {/*<Media/>*/}
             {/*<Tag/>*/}
-            <Button/>
+            {/*<Button/>*/}
             {/*<Alert/>*/}
             {/*<Grid/>*/}
             {/*<RME tc fr bg-primary w240>width-100</RME>*/}
@@ -99,7 +114,7 @@ function App() {
             {/*</RME>*/}
 
             {/*</RME>*/}
-        </RME>
+        </>
     )
 }
 

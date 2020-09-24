@@ -4,59 +4,25 @@ const gridKeys: Array<string> = ['col', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
 
 let cssProperties: any = {
     defaultProperties: {
-        shortcut: '',
-        values: [
-            // color
-            'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark', 'white', 'transparent',
-            // background color
-            'bg-primary', 'bg-secondary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-light', 'bg-dark', 'bg-white', 'bg-transparent',
-            // border color 1px solid
-            'bc-primary', 'bc-secondary', 'bc-success', 'bc-danger', 'bc-warning', 'bc-info', 'bc-light', 'bc-dark', 'bc-white', 'bc-transparent',
-            'btc-primary', 'btc-secondary', 'btc-success', 'btc-danger', 'btc-warning', 'btc-info', 'btc-light', 'btc-dark', 'btc-white', 'btc-transparent',
-            'brc-primary', 'brc-secondary', 'brc-success', 'brc-danger', 'brc-warning', 'brc-info', 'brc-light', 'brc-dark', 'brc-white', 'brc-transparent',
-            'bbc-primary', 'bbc-secondary', 'bbc-success', 'bbc-danger', 'bbc-warning', 'bbc-info', 'bbc-light', 'bbc-dark', 'bbc-white', 'bbc-transparent',
-            'blc-primary', 'blc-secondary', 'blc-success', 'blc-danger', 'blc-warning', 'blc-info', 'blc-light', 'blc-dark', 'blc-white', 'blc-transparent',
-            'bhc-primary', 'bhc-secondary', 'bhc-success', 'bhc-danger', 'bhc-warning', 'bhc-info', 'bhc-light', 'bhc-dark', 'bhc-white', 'bhc-transparent',
-            'bvc-primary', 'bvc-secondary', 'bvc-success', 'bvc-danger', 'bvc-warning', 'bvc-info', 'bvc-light', 'bvc-dark', 'bvc-white', 'bvc-transparent',
-            'bs-none', 'bts-none', 'brs-none', 'bbs-none', 'bls-none', 'bhs-none', 'bvs-none',
-            'bs-hidden', 'bts-hidden', 'brs-hidden', 'bbs-hidden', 'bls-hidden', 'bhs-hidden', 'bvs-hidden',
-            'bs-dotted', 'bts-dotted', 'brs-dotted', 'bbs-dotted', 'bls-dotted', 'bhs-dotted', 'bvs-dotted',
-            'bs-dashed', 'bts-dashed', 'brs-dashed', 'bbs-dashed', 'bls-dashed', 'bhs-dashed', 'bvs-dashed',
-            'bs-solid', 'bts-solid', 'brs-solid', 'bbs-solid', 'bls-solid', 'bhs-solid', 'bvs-solid',
-            'bs-double', 'bts-double', 'brs-double', 'bbs-double', 'bls-double', 'bhs-double', 'bvs-double',
-            'bs-groove', 'bts-groove', 'brs-groove', 'bbs-groove', 'bls-groove', 'bhs-groove', 'bvs-groove',
-            'bs-ridge', 'bts-ridge', 'brs-ridge', 'bbs-ridge', 'bls-ridge', 'bhs-ridge', 'bvs-ridge',
-            'bs-inset', 'bts-inset', 'brs-inset', 'bbs-inset', 'bls-inset', 'bhs-inset', 'bvs-inset',
-            'bs-outset', 'bts-outset', 'brs-outset', 'bbs-outset', 'bls-outset', 'bhs-outset', 'bvs-outset',
-            'bs-initial', 'bts-initial', 'brs-initial', 'bbs-initial', 'bls-initial', 'bhs-initial', 'bvs-initial',
-            'bs-inherit', 'bts-inherit', 'brs-inherit', 'bbs-inherit', 'bls-inherit', 'bhs-inherit', 'bvs-inherit',
-            // circle
-            'circle',
-            // tag
-            'tag',
-            // alert
-            'alert',
-            // plain
-            'plain',
-            // link
-            'link',
-            // block align
-            'left', 'center', 'right', 'top', 'middle', 'bottom',
-            // text align
-            'txt-left', 'txt-center', 'txt-right',
-            // text decoration
-            'underline', 'hover-underline', 'line-through', 'pointer',
-            // row, col, fill, rest
-            'row', 'col', 'flex', 'fill', 'rest', 'd-row', 'd-col',
-            // disabled
-            'disabled',
-            // group
-            'group',
-            // size
-            'tiny', 'mini', 'small', 'medium', 'big', 'large', 'huge', 'gigantic',
-            // bgImg
-            'bgi', 'bgImg', 'bg-img',
-        ]
+        keyValues: [{
+            keys: [''],
+            values: colors.map((color: string) => color.replace('-', ''))
+        }, {
+            // background, border
+            keys: 'bg,bc,btc,brc,bbc,bhc,bvc'.split(','),
+            values: colors
+        }, {
+            // border style
+            keys: 'bs,bts,brs,bbs,bls,bhs,bvs'.split(','),
+            values: '-none,-hidden,-dotted,-dashed,-solid,-double,-groove,-ridge,-inset,-outset,-initial,-inherit'.split(',')
+        }, {
+            // box sizing
+            keys: [''],
+            values: 'tiny,mini,small,medium,big,large,huge,gigantic'.split(',')
+        }, {
+            keys: [''],
+            values: `circle,tag,alert,plain,link,left,center,right,top,middle,bottom,txt-left,txt-center,txt-right,underline,hover-underline,line-through,pointer,row,col,flex,rest,d-row,d-col,disabled,group,bgi`.split(',')
+        }]
     },
     width: {
         shortcut: 'w',
@@ -107,10 +73,6 @@ let cssProperties: any = {
         shortcut: 'l',
         values: [1, 2, 3, 4, 5]
     },
-    boxSizing: {
-        shortcut: 'bsz',
-        values: ['-tiny', '-mini', '-small', '-medium', '-big', '-large', '-huge', '-gigantic']
-    },
     boxShadow: {
         shortcut: 's',
         values: ['']
@@ -153,8 +115,12 @@ const initialBuiltinClassAndStyleMappings = () => {
 
     keys.map(key => {
         if (key === 'defaultProperties') {
-            cssProperties.defaultProperties.values.map((v: string) => {
-                groups[v] = 1
+            cssProperties.defaultProperties.keyValues.map((kv: any) => {
+                kv.keys.map((k: string) => {
+                    kv.values.map((v: string) => {
+                        groups[k + v] = 1
+                    })
+                })
             })
         } else {
             let cssProps = cssProperties[key]
@@ -222,6 +188,7 @@ const initialBuiltinClassAndStyleMappings = () => {
         }
     })
 
+    console.log(mappings.bsz)
     return {elements, styleMappings: mappings, builtinClasses: Object.keys(groups)}
 }
 
@@ -240,7 +207,11 @@ const utils = {
                 return tempKey.join('-')
             }
 
-            return 'col-' + tempKey.join('-')
+            if (tempKey.length) {
+                return 'col-' + tempKey.join('-')
+            } else {
+                return key
+            }
         } else {
             return null
         }
