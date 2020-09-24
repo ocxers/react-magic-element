@@ -16,13 +16,18 @@ import BoxSizing from "./demo/BoxSizing"
 import BackgroundColor from "./demo/BackgroundColor"
 import BackgroundImage from "./demo/BackgroundImage"
 import Grid from "./demo/Grid"
+import Layout from "./demo/Layout"
+import Main from "./demo/Main"
+import Media from "./demo/Media"
+import Tag from "./demo/Tag"
+import Alert from "./demo/Alert"
 
 RME.config({
     colors: {
         /**
          * Default color system
          */
-        primary: ['#ffcc00', '#ccc'],
+        // danger: ['#ffcc00', '#ccc'],
         // danger: ['#ff0000', '#fff'],
         // secondary: '#6c757d',
         // success: '#28a745',
@@ -43,20 +48,35 @@ function App() {
     }
     return (
         <>
-            <div style={{padding: '15px', width: '1024px'}}>
-                {/*<RME row g36>*/}
-                {/*    <RME col12>*/}
-                {/*        <RME bgc-secondary>col12</RME>*/}
-                {/*    </RME>*/}
-                {/*    <RME rest>*/}
-                {/*        <RME bgc-danger>rest</RME>*/}
-                {/*    </RME>*/}
-                {/*</RME>*/}
-                <RME b bc-primary row g32>
-                    <RME b col12> ROW COL</RME>
-                    <RME b col12 bsz-tiny> ROW COL</RME>
+            <RME b-success d-row g32>
+                <RME xs24 sm16 md12 lg8 xl4 xxl2>
+                    <RME bgc-primary>xs24 sm16 md12 lg8 xl4 xxl2</RME>
                 </RME>
-            </div>
+                <RME xs24 rest>
+                    <RME d-row>
+                        <RME col12>
+                            <RME bgc-secondary>col12</RME>
+                        </RME>
+                        <RME rest>
+                            <RME bgc-danger>rest</RME>
+                        </RME>
+                    </RME>
+                </RME>
+            </RME>
+            {/*<div style={{padding: '15px', width: '1024px'}}>*/}
+            {/*    <RME row g36>*/}
+            {/*        <RME col12>*/}
+            {/*            <RME bgc-secondary>col12</RME>*/}
+            {/*        </RME>*/}
+            {/*        <RME rest>*/}
+            {/*            <RME bgc-danger>rest</RME>*/}
+            {/*        </RME>*/}
+            {/*    </RME>*/}
+            {/*    <RME b bc-primary row g32>*/}
+            {/*        <RME b col12> ROW COL</RME>*/}
+            {/*        <RME b col12 bsz-tiny> ROW COL</RME>*/}
+            {/*    </RME>*/}
+            {/*</div>*/}
             {/*<Padding />*/}
             {/*<Margin />*/}
             {/*<Elements />*/}

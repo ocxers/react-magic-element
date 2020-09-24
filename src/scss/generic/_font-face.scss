@@ -1,3 +1,9 @@
+[class*="rme--lc"] {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+}
 .rme {
     // Font size
     &--fs {
@@ -19,20 +25,9 @@
         }
     }
 
-    // Font lines
-    &--l {
-        display: -webkit-box !important;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        -webkit-line-clamp: 1;
-    }
-
-    $lines: 1, 2, 3, 4, 5;
+    $lines: 1, 2, 3, 4;
     @each $l in $lines {
-        &--l#{$l} {
-            display: -webkit-box !important;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        &--lc#{$l} {
             -webkit-line-clamp: $l;
         }
     }

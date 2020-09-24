@@ -5,7 +5,7 @@ export default () => {
     return (
         <>
             <RME h1 primary>Background Color</RME>
-            <RME b bgc-primary>bgc-primary -> rme--bgc-primary</RME>
+            <RME bg-primary>bgc-primary -> rme--bgc-primary</RME>
             <RME b bgc-secondary>bgc-secondary -> rme--bgc-secondary</RME>
             <RME b bgc-success>bgc-success -> rme--bgc-success</RME>
             <RME b bgc-danger>bgc-danger -> rme--bgc-danger</RME>

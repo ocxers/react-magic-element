@@ -21,7 +21,7 @@ const RME = (props: any) => {
     let styleList: any = {}
     const loopCssProperties = (key: string, val: string) => {
         (styleMappings[key]?.split(',') || []).map((k: any) => {
-            styleList[k] = val
+            styleList[k] = utils.colorsValues[val] || val
         })
     }
     const initialClassesAndStyles = () => {
@@ -31,71 +31,61 @@ const RME = (props: any) => {
 
         Object.keys(props).map((key: string) => {
             let fmtKey = utils.formatKey(key)
-            if (['button', 'btn', 'link'].indexOf(fmtKey) > -1) {
+            if (['button', 'btn'].indexOf(fmtKey) > -1) {
                 classNameList.push('rme--btn')
             }
-            if (fmtKey === 'hover-underline') {
-                classNameList.push('rme--hover-underline')
-            }
-            if (fmtKey === 'line-through') {
-                classNameList.push('rme--line-through')
-            }
-            if (fmtKey === 'l') {
-                classNameList.push('rme--l')
-            }
-            if (['bg-img', 'bgi'].indexOf(fmtKey) > -1) {
-                classNameList.push('rme--bg-img')
+            if (['hover-underline', 'line-through', 'lc', 'bgi'].indexOf(fmtKey) > -1) {
+                classNameList.push(`rme--${fmtKey}`)
             }
 
             if (utils.reservedWord.indexOf(key) <= -1 || !utils.isBoolean(props[key])) {
                 let gridKey = utils.checkGridKey(key)
 
                 if (gridKey) {
-                    classNameList.push('rme--' + gridKey)
+                    classNameList.push(`rme--${gridKey}`)
                 } else if (utils.isBoolean(props[key]) && builtinClasses?.indexOf(fmtKey) > -1) {
-                    classNameList.push('rme--' + fmtKey)
+                    if (utils.boxSize.indexOf(fmtKey) > -1) {
+                        classNameList.push(`rme--sz-${fmtKey}`)
+                    } else {
+                        classNameList.push(`rme--${fmtKey}`)
+                    }
                 } else {
-                    switch (key) {
-                        case 'b':
-                            loopCssProperties(key, props[key])
-                            break
-                        default:
-                            if (!utils.isBoolean(props[key])) {
-                                loopCssProperties(key, props[key])
-                            } else {
-                                if (key.indexOf('-') > -1) {
-                                    let percentage = utils.getPercentageHandler(key)
-                                    if (percentage) {
-                                        loopCssProperties(percentage[0], percentage[1] + '%')
-                                    } else {
-                                        if (Object.keys(styleMappings).indexOf(key) > -1) {
-                                            loopCssProperties(key, utils.getValue(props[key]))
-                                        }
-                                    }
+                    if (!utils.isBoolean(props[key])) {
+                        loopCssProperties(key, props[key])
+                    } else {
+                        if (key.indexOf('-') > -1) {
+                            let percentage = utils.getPercentageHandler(key)
+                            if (percentage) {
+                                if (isNaN(Number(percentage[1]))) {
+                                    loopCssProperties(percentage[0], percentage[1])
                                 } else {
-                                    let pixel = utils.getPixelHandler(key)
-                                    if (pixel) {
-                                        loopCssProperties(pixel[0], pixel[1] + 'px')
-                                        if (pixel[0] === 'g' || pixel[0] === 'gutter') {
-                                            classNameList.push('rme--g')
-                                            if (pixel[1]) {
-                                                // @ts-ignore
-                                                styleList['--gutter'] = `-${pixel[1] / 2}px`
-                                                // @ts-ignore
-                                                styleList['--child-gutter'] = `${pixel[1] / 2}px`
-                                            }
-                                        } else if (pixel[0] === 'b' || pixel[0] === 'border') {
-                                            loopCssProperties(pixel[0], pixel[1] + 'px solid')
-                                        } else {
-                                            loopCssProperties(pixel[0], pixel[1] + 'px')
-                                        }
-                                    } else {
-                                        if (Object.keys(styleMappings).indexOf(key) > -1) {
-                                            loopCssProperties(key, utils.getValue(props[key]))
-                                        }
-                                    }
+                                    loopCssProperties(percentage[0], percentage[1] + '%')
+                                }
+                            } else {
+                                if (Object.keys(styleMappings).indexOf(key) > -1) {
+                                    loopCssProperties(key, utils.getValue(props[key]))
                                 }
                             }
+                        } else {
+                            let pixel = utils.getPixelHandler(key)
+                            if (pixel) {
+                                if (pixel[0] === 'g' || pixel[0] === 'gutter') {
+                                    classNameList.push('rme--g')
+                                    if (pixel[1]) {
+                                        // @ts-ignore
+                                        styleList['--gutter'] = `-${pixel[1] / 2}px`
+                                        // @ts-ignore
+                                        styleList['--child-gutter'] = `${pixel[1] / 2}px`
+                                    }
+                                } else {
+                                    loopCssProperties(pixel[0], pixel[1] + 'px')
+                                }
+                            } else {
+                                if (Object.keys(styleMappings).indexOf(key) > -1) {
+                                    loopCssProperties(key, utils.getValue(props[key]))
+                                }
+                            }
+                        }
                     }
                 }
             }

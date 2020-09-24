@@ -31,8 +31,6 @@
         border-color: transparent !important;
         background-color: transparent !important;
         color: $primary;
-        align-items: center;
-        display: flex;
         text-decoration: none;
 
         &:hover {
@@ -79,14 +77,14 @@ $btnSizes:
     gigantic    64px        24px        24px        4px;
 
 @each $n, $h, $p, $s, $r in $btnSizes {
-    .rme--btn.rme--#{$n} {
-        height: $h!important;
+    .rme--btn.rme--sz-#{$n} {
+        height: $h;
         padding-left: $p;
         padding-right: $p;
         font-size: $s;
         border-radius: $r;
     }
-    .rme--btn.rme--#{$n}:not(.rme--circle) {
-        width: auto!important;
+    .rme--btn.rme--sz-#{$n}:not(.rme--circle) {
+        width: auto;
     }
 }

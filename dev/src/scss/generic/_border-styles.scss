@@ -1,87 +1,37 @@
 .rme {
-    $radius:
-            1 1px,
-            2 2px,
-            3 3px,
-            4 4px,
-            5 5px,
-            6 6px,
-            7 7px,
-            8 8px,
-            9 9px,
-            10 10px;
+    &--b {
+        border: 1px solid;
+    }
+
+    $radius: 1 1px,
+    2 2px,
+    3 3px,
+    4 4px,
+    5 5px;
     @each $n, $r in $radius {
         &--r#{$n} {
             border-radius: $r;
         }
-        &--rtl#{$n} {
-            border-top-left-radius: $r;
-        }
-        &--rtr#{$n} {
-            border-top-right-radius: $r;
-        }
-        &--rbl#{$n} {
-            border-bottom-left-radius: $r;
-        }
-        &--rbr#{$n} {
-            border-bottom-right-radius: $r;
-        }
     }
 
-    &--border, &--b {
-        border: 1px solid;
+    &--r-50 {
+        border-radius: 50%;
     }
 
-    @for $i from 1 through 10 {
+    &--r-100 {
+        border-radius: 100%;
+    }
+
+    @for $i from 1 through 4 {
         &--bw#{$i} {
             border-width: $i + px !important;
         }
-        &--btw#{$i} {
-            border-top-width: $i + px !important;
-        }
-        &--brw#{$i} {
-            border-right-width: $i + px !important;
-        }
-        &--bbw#{$i} {
-            border-bottom-width: $i + px !important;
-        }
-        &--blw#{$i} {
-            border-left-width: $i + px !important;
-        }
-        &--bhw#{$i} {
-            border-left-width: $i + px !important;
-            border-right-width: $i + px !important;
-        }
-        &--bvw#{$i} {
-            border-top-width: $i + px !important;
-            border-bottom-width: $i + px !important;
-        }
     }
 
-    $borderStyles: none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial, inherit;
+    $borderStyles: dotted, dashed, solid, double;
     @each $bs in $borderStyles {
         &--bs-#{$bs} {
             border-style: $bs !important;
-        }
-        &--bts-#{$bs} {
-            border-top-style: $bs !important;
-        }
-        &--brs-#{$bs} {
-            border-right-style: $bs !important;
-        }
-        &--bbs-#{$bs} {
-            border-bottom-style: $bs !important;
-        }
-        &--bls-#{$bs} {
-            border-left-style: $bs !important;
-        }
-        &--bhs-#{$bs} {
-            border-left-style: $bs !important;
-            border-right-style: $bs !important;
-        }
-        &--bvs-#{$bs} {
-            border-top-style: $bs !important;
-            border-bottom-style: $bs !important;
         }
     }
 }

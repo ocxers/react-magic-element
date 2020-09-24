@@ -10,6 +10,11 @@
     &--row {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    &--col {
+        display: initial;
     }
 
     &--d-row {
@@ -21,7 +26,7 @@
         flex-direction: column;
     }
 
-    &--fill, &--rest {
+    &--rest {
         flex: 1 1;
         display: block;
     }

@@ -11,8 +11,8 @@ export default (props: any) => {
         <RME>
             <RME alert primary onClose={handleClose} mb5>Warning Text Warning Text Warning Text Warning Text Warning
                 Text Warning TextWarning Text</RME>
-            <RME section alert success onClose={handleClose} border p15 showIcon row>
-                <RME avatar huge mr15 circle bgImg={img}></RME>
+            <RME section d-row alert success onClose={handleClose} border p15 showIcon row>
+                <RME avatar huge mr15 circle bgi={img}>Hello</RME>
                 <RME col fill>
                     <RME h3 m0 mb5 underline pointer center>RME H2</RME>
                     <RME>Warning Text Warning Text Warning Text Warning Text
@@ -26,9 +26,9 @@ export default (props: any) => {
                 </RME>
             </RME>
             <RME alert success b={'2px solid red'} row p0>
-                <RME col fill>
-                    <RME h1 right>RME H2</RME>
-                    <RME left>Warning Text Warning Text Warning Text Warning Text
+                <RME col rest>
+                    <RME h1>RME H2</RME>
+                    <RME>Warning Text Warning Text Warning Text Warning Text
                         Warning Text Warning TextWarning Text</RME>
                     <RME>Warning Text Warning Text Warning Text Warning Text
                         Warning Text Warning TextWarning Text</RME>
@@ -37,7 +37,7 @@ export default (props: any) => {
                     <RME>Warning Text Warning Text Warning Text Warning Text
                         Warning Text Warning TextWarning Text</RME>
                 </RME>
-                <RME avatar bgImg={img} w={360}>jjj</RME>
+                <RME avatar bgi={img} w={360}>jjj</RME>
             </RME>
         </RME>
     )

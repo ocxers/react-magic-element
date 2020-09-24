@@ -1,37 +1,61 @@
 const elements = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'nav', 'label', 'header', 'footer', 'button', 'btn', 'a', 'ul', 'ol', 'li', 'span', 'section', 'address']
-const colors = ['-primary', '-secondary', '-success', '-danger', '-warning', '-info', '-light', '-dark', '-white', '-transparent']
+const colorsValues: any = {
+    primary: '#007bff',
+    secondary: '#6c757d',
+    success: '#28a745',
+    danger: '#dc3545',
+    warning: '#ffc107',
+    info: '#17a2b8',
+    light: '#f8f9fa',
+    dark: '#343a40',
+    white: '#fff',
+    transparent: 'transparent'
+}
+const colors = Object.keys(colorsValues).map((color: string) => `-${color}`)
 const gridKeys: Array<string> = ['col', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
+const boxSize = 'mini,small,medium,big,large,huge'.split(',')
 
 let cssProperties: any = {
     defaultProperties: {
         keyValues: [{
             keys: [''],
-            values: colors.map((color: string) => color.replace('-', ''))
+            values: Object.keys(colorsValues)
         }, {
             // background, border
-            keys: 'bg,bc,btc,brc,bbc,bhc,bvc'.split(','),
+            keys: 'bg,bc'.split(','),
             values: colors
         }, {
             // border style
-            keys: 'bs,bts,brs,bbs,bls,bhs,bvs'.split(','),
-            values: '-none,-hidden,-dotted,-dashed,-solid,-double,-groove,-ridge,-inset,-outset,-initial,-inherit'.split(',')
+            keys: ['bs'],
+            values: '-dotted,-dashed,-solid,-double'.split(',')
+        }, {
+            // radius
+            keys: ['r'],
+            values: '-50,-100'.split(',')
         }, {
             // box sizing
             keys: [''],
-            values: 'tiny,mini,small,medium,big,large,huge,gigantic'.split(',')
+            values: boxSize
         }, {
             keys: [''],
             values: `circle,tag,alert,plain,link,left,center,right,top,middle,bottom,txt-left,txt-center,txt-right,underline,hover-underline,line-through,pointer,row,col,flex,rest,d-row,d-col,disabled,group,bgi`.split(',')
+        }, {
+            keys: ['lc'],
+            values: '1,2,3,4'.split(',')
+        }, {
+            // border width
+            keys: 'bw'.split(','),
+            values: '1,2,3,4'.split(',')
         }]
     },
     width: {
         shortcut: 'w',
-        percentValues: [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        percentValues: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         values: [8, 16, 32, 48, 64, 96, 128, 256]
     },
     height: {
         shortcut: 'h',
-        percentValues: [5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        percentValues: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         values: [8, 16, 32, 48, 64, 96, 128, 256]
     },
     padding: {
@@ -48,14 +72,14 @@ let cssProperties: any = {
         shortcut: 'b',
         directions: ['top', 'right', 'bottom', 'left', 'horizontal', 'vertical'],
         attributes: ['width', 'style', 'color'],
-        values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        values: [1, 2, 3, 4],
         styleValues: ['-none', '-hidden', '-dotted', '-dashed', '-solid', '-double', '-groove', '-ridge', '-inset', '-outset', '-initial', '-inherit'],
         colorValues: colors
     },
     borderRadius: {
         shortcut: 'r',
         directions: ['topRight', 'bottomRight', 'topLeft', 'bottomLeft'],
-        values: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        values: [1, 2, 3, 4, 5]
     },
     color: {
         shortcut: 'fc',
@@ -70,8 +94,8 @@ let cssProperties: any = {
         values: [100, 200, 300, 400, 500, 600, 700, 800, 900]
     },
     textLines: {
-        shortcut: 'l',
-        values: [1, 2, 3, 4, 5]
+        shortcut: 'lc',
+        values: [1, 2, 3, 4]
     },
     boxShadow: {
         shortcut: 's',
@@ -150,18 +174,6 @@ const initialBuiltinClassAndStyleMappings = () => {
                             groups[cssShort + a.charAt(0)] = 1
                             mappings[cssShort + a.charAt(0)] = formatHVValue(key + capitalize(a))
                             mappings[cssShort + getShortcut(d) + a.charAt(0)] = formatHVValue(key + capitalize(d) + capitalize(a))
-                            if (!cssProps[a + 'Values']) {
-                                cssProps.values.map((v: any) => {
-                                    // for width: border top width => btw, btw0
-                                    groups[cssShort + getShortcut(d) + a.charAt(0)] = 1
-                                    groups[cssShort + getShortcut(d) + a.charAt(0) + v] = 1
-                                })
-                            } else {
-                                cssProps[a + 'Values'].map((v: string) => {
-                                    groups[cssShort + getShortcut(d) + a.charAt(0)] = 1
-                                    groups[cssShort + getShortcut(d) + a.charAt(0) + v] = 1
-                                })
-                            }
                         })
                     } else {
                         cssProps.values?.map((v: any) => {
@@ -188,7 +200,6 @@ const initialBuiltinClassAndStyleMappings = () => {
         }
     })
 
-    console.log(mappings.bsz)
     return {elements, styleMappings: mappings, builtinClasses: Object.keys(groups)}
 }
 
@@ -237,12 +248,13 @@ const utils = {
     },
     setConfig(config: any) {
         let colorCssProperties: any = {}
-        Object.keys(config.colors).map((key: any) => {
+        Object.keys(config.colors).map((key: string) => {
             const color = config.colors[key]
+            colorsValues[key] = color[0]
             colorCssProperties['rme--' + key] = {
                 color: color[0]
             }
-            colorCssProperties['rme--bg-' + key] = {
+            colorCssProperties['rme--bc-' + key] = {
                 backgroundColor: color[0]
             }
             colorCssProperties['rme--bgc-' + key] = {
@@ -259,7 +271,6 @@ const utils = {
             }
         })
 
-        // rmeConfig = config
         utils.rmeConfig.colors = colorCssProperties
     },
     getValue(val: any) {
@@ -277,7 +288,9 @@ const utils = {
     rmeConfig: {
         colors: {} as any
     } as any,
-    reservedWord: elements
+    reservedWord: elements,
+    colorsValues: colorsValues,
+    boxSize: boxSize
 }
 
 export default utils

@@ -10,17 +10,17 @@ export default (props:any) => {
     }
     return (
         <RME className={'rme--layout'}>
-            <RME nav col width={240} h100 br-primary>
-                <RME logo height={64}>LOGO</RME>
+            <RME nav col w={240} h100 br-primary>
+                <RME logo h={64}>LOGO</RME>
                 <RME link>Item 1</RME>
                 <RME link>Item 2</RME>
                 <RME link>Item 3</RME>
                 <RME link>Item 4</RME>
                 <RME link>Item 5</RME>
             </RME>
-            <RME fill col h100>
+            <RME rest col h100>
                 <RME height={64}>Header</RME>
-                <RME section fill h100>
+                <RME section rest h100>
                     <RME w100 height={300}  bgImg={img}></RME>
                     <RME>
                         <RME tag onClose={handleClose}>tag closable</RME>
@@ -46,7 +46,7 @@ export default (props:any) => {
                     </RME>
                     <RME>
                         <RME button primary m15 dashed small>Primary</RME>
-                        <RME button secondary m15 solid tiny width={60}></RME>
+                        <RME button secondary m15 solid tiny width={60}>Pro</RME>
                         <RME button success m15 large>Success</RME>
                         <RME button danger m15>Danger</RME>
                         <RME button warning m15 small>Warning</RME>
@@ -55,9 +55,9 @@ export default (props:any) => {
                         <RME button dark m15>Dark</RME>
                         <RME button white m15>White</RME>
                         <RME button m15>Default</RME>
-                        <RME button link m15 href={'https://google.com'} target={'_blank'}>Default</RME>
-                        <RME button link m15 danger href={'https://google.com'} target={'_blank'}>Default</RME>
-                        <RME button link m15 success plain href={'https://google.com'} target={'_blank'}>Default</RME>
+                        <RME a link href={'https://google.com'} target={'_blank'}>google</RME>
+                        <RME a link p15 danger href={'https://google.com'} target={'_blank'}>Default</RME>
+                        <RME a link p15 success plain href={'https://google.com'} target={'_blank'}>Default</RME>
                     </RME>
                     <RME>
                         <RME btn plain primary dashed bw5 m15>Primary</RME>
@@ -71,8 +71,8 @@ export default (props:any) => {
                         <RME btn plain white m15>White</RME>
                         <RME btn plain m15>Default</RME>
                     </RME>
-                    <RME h2 color={'blue'} s={56} p={45} m={45} r10 bw5 bc-success right bgImg={img}>afasdfsd</RME>
-                    <RME weight={100} color={'red'} m30 l1 hoverUnderline pointer>Heading H1 // _import from 'super-label'
+                    <RME h2 color={'blue'} s={56} ph={45} m={45} r10 bw5 bc-success right bgi={img}>afasdfsd</RME>
+                    <RME h1 weight={100} color={'red'} m30 lc1 hoverUnderline pointer>Heading H1 // _import from 'super-label'
                         // _import SuperLemon from "super-lemon"
                         // _import * as RME from './Components/index'
                         // _import RME from './Components/label/index'</RME>
