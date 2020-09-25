@@ -62,17 +62,21 @@ import RME from 'react-magic-element
 
 export default () => {
     return (
-        <RME b-success g32>
-            <RME xs24 sm16 md12 lg8 xl4 xxl2>
-                <RME bgc-primary>xs24 sm16 md12 lg8 xl4 xxl2</RME>
-            </RME>
-            <RME xs24 rest>
-                <RME>
-                    <RME col12>
-                        <RME bgc-secondary>col12</RME>
+        <RME flex center>
+            <RME w-90>
+                <RME b-success d-row g32>
+                    <RME xs24 sm16 md12 lg8 xl4 xxl2>
+                        <RME bgc-primary>xs24 sm16 md12 lg8 xl4 xxl2</RME>
                     </RME>
-                    <RME rest>
-                        <RME bgc-danger>rest</RME>
+                    <RME xs24 rest>
+                        <RME d-row>
+                            <RME col12>
+                                <RME bgc-secondary>col12</RME>
+                            </RME>
+                            <RME rest>
+                                <RME bgc-danger>rest</RME>
+                            </RME>
+                        </RME>
                     </RME>
                 </RME>
             </RME>
@@ -94,11 +98,14 @@ export default () => {
 - xxl[1-24]
 - col[1-24]
 - rest          -> the rest width of the row
-### Elements
+### Elements [Open in CodeSandbox](https://codesandbox.io/s/friendly-goldwasser-3oux8)
 ```tsx
 import RME from 'react-magic-element
 
 export default () => {
+    const handleChange = (event) => {
+      console.log(event.target.value);
+    }
     return (
         <>
             <RME>Default render as div</RME>
@@ -122,24 +129,25 @@ export default () => {
             <RME li>Render as li</RME>
             <RME section>Render as section</RME>
             <RME address>Render as address</RME>
-            <RME tag>Render as tat</RME>
+            <RME tag>Render as tag</RME>
             <RME alert>Render as alert</RME>
+            <RME pv15 label={<RME w240 txt-right pr5>Password: </RME>} value={<RME input w360 type='password' placeholder='Please input password' onChange={handleChange} />}/>
         </>
     )
 }
 ```
 ### Styles
-#### Width
+#### Width [Open in CodeSandbox](https://codesandbox.io/s/intelligent-glade-xkk60)
 ```tsx
 import RME from 'react-magic-element
 
 export default () => {
     return (
         <>
-            <RME w1024>width=1024px</RME>
-            <RME w={'80px'}>width=80px</RME>
-            <RME w-80>width=80%</RME>
-            <RME w={'80%'}>width=80%</RME>
+            <RME b w1024>width=1024px</RME>
+            <RME b w={'80px'}>width=80px</RME>
+            <RME b w-80>width=80%</RME>
+            <RME b w={'80%'}>width=80%</RME>
         </>
     )
 }
@@ -184,7 +192,7 @@ export default () => {
     </tbody>
 </table>
 
-#### Height
+#### Height [Open in CodeSandbox](https://codesandbox.io/s/boring-ritchie-0plk4)
 ```tsx
 import RME from 'react-magic-element
 
@@ -192,8 +200,10 @@ export default () => {
     return (
         <>
             <RME h360 bg-success rest>
-                height=360px
-                <RME h-36 bottom>height=parent's 36% height</RME>
+              height=360px
+              <RME h-36 bg-danger bottom>
+                height=parent's 36% height
+              </RME>
             </RME>
         </>
     )
@@ -239,7 +249,7 @@ export default () => {
     </tbody>
 </table>
 
-#### Padding
+#### Padding [Open in CodeSandbox](https://codesandbox.io/s/nice-moser-1k0uc)
 ```tsx
 import RME from 'react-magic-element
 
@@ -274,11 +284,11 @@ export default () => {
         <td>padding[-top/right/bottom/left]</td>
         <td>padding[-top/right/bottom/left]: [number]px</td>
         <td>
-            p13 -> padding: 13px <br>
-            pt13 -> padding-top: 13px <br>
-            pr13 -> padding-right: 13px <br>
-            pb13 -> padding-bottom: 13px <br>
-            pl13 -> padding-left: 13px
+            p16 -> padding: 16px <br>
+            pt16 -> padding-top: 16px <br>
+            pr16 -> padding-right: 16px <br>
+            pb16 -> padding-bottom: 16px <br>
+            pl16 -> padding-left: 16px
         </td>
     </tr>
     <tr>
@@ -286,50 +296,49 @@ export default () => {
         <td>padding[-top/right/bottom/left]</td>
         <td>padding[-top/right/bottom/left]: [number]px</td>
         <td>
-            p=13 -> padding: 13px <br>
-            pt=13 -> padding-top: 13px <br>
-            pr=13 -> padding-right: 13px <br>
-            pb=13 -> padding-bottom: 13px <br>
-            pl=13 -> padding-left: 13px
+            p=16 -> padding: 16px <br>
+            pt=16 -> padding-top: 16px <br>
+            pr=16 -> padding-right: 16px <br>
+            pb=16 -> padding-bottom: 16px <br>
+            pl=16 -> padding-left: 16px
         </td>
     </tr>
     <tr>
         <td>ph[number]</td>
         <td>padding-left, padding-right</td>
-        <td>padding-left: 13px; padding-right: [number]px</td>
+        <td>padding-left: 16px; padding-right: [number]px</td>
         <td>
-            ph13 -> padding-left: 13px; padding-right: 13px
+            ph16 -> padding-left: 16px; padding-right: 16px
         </td>
     </tr>
     <tr>
         <td>ph={value}</td>
         <td>padding-left, padding-right</td>
-        <td>padding-left: 13px; padding-right: value</td>
+        <td>padding-left: 16px; padding-right: value</td>
         <td>
-            ph=13 -> padding-left: 13px; padding-right: 13px
+            ph=16 -> padding-left: 16px; padding-right: 16px
         </td>
     </tr>
     <tr>
         <td>pv[number]</td>
         <td>padding-top, padding-bottom</td>
-        <td>padding-top: 13px; padding-bottom: [number]px</td>
+        <td>padding-top: 16px; padding-bottom: [number]px</td>
         <td>
-            pv13 -> padding-top: 13px; padding-bottom: 13px
+            pv16 -> padding-top: 16px; padding-bottom: 16px
         </td>
     </tr>
     <tr>
         <td>pv={value}</td>
         <td>padding-top, padding-bottom</td>
-        <td>padding-top: 13px; padding-bottom: value</td>
+        <td>padding-top: 16px; padding-bottom: value</td>
         <td>
-            pv=13 -> padding-top: 13px; padding-bottom: 13px
+            pv=16 -> padding-top: 16px; padding-bottom: 16px
         </td>
     </tr>
     </tbody>
 </table>
 
-#### Margin
-
+#### Margin [Open in CodeSandbox](https://codesandbox.io/s/vigorous-jepsen-y386t)
 ```tsx
 import RME from 'react-magic-element
 
@@ -365,11 +374,11 @@ export default () => {
         <td>margin[-top/right/bottom/left]</td>
         <td>margin[-top/right/bottom/left]: [number]px</td>
         <td>
-            p13 -> margin: 13px <br>
-            mt13 -> margin-top: 13px <br>
-            mr13 -> margin-right: 13px <br>
-            mb13 -> margin-bottom: 13px <br>
-            ml13 -> margin-left: 13px
+            m16 -> margin: 16px <br>
+            mt16 -> margin-top: 16px <br>
+            mr16 -> margin-right: 16px <br>
+            mb16 -> margin-bottom: 16px <br>
+            ml16 -> margin-left: 16px
         </td>
     </tr>
     <tr>
@@ -377,66 +386,78 @@ export default () => {
         <td>margin[-top/right/bottom/left]</td>
         <td>margin[-top/right/bottom/left]: [number]px</td>
         <td>
-            m=13 -> margin: 13px <br>
-            mt=13 -> margin-top: 13px <br>
-            mr=13 -> margin-right: 13px <br>
-            mb=13 -> margin-bottom: 13px <br>
-            ml=13 -> margin-left: 13px
+            m=16 -> margin: 16px <br>
+            mt=16 -> margin-top: 16px <br>
+            mr=16 -> margin-right: 16px <br>
+            mb=16 -> margin-bottom: 16px <br>
+            ml=16 -> margin-left: 16px
         </td>
     </tr>
     <tr>
         <td>mh[number]</td>
         <td>margin-left, margin-right</td>
-        <td>margin-left: 13px; margin-right: [number]px</td>
+        <td>margin-left: 16px; margin-right: [number]px</td>
         <td>
-            mh13 -> margin-left: 13px; margin-right: 13px
+            mh16 -> margin-left: 16px; margin-right: 16px
         </td>
     </tr>
     <tr>
         <td>mh={value}</td>
         <td>margin-left, margin-right</td>
-        <td>margin-left: 13px; margin-right: value</td>
+        <td>margin-left: 16px; margin-right: value</td>
         <td>
-            mh=13 -> margin-left: 13px; margin-right: 13px
+            mh=16 -> margin-left: 16px; margin-right: 16px
         </td>
     </tr>
     <tr>
         <td>mv[number]</td>
         <td>margin-top, margin-bottom</td>
-        <td>margin-top: 13px; margin-bottom: [number]px</td>
+        <td>margin-top: 16px; margin-bottom: [number]px</td>
         <td>
-            mv13 -> margin-top: 13px; margin-bottom: 13px
+            mv16 -> margin-top: 16px; margin-bottom: 16px
         </td>
     </tr>
     <tr>
         <td>mv={value}</td>
         <td>margin-top, margin-bottom</td>
-        <td>margin-top: 13px; margin-bottom: value</td>
+        <td>margin-top: 16px; margin-bottom: value</td>
         <td>
-            mv=13 -> margin-top: 13px; margin-bottom: 13px
+            mv=16 -> margin-top: 16px; margin-bottom: 16px
         </td>
     </tr>
     </tbody>
 </table>
 
-#### Border
+#### Border [Open in CodeSandbox](https://codesandbox.io/s/elegant-shirley-nrgbe)
 ```tsx
 import RME from 'react-magic-element
 
 export default () => {
     return (
         <>
-            <RME h1 b-danger>Border</RME>
-            <RME b-primary btw5 btc={'red'} brw11 brs={'dashed'}>
-                <ul>
-                    <li>Border:</li>
-                    <li>b-primary: border-color: primary</li>
-                    <li>btw5: border-top-width: 5pxy</li>
-                    <li>btc={'red'}: border-top-color: red</li>
-                    <li>brw11: border-right-width: 11px</li>
-                    <li>brs={'dashed'}: border-right-style: dashed</li>
-                </ul>
+          <RME h1 b-danger>
+            Border
+          </RME>
+          <RME b>border: 1px solid;</RME>
+          <RME b bc-danger>
+            border-color: danger;
+          </RME>
+          <RME b bc-primary blc-success brc-danger bvw36 bhw12 r-50 bs-double>
+            <RME ul>
+              <RME li>b: border: 1px solid;</RME>
+              <RME li>bc-primary: border-color: primary;</RME>
+              <RME li>blc-success: border-left-color: success;</RME>
+              <RME li>brc-danger: border-right-color: danger;</RME>
+              <RME li>
+                bvw36: border-top-width: 36px; border-bottom-width: 36px;
+              </RME>
+              <RME li>
+                bhw12: border-left-width: 12px; border-right-width: 12px;
+              </RME>
+              <RME li>r-50: border-radius: 50%;</RME>
+              <RME li>bs-double: border-style: double;</RME>
             </RME>
+          </RME>
         </>
     )
 }
@@ -634,7 +655,7 @@ export default () => {
     </tbody>
 </table>
 
-#### Color
+#### Color [Open in CodeSandbox](https://codesandbox.io/s/agitated-mccarthy-v7ttp)
 ```tsx
 import RME from 'react-magic-element
 
@@ -688,7 +709,7 @@ export default () => {
     </tbody>
 </table>
 
-#### FontSize
+#### FontSize [Open in CodeSandbox](https://codesandbox.io/s/lingering-platform-b0ss8)
 ```tsx
 import RME from 'react-magic-element
 
@@ -735,7 +756,7 @@ export default () => {
 </table>
 
 
-#### FontWeight
+#### FontWeight [Open in CodeSandbox](https://codesandbox.io/s/exciting-hofstadter-3dji7)
 ```tsx
 import RME from 'react-magic-element
 
@@ -781,7 +802,7 @@ export default () => {
     </tbody>
 </table>
 
-#### Ellipsis text lines count
+#### Ellipsis text lines count [Open in CodeSandbox](https://codesandbox.io/s/vigorous-keller-8i8mh)
 ```tsx
 import RME from 'react-magic-element
 
@@ -789,12 +810,11 @@ export default () => {
     return (
         <>
             <RME h1 primary>Ellipsis text lines count</RME>
-            <RME primary fs24 mb15 w240 l1>l1: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME secondary fs24 mb15 w240 l2>l2: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME success fs24 mb15 w240 l3>l3: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME danger fs24 mb15 w240 l4>l4: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME warning fs24 mb15 w240 l5>l5: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME info fs24 mb15 w240 l={7}>l=7: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME primary fs24 mb15 w240 lc1>lc1: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME secondary fs24 mb15 w240 lc2>lc2: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME success fs24 mb15 w240 lc3>lc3: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME danger fs24 mb15 w240 lc4>lc4: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME info fs24 mb15 w200 lc={7}>lc=7: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
         </>
     )
 }
@@ -812,25 +832,25 @@ export default () => {
     <tbody>
     <tr>
         <td rowspan="2">Ellipsis text lines count</td>
-        <td>l[1, 2, 3, 4, 5]</td>
+        <td>lc[1, 2, 3, 4]</td>
         <td>-webkit-line-clamp</td>
         <td>rme--l2</td>
         <td>
-            l2 -> rme--l2
+            lc2 -> rme--lc2
         </td>
     </tr>
     <tr>
-        <td>l={number}</td>
+        <td>lc={number}</td>
         <td>-webkit-line-clamp</td>
         <td>-webkit-line-clamp: [number]</td>
         <td>
-            l=7 -> -webkit-line-clamp: 7
+            lc=7 -> -webkit-line-clamp: 7
         </td>
     </tr>
     </tbody>
 </table>
 
-#### boxSizing
+#### boxSizing [Open in CodeSandbox](https://codesandbox.io/s/competent-morning-sruek)
 ```tsx
 import RME from 'react-magic-element
 
@@ -838,14 +858,12 @@ export default () => {
     return (
         <>
             <RME h1 primary>Box Sizing</RME>
-            <RME b bc-primary tiny>tiny box: 12px x 12px</RME>
             <RME b bc-secondary mini>mini box: 16px x 16px.</RME>
             <RME b bc-success small>small box: 24px x 24px.</RME>
             <RME b bc-danger medium>medium box: 32px x 32px.</RME>
             <RME b bc-warning big>big box: 48px x 48px.</RME>
             <RME b bc-info large>large box: 64px x 64px.</RME>
             <RME b bc-light huge>huge box:96px x 96px.</RME>
-            <RME b bc-dark gigantic>gigantic box: 128px x 128px.</RME>
             <RME b bc-dark w234 h234>other box: 234px x 234px.</RME>
         </>
     )
@@ -864,7 +882,7 @@ export default () => {
     <tbody>
     <tr>
         <td>Box Sizing</td>
-        <td>['tiny', 'mini', 'small', 'medium', 'big', 'large', 'huge', 'gigantic']</td>
+        <td>['mini', 'small', 'medium', 'big', 'large', 'huge']</td>
         <td>width, height</td>
         <td>rme--big</td>
         <td>

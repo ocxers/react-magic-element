@@ -2,7 +2,8 @@ import React from 'react'
 import '../../scss/main.scss'
 import utils from './utils'
 
-const {elements, styleMappings, builtinClasses} = utils.mappingsAndClasses()
+const {mappingsAndClasses, isBoolean, colorsValues, getValue, formatKey, reservedWord, checkGridKey, boxSize, getPercentageHandler, getPixelHandler, rmeConfig, setConfig, toArr} = utils
+const {elements, styleMappings, builtinClasses} = mappingsAndClasses()
 const RME = (props: any) => {
     let elementType = 'div'
 
@@ -11,7 +12,7 @@ const RME = (props: any) => {
     }
 
     elements.map((el: any) => {
-        if (props[el] && utils.isBoolean(props[el])) {
+        if (props[el] && isBoolean(props[el])) {
             elementType = el === 'btn' ? 'button' : el
         }
     })
@@ -20,11 +21,11 @@ const RME = (props: any) => {
     let classNameList: Array<any> = []
     let styleList: any = {}
     const loopCssProperties = (key: string, val: string) => {
-        (styleMappings[key]?.split(',') || []).map((k: any) => {
+        (toArr(styleMappings[key] || '') || []).map((k: any) => {
             if (k === 'zIndex') {
                 styleList[k] = Number.parseInt(val)
             } else {
-                styleList[k] = utils.colorsValues[val] || val
+                styleList[k] = colorsValues[val] || val
             }
         })
     }
@@ -38,26 +39,26 @@ const RME = (props: any) => {
                 // box size: width, height
                 let bw: any = props.box
                 let bh = 0
-                if (bw.split(',').length > 1) {
-                    bw = bw.split(',')
+                if (toArr(bw).length > 1) {
+                    bw = toArr(bw)
                     bh = bw[1]
                     bw = bw[0]
                 }
-                loopCssProperties('w', utils.getValue(bw))
-                loopCssProperties('h', utils.getValue(bh))
-            } else if (key === 'fill' && !utils.isBoolean(props.fill)) {
+                loopCssProperties('w', getValue(bw))
+                loopCssProperties('h', getValue(bh))
+            } else if (key === 'fill' && !isBoolean(props.fill)) {
                 // box size: width, height
-                let pos: any = props.fill.toString().split(',')
+                let pos: any = toArr(props.fill.toString())
                 if (pos.length === 2) {
                     pos = [pos[0], pos[1], pos[0], pos[1]]
                 }
 
-                loopCssProperties('top', utils.getValue(pos[0]))
-                loopCssProperties('right', utils.getValue(pos[1]))
-                loopCssProperties('bottom', utils.getValue(pos[2]))
-                loopCssProperties('left', utils.getValue(pos[3]))
+                loopCssProperties('top', getValue(pos[0]))
+                loopCssProperties('right', getValue(pos[1]))
+                loopCssProperties('bottom', getValue(pos[2]))
+                loopCssProperties('left', getValue(pos[3]))
             } else {
-                let fmtKey = utils.formatKey(key)
+                let fmtKey = formatKey(key)
                 if (['button', 'btn'].indexOf(fmtKey) > -1) {
                     classNameList.push('rme--btn')
                 }
@@ -65,23 +66,23 @@ const RME = (props: any) => {
                     classNameList.push(`rme--${fmtKey}`)
                 }
 
-                if (utils.reservedWord.indexOf(key) <= -1 || !utils.isBoolean(props[key])) {
-                    let gridKey = utils.checkGridKey(key)
+                if (reservedWord.indexOf(key) <= -1 || !isBoolean(props[key])) {
+                    let gridKey = checkGridKey(key)
 
                     if (gridKey) {
                         classNameList.push(`rme--${gridKey}`)
-                    } else if (utils.isBoolean(props[key]) && builtinClasses?.indexOf(fmtKey) > -1) {
-                        if (utils.boxSize.indexOf(fmtKey) > -1) {
+                    } else if (isBoolean(props[key]) && builtinClasses?.indexOf(fmtKey) > -1) {
+                        if (boxSize.indexOf(fmtKey) > -1) {
                             classNameList.push(`rme--sz-${fmtKey}`)
                         } else {
                             classNameList.push(`rme--${fmtKey}`)
                         }
                     } else {
-                        if (!utils.isBoolean(props[key])) {
+                        if (!isBoolean(props[key])) {
                             loopCssProperties(key, props[key])
                         } else {
                             if (key.indexOf('-') > -1) {
-                                let percentage = utils.getPercentageHandler(key)
+                                let percentage = getPercentageHandler(key)
                                 if (percentage) {
                                     if (isNaN(Number(percentage[1]))) {
                                         loopCssProperties(percentage[0], percentage[1])
@@ -90,11 +91,11 @@ const RME = (props: any) => {
                                     }
                                 } else {
                                     if (Object.keys(styleMappings).indexOf(key) > -1) {
-                                        loopCssProperties(key, utils.getValue(props[key]))
+                                        loopCssProperties(key, getValue(props[key]))
                                     }
                                 }
                             } else {
-                                let pixel = utils.getPixelHandler(key)
+                                let pixel = getPixelHandler(key)
                                 if (pixel) {
                                     if (pixel[0] === 'g' || pixel[0] === 'gutter') {
                                         classNameList.push('rme--g')
@@ -109,7 +110,7 @@ const RME = (props: any) => {
                                     }
                                 } else {
                                     if (Object.keys(styleMappings).indexOf(key) > -1) {
-                                        loopCssProperties(key, utils.getValue(props[key]))
+                                        loopCssProperties(key, getValue(props[key]))
                                     }
                                 }
                             }
@@ -119,6 +120,8 @@ const RME = (props: any) => {
             }
         })
     }
+
+    initialClassesAndStyles()
 
     const getCloseIcon = () => {
         if (props.closable || props.onClose) {
@@ -140,6 +143,7 @@ const RME = (props: any) => {
                 </div>
             )
         }
+
         if (props.circle) {
             classNames = ['rme--circle-container', props.col ? 'rme--col' : '', props.row ? 'rme--row' : ''].join(' ')
             return (
@@ -147,12 +151,29 @@ const RME = (props: any) => {
                     {props.children}
                 </div>
             )
-        } else {
-            return props.children
         }
-    }
 
-    initialClassesAndStyles()
+        if (props.label && !isBoolean(props.label)) {
+            classNames = 'rme--label-item'
+            let labelWidth = Number(props.labelWidth)
+            if (typeof props.label === 'string') {
+                return (
+                    <div className={classNames}>
+                        <span className={'rme--label'}
+                              style={{width: labelWidth + 'px'}}>{props.label}:</span> {props.prefix}{props.value}{props.children}{props.suffix}
+                    </div>
+                )
+            } else {
+                return (
+                    <div className={classNames}>
+                        {props.label} {props.prefix}{props.value}{props.children}{props.suffix}
+                    </div>
+                )
+            }
+        }
+
+        return props.children
+    }
 
     const renderElement = () => {
         let computerProps: any = {
@@ -178,20 +199,27 @@ const RME = (props: any) => {
             Object.assign(computerProps.style, props.style)
         }
 
-        Object.keys(utils.rmeConfig.colors).map((key: any) => {
+        Object.keys(rmeConfig.colors).map((key: any) => {
             if (computerProps.className.indexOf(key) > -1) {
                 if (computerProps.className.indexOf('rme--btn') > -1 || computerProps.className.indexOf('rme--tag') > -1) {
                     if (computerProps.className.indexOf('rme--plain') > -1) {
-                        computerProps.style = Object.assign(computerProps.style, utils.rmeConfig.colors['rme--btn-tag-plain'])
+                        computerProps.style = Object.assign(computerProps.style, rmeConfig.colors['rme--btn-tag-plain'])
                     } else {
-                        computerProps.style = Object.assign(computerProps.style, utils.rmeConfig.colors['rme--btn-tag'])
+                        computerProps.style = Object.assign(computerProps.style, rmeConfig.colors['rme--btn-tag'])
                     }
                 } else {
-                    computerProps.style = Object.assign(computerProps.style, utils.rmeConfig.colors[key])
+                    computerProps.style = Object.assign(computerProps.style, rmeConfig.colors[key])
                 }
             }
         })
 
+        if (elementType === 'input') {
+            console.log(props.onChange)
+            return (
+                <input className={computerProps.className} style={computerProps.style} type={props.type || 'text'}
+                       placeholder={props.placeholder} onChange={props.onChange}/>
+            )
+        }
         return React.createElement(elementType, computerProps, [getChildren(), getCloseIcon()].map((child: any, key: number) => {
             return (
                 <React.Fragment key={key}>{child}</React.Fragment>
@@ -207,5 +235,5 @@ const RME = (props: any) => {
 }
 
 RME.displayName = 'RME'
-RME.config = utils.setConfig
+RME.config = setConfig
 export default RME

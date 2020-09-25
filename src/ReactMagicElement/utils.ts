@@ -1,4 +1,7 @@
-const elements = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'nav', 'label', 'header', 'footer', 'button', 'btn', 'a', 'ul', 'ol', 'li', 'span', 'section', 'address']
+const toArr = (str: string, spliter:any = ',') => {
+    return str.split(spliter)
+}
+const elements = toArr('input,h1,h2,h3,h4,h5,h6,p,nav,label,header,footer,button,btn,a,ul,ol,li,span,section,address')
 const colorsValues: any = {
     primary: '#007bff',
     secondary: '#6c757d',
@@ -12,8 +15,11 @@ const colorsValues: any = {
     transparent: 'transparent'
 }
 const colors = Object.keys(colorsValues).map((color: string) => `-${color}`)
-const gridKeys: Array<string> = ['col', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl']
-const boxSize = 'mini,small,medium,big,large,huge'.split(',')
+const gridKeys = toArr('col,xs,sm,md,lg,xl,xxl')
+const boxSize = toArr('mini,small,medium,big,large,huge')
+const direstions = toArr('top,right,bottom,left,horizontal,vertical')
+const pms = toArr('0,5,10,15,20,25,30') // padding, margin default values
+const val14 = toArr('1,2,3,4')
 
 let cssProperties: any = {
     defaultProperties: {
@@ -22,55 +28,54 @@ let cssProperties: any = {
             values: Object.keys(colorsValues)
         }, {
             // background, border
-            keys: 'bg,bc'.split(','),
+            keys: toArr('bg,bc'),
             values: colors
         }, {
             // border style
             keys: ['bs'],
-            values: '-dotted,-dashed,-solid,-double'.split(',')
+            values: toArr('-dotted,-dashed,-solid,-double')
         }, {
             // radius
             keys: ['r'],
-            values: '-100'.split(',')
+            values: ['-100']
         }, {
             // box sizing
             keys: [''],
             values: boxSize
         }, {
             keys: [''],
-            values: `fixed,absolute,relative,fill,circle,tag,alert,plain,link,left,center,right,top,middle,bottom,txt-left,txt-center,txt-right,underline,hover-underline,line-through,pointer,row,col,flex,rest,d-row,d-col,disabled,group,bgi`.split(',')
+            values: toArr(`fixed,absolute,relative,fill,circle,tag,alert,plain,link,left,center,right,top,middle,bottom,txt-left,txt-center,txt-right,underline,hover-underline,line-through,pointer,row,col,flex,rest,d-row,d-col,disabled,group,bgi`)
         }, {
             keys: ['lc'],
-            values: '1,2,3,4'.split(',')
+            values: val14
         }, {
             // border width
-            keys: 'bw'.split(','),
-            values: '1,2,3,4'.split(',')
+            keys: ['bw'],
+            values: val14
         }, {
             keys: ['w', 'h'],
-            values: '-10,-20,-30,-40,-50,-100'.split(',')
+            values: toArr('-10,-20,-30,-40,-50,-100')
         }]
     },
     padding: {
         shortcut: 'p',
-        directions: ['top', 'right', 'bottom', 'left', 'horizontal', 'vertical'],
-        values: [0, 5, 10, 15, 20, 25, 30]
+        directions: direstions,
+        values: pms
     },
     margin: {
         shortcut: 'm',
-        directions: ['top', 'right', 'bottom', 'left', 'horizontal', 'vertical'],
-        values: [0, 5, 10, 15, 20, 25, 30]
+        directions: direstions,
+        values: pms
     },
     border: {
         shortcut: 'b',
-        directions: ['top', 'right', 'bottom', 'left', 'horizontal', 'vertical'],
-        attributes: ['width', 'style', 'color'],
-        values: [1, 2, 3, 4]
+        directions: direstions,
+        attributes: toArr('width,style,color')
     },
     borderRadius: {
         shortcut: 'r',
-        directions: ['topRight', 'bottomRight', 'topLeft', 'bottomLeft'],
-        values: [1, 2, 3, 4]
+        directions: toArr('topRight,bottomRight,topLeft,bottomLeft'),
+        values: val14
     },
     color: {
         shortcut: 'fc',
@@ -78,15 +83,15 @@ let cssProperties: any = {
     },
     fontSize: {
         shortcut: 'fs',
-        values: '9,10,11,12,13,14,15,16,17,18,24,32,48,64,72'.split(',')
+        values: toArr('9,10,11,12,13,14,15,16,17,18,24,32,48,64,72')
     },
     fontWeight: {
         shortcut: 'fw',
-        values: [100, 200, 300, 400, 500, 600, 700, 800, 900]
+        values: toArr('100,200,300,400,500,600,700,800,900')
     },
     textLines: {
         shortcut: 'lc',
-        values: [1, 2, 3, 4]
+        values: val14
     },
     boxShadow: {
         shortcut: 's',
@@ -107,9 +112,9 @@ const capitalize = (w: string) => {
 }
 
 const getShortcut = (str: string) => {
-    return str.replace(/[A-Z]/g, match => {
+    return toArr(str.replace(/[A-Z]/g, match => {
         return '-' + match.toLowerCase()
-    }).split('-').map(k => k.charAt(0)).join('')
+    }),'-').map(k => k.charAt(0)).join('')
 }
 
 const formatHVValue = (val: string) => {
@@ -156,13 +161,13 @@ const initialBuiltinClassAndStyleMappings = () => {
             }
             if (cssProps.directions) {
                 cssProps.directions.map((d: string) => {
-                    let formattedkey = utils.formatKey(d).split('-')
+                    let formattedkey = toArr(utils.formatKey(d),'-')
                     if (formattedkey[0] === d) {
                         mappings[cssShort + d.charAt(0)] = formatHVValue(key + capitalize(d))
                     } else {
                         let fkey = [cssShort]
                         formattedkey.map((k: string) => {
-                            fkey.push(k.split('').shift())
+                            fkey.push(k.charAt(0))
                         })
 
                         // border radius
@@ -206,7 +211,7 @@ const utils = {
         })
     },
     checkGridKey(key: string) {
-        let tempKey = key.split(/(\d+)/)
+        let tempKey = toArr(key,/(\d+)/)
         if (gridKeys.indexOf(tempKey[0]) > -1) {
             tempKey.pop()
             if (tempKey[0] === 'col') {
@@ -223,7 +228,7 @@ const utils = {
         }
     },
     getPercentageHandler(k: string) {
-        let arr = k.split(/-/g)
+        let arr = toArr(k,/-/g)
         if (arr.length > 0 && arr[0] !== k) {
             return arr
         }
@@ -231,7 +236,7 @@ const utils = {
         return null
     },
     getPixelHandler(k: string) {
-        let arr = k.split(/(\d+)/g)
+        let arr = toArr(k,/(\d+)/g)
         if (arr.length > 0 && arr[0] !== k) {
             return arr
         }
@@ -288,7 +293,8 @@ const utils = {
     boxSize: boxSize,
     isArray(arr: any) {
         return Array.isArray(arr)
-    }
+    },
+    toArr: toArr
 }
 
 export default utils

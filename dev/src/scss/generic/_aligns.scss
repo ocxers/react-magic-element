@@ -28,11 +28,14 @@
     }
     &--txt-center {
         justify-content: center;
+        text-align: center;
     }
     &--txt-left {
         justify-content: flex-start;
+        text-align: left;
     }
     &--txt-right {
         justify-content: flex-end;
+        text-align: right;
     }
 }
