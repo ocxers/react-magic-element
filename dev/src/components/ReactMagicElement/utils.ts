@@ -31,14 +31,14 @@ let cssProperties: any = {
         }, {
             // radius
             keys: ['r'],
-            values: '-50,-100'.split(',')
+            values: '-100'.split(',')
         }, {
             // box sizing
             keys: [''],
             values: boxSize
         }, {
             keys: [''],
-            values: `circle,tag,alert,plain,link,left,center,right,top,middle,bottom,txt-left,txt-center,txt-right,underline,hover-underline,line-through,pointer,row,col,flex,rest,d-row,d-col,disabled,group,bgi`.split(',')
+            values: `fixed,absolute,relative,fill,circle,tag,alert,plain,link,left,center,right,top,middle,bottom,txt-left,txt-center,txt-right,underline,hover-underline,line-through,pointer,row,col,flex,rest,d-row,d-col,disabled,group,bgi`.split(',')
         }, {
             keys: ['lc'],
             values: '1,2,3,4'.split(',')
@@ -46,17 +46,10 @@ let cssProperties: any = {
             // border width
             keys: 'bw'.split(','),
             values: '1,2,3,4'.split(',')
+        }, {
+            keys: ['w', 'h'],
+            values: '-10,-20,-30,-40,-50,-100'.split(',')
         }]
-    },
-    width: {
-        shortcut: 'w',
-        percentValues: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        values: [8, 16, 32, 48, 64, 96, 128, 256]
-    },
-    height: {
-        shortcut: 'h',
-        percentValues: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        values: [8, 16, 32, 48, 64, 96, 128, 256]
     },
     padding: {
         shortcut: 'p',
@@ -72,14 +65,12 @@ let cssProperties: any = {
         shortcut: 'b',
         directions: ['top', 'right', 'bottom', 'left', 'horizontal', 'vertical'],
         attributes: ['width', 'style', 'color'],
-        values: [1, 2, 3, 4],
-        styleValues: ['-none', '-hidden', '-dotted', '-dashed', '-solid', '-double', '-groove', '-ridge', '-inset', '-outset', '-initial', '-inherit'],
-        colorValues: colors
+        values: [1, 2, 3, 4]
     },
     borderRadius: {
         shortcut: 'r',
         directions: ['topRight', 'bottomRight', 'topLeft', 'bottomLeft'],
-        values: [1, 2, 3, 4, 5]
+        values: [1, 2, 3, 4]
     },
     color: {
         shortcut: 'fc',
@@ -87,7 +78,7 @@ let cssProperties: any = {
     },
     fontSize: {
         shortcut: 'fs',
-        values: ['9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '24', '32', '48', '64', '72']
+        values: '9,10,11,12,13,14,15,16,17,18,24,32,48,64,72'.split(',')
     },
     fontWeight: {
         shortcut: 'fw',
@@ -135,7 +126,15 @@ const formatHVValue = (val: string) => {
 const initialBuiltinClassAndStyleMappings = () => {
     let keys = Object.keys(cssProperties)
     let groups: any = {}
-    let mappings: any = {}
+    let mappings: any = {
+        w: 'width',
+        h: 'height',
+        top: 'top',
+        right: 'right',
+        bottom: 'bottom',
+        left: 'left',
+        z: 'zIndex'
+    }
 
     keys.map(key => {
         if (key === 'defaultProperties') {
@@ -193,10 +192,6 @@ const initialBuiltinClassAndStyleMappings = () => {
                     groups[cssShort + v] = 1
                 })
             }
-
-            cssProps.percentValues?.map((v: any) => {
-                groups[cssShort + '-' + v] = 1
-            })
         }
     })
 
@@ -290,7 +285,10 @@ const utils = {
     } as any,
     reservedWord: elements,
     colorsValues: colorsValues,
-    boxSize: boxSize
+    boxSize: boxSize,
+    isArray(arr: any) {
+        return Array.isArray(arr)
+    }
 }
 
 export default utils

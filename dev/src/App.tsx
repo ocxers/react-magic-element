@@ -28,7 +28,7 @@ RME.config({
          * Default color system
          */
         // danger: ['#ffcc00', '#ccc'],
-        // danger: ['#ff0000', '#fff'],
+        // info: ['#ff0000', '#fff'],
         // secondary: '#6c757d',
         // success: '#28a745',
         // danger: '#dc3545',
@@ -48,21 +48,22 @@ function App() {
     }
     return (
         <>
-            <RME b-success d-row g32>
-                <RME xs24 sm16 md12 lg8 xl4 xxl2>
-                    <RME bgc-primary>xs24 sm16 md12 lg8 xl4 xxl2</RME>
-                </RME>
-                <RME xs24 rest>
-                    <RME d-row>
-                        <RME col12>
-                            <RME bgc-secondary>col12</RME>
-                        </RME>
-                        <RME rest>
-                            <RME bgc-danger>rest</RME>
-                        </RME>
-                    </RME>
-                </RME>
-            </RME>
+            {/*<RME box={[12,34]}>box=[12,34]</RME>*/}
+            {/*<RME b-success d-row g32>*/}
+            {/*    <RME xs24 sm16 md12 lg8 xl4 xxl2>*/}
+            {/*        <RME bgc-primary>xs24 sm16 md12 lg8 xl4 xxl2</RME>*/}
+            {/*    </RME>*/}
+            {/*    <RME xs24 rest>*/}
+            {/*        <RME d-row>*/}
+            {/*            <RME col12>*/}
+            {/*                <RME bgc-secondary>col12</RME>*/}
+            {/*            </RME>*/}
+            {/*            <RME rest>*/}
+            {/*                <RME bgc-danger>rest</RME>*/}
+            {/*            </RME>*/}
+            {/*        </RME>*/}
+            {/*    </RME>*/}
+            {/*</RME>*/}
             {/*<div style={{padding: '15px', width: '1024px'}}>*/}
             {/*    <RME row g36>*/}
             {/*        <RME col12>*/}
@@ -105,6 +106,14 @@ function App() {
             {/*    <RME bg-secondary>secondary</RME>*/}
             {/*</RME>*/}
             {/*<Layout/>*/}
+            {/*<RME bgc-danger bw12 box='123,234'>box={[123, 234]}</RME>*/}
+            <RME d-row>
+                <RME relative w-50 h120>
+                    {/*<RME bgc-danger bw12 pt5 mb5 w-20 fixed>box={[123, 234]}</RME>*/}
+                    <RME bgc={'info'} bw12 pt5 mb5 fixed fill z5>box=121212adfadfasdf12</RME>
+                    <RME bgc={'success'} bw12 pt5 mb5 absolute w-45 z6 fill>box=aaaaa12121212</RME>
+                </RME>
+            </RME>
             {/*<Main/>*/}
             {/*<Media/>*/}
             {/*<Tag/>*/}

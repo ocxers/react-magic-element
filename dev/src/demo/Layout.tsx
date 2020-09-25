@@ -5,11 +5,16 @@ const img = 'https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/01/02/b1/0102
 
 export default (props: any) => {
     return (
-        <RME layout row h-100 w-100 bg-secondary danger>
+        <RME fixed row h-100 w-100 bg-light danger>
             <RME nav w240 br={'1px solid red'} bb={'3px dashed black'} p15>Left navigation</RME>
             <RME rest>
                 <RME header p15>Header</RME>
-                <RME section>Content</RME>
+                <RME section>Content
+
+                    <RME rest>
+                        <RME bgc-danger box={[123,234]}>box={[123,234]}</RME>
+                    </RME>
+                </RME>
             </RME>
         </RME>
     )

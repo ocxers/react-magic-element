@@ -5,7 +5,7 @@
     box-sizing: border-box;
 }
 .rme {
-    $sizes: tiny 12px, mini 16px, small 24px, medium 32px, big 48px,large 64px, huge 96px, gigantic 128px;
+    $sizes: mini 16px, small 24px, medium 32px, big 48px,large 64px, huge 96px;
 
     @each $n, $s in $sizes {
         &--sz-#{$n} {

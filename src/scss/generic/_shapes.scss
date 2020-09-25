@@ -2,8 +2,8 @@
     &--circle {
         position: relative;
         display: flex;
-        box-sizing: border-box!important;
-        border-radius: 100%!important;
+        box-sizing: border-box;
+        border-radius: 100%;
         .rme--circle-container {
             position: absolute;
             top: 0;
@@ -14,7 +14,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-sizing: border-box!important;
+            box-sizing: border-box;
         }
     }
 }

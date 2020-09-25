@@ -6,16 +6,11 @@
     $radius: 1 1px,
     2 2px,
     3 3px,
-    4 4px,
-    5 5px;
+    4 4px;
     @each $n, $r in $radius {
         &--r#{$n} {
             border-radius: $r;
         }
-    }
-
-    &--r-50 {
-        border-radius: 50%;
     }
 
     &--r-100 {
@@ -28,7 +23,7 @@
         }
     }
 
-    $borderStyles: none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial, inherit;
+    $borderStyles: dotted, dashed, solid, double;
     @each $bs in $borderStyles {
         &--bs-#{$bs} {
             border-style: $bs !important;
