@@ -276,7 +276,7 @@ const utils = {
     getValue(val: any) {
         if (!utils.isBoolean(val) && val) {
             val = val.toString()
-            if (val.indexOf('%') > -1) {
+            if (val.indexOf('%') > -1 || val === 'auto') {
                 return val
             } else {
                 return val.replace(/px/, '') + 'px'

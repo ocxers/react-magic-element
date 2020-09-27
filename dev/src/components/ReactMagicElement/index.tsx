@@ -35,7 +35,16 @@ const RME = (props: any) => {
         styleList = {}
 
         Object.keys(props).map((key: string) => {
-            if (key === 'box') {
+            if (key.indexOf('cn-') === 0 || key === 'cn') {
+                // outside classnames
+                if (key.indexOf('cn-') === 0) {
+                    const cn = key.split('-')
+                    cn.shift()
+                    classNameList.push(cn.join('-'))
+                } else {
+                    classNameList.push(toArr(props[key]).join(' '))
+                }
+            } else if (key === 'box') {
                 // box size: width, height
                 let bw: any = props.box
                 let bh = 0
@@ -177,7 +186,12 @@ const RME = (props: any) => {
 
     const renderElement = () => {
         let computerProps: any = {
-            className: ['rme', props.className, ...classNameList].join(' '),
+            className: ['rme', props.className, ...classNameList].reduce((cls: Array<string>, cn: any) => {
+                if (cn) {
+                    cls.push(cn)
+                }
+                return cls
+            }, []).join(' '),
             style: styleList
         }
 
@@ -214,7 +228,6 @@ const RME = (props: any) => {
         })
 
         if (elementType === 'input') {
-            console.log(props.onChange)
             return (
                 <input className={computerProps.className} style={computerProps.style} type={props.type || 'text'}
                        placeholder={props.placeholder} onChange={props.onChange}/>
