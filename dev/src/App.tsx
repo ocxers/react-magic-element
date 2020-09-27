@@ -48,13 +48,13 @@ function App() {
     }
     return (
         <>
-            <RME h1 primary>Ellipsis text lines count</RME>
-            <RME primary fs24 mb15 w240 lc1>lc1: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME secondary fs24 mb15 w240 lc2>lc2: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME success fs24 mb15 w240 lc3>lc3: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME danger fs24 mb15 w240 lc4>lc4: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME warning fs24 mb15 w240 lc5>lc5: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
-            <RME info fs24 mb15 w240 lc={7}>lc=7: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>
+            <RME>Ellipsis text lines count;</RME>
+            {/*<RME primary fs24 mb15 w240 lc1>lc1: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>*/}
+            {/*<RME secondary fs24 mb15 w240 lc2>lc2: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>*/}
+            {/*<RME success fs24 mb15 w240 lc3>lc3: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>*/}
+            {/*<RME danger fs24 mb15 w240 lc4>lc4: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>*/}
+            {/*<RME warning fs24 mb15 w240 lc5>lc5: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>*/}
+            {/*<RME info fs24 mb15 w240 lc={7}>lc=7: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>*/}
             {/*<RME box={[12,34]}>box=[12,34]</RME>*/}
             {/*<RME b-success d-row g32>*/}
             {/*    <RME xs24 sm16 md12 lg8 xl4 xxl2>*/}
@@ -128,13 +128,13 @@ function App() {
             {/*</RME>*/}
             {/*<Layout/>*/}
             {/*<RME bgc-danger bw12 box='123,234'>box={[123, 234]}</RME>*/}
-            <RME d-row cn=''>
-                <RME relative w-50 h120 cn-primary-abc>
-                    {/*<RME bgc-danger bw12 pt5 mb5 w-20 fixed>box={[123, 234]}</RME>*/}
-                    <RME bgc={'info'} bw12 pt5 mb5 fixed fill='15px,,0,0' z5>box=121212adfadfasdf12</RME>
-                    <RME bgc={'success'} bw12 pt5 mb5 absolute w-45 z6 fill>box=aaaaa12121212</RME>
-                </RME>
-            </RME>
+            {/*<RME d-row cn=''>*/}
+            {/*    <RME relative w-50 h120 cn-primary-abc>*/}
+            {/*        /!*<RME bgc-danger bw12 pt5 mb5 w-20 fixed>box={[123, 234]}</RME>*!/*/}
+            {/*        <RME bgc={'info'} bw12 pt5 mb5 fixed fill='15px,,0,0' z5>box=121212adfadfasdf12</RME>*/}
+            {/*        <RME bgc={'success'} bw12 pt5 mb5 absolute w-45 z6 fill>box=aaaaa12121212</RME>*/}
+            {/*    </RME>*/}
+            {/*</RME>*/}
             {/*<Main/>*/}
             {/*<Media/>*/}
             {/*<Tag/>*/}
