@@ -4,6 +4,10 @@
             color: $c;
         }
 
+        &--b-#{$n} {
+            border: 1px solid $c;
+        }
+
         &--bc-#{$n} {
             border-color: $c;
         }

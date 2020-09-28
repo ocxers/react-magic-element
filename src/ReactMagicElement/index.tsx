@@ -21,12 +21,14 @@ const RME = (props: any) => {
   let classNameList: Array<any> = []
   let styleList: any = {}
   const loopCssProperties = (key: string, val: string) => {
-    if (key !== 'children') {
+    if (key !== 'children' && typeof val === 'string') {
       (toArr(styleMappings[key] || '') || []).map((k: any) => {
         if (k === 'zIndex') {
           styleList[k] = Number.parseInt(val)
         } else {
-          styleList[k] = colorsValues[val] || val
+          let tempVal = val.split(' ').map((tv: string) => colorsValues[tv] || tv).join(' ')
+          tempVal = tempVal.split(',').map((tv: string) => colorsValues[tv] || tv).join(' ')
+          styleList[k] = tempVal
         }
       })
     }
@@ -146,7 +148,7 @@ const RME = (props: any) => {
   }
 
   const getChildren = () => {
-    let classNames = ['rme-container', props.col ? 'rme--col' : '', props.row ? 'rme--row' : ''].join(' ')
+    let classNames = ['rme--flex rme--w-100', props.col ? 'rme--col' : '', props.row ? 'rme--row' : ''].join(' ')
     if (props.alert) {
       return (
         <div className={classNames}>
@@ -235,6 +237,7 @@ const RME = (props: any) => {
                placeholder={props.placeholder} onChange={props.onChange}/>
       )
     }
+
     return React.createElement(elementType, computerProps, [getChildren(), getCloseIcon()].map((child: any, key: number) => {
       return (
         <React.Fragment key={key}>{child}</React.Fragment>

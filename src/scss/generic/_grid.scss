@@ -1,11 +1,26 @@
 @mixin make-grid($class: '') {
     @for $i from 1 through 24 {
         &--col#{$class}-#{$i} {
-            display: block;
             flex: 0 0 percentage(($i / 24));
             max-width: percentage(($i / 24));
         }
     }
+
+    &-#{$class}-hidden {
+        display: none;
+        visibility: hidden;
+        overflow: hidden;
+    }
+
+    &-#{$class}-display {
+        display: initial;
+        visibility: visible;
+        overflow: initial;
+    }
+}
+
+[class*='rme--col-'] {
+    display: block;
 }
 
 .rme {
@@ -31,18 +46,23 @@
         }
     }
 
+    &--flex, &--row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    &--rest {
+        flex: 1 1;
+        display: block;
+    }
+
     &--g {
-        //margin-left: attr(gutter);
         margin-left: var(--gutter);
         margin-right: var(--gutter);
-        box-sizing: border-box;
-        &.rme {
-            width: auto;
-        }
         >.rme {
             padding-left: var(--child-gutter);
             padding-right: var(--child-gutter);
-            display: block;
         }
     }
 

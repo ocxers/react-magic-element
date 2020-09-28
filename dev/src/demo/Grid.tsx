@@ -1,28 +1,22 @@
 import React from 'react'
 import cx from 'classnames'
-import RME from "../components/ReactMagicElement"
+import RME from '../components/ReactMagicElement'
 
 export default (props: any) => {
-    return (
-        <RME flex row>
-            <RME w-86 b3 btw6 bc='red'>
-                <RME md5 sm12 xs16 bgc-primary>md5 sm12 xs16</RME>
-            </RME>
-            <RME col2 bgc-danger>2</RME>
-            <RME col3 bgc-primary>3</RME>
-            <RME col4 bgc-danger>4</RME>
-            <RME col4 sm1 bgc-success>4</RME>
-            <RME col4 bgc-primary>4</RME>
-            <RME col3 bgc-danger>3</RME>
-            <RME col2 bgc-primary>2</RME>
-            <RME col1 bgc-danger>1</RME>
-            <RME col12 bgc-success>1</RME>
-            <RME>
-                <RME col12 xs18 bgc-success>1</RME>
-            </RME>
-            <RME mv32 mh3>
-                <RME xxl12 xl16 lg18 md20 sm22 xs24 r5 p13 b={'1px solid red'}> xxl12 xl16 lg18 md20 sm22 xs24 </RME>
-            </RME>
+  return (
+    <RME row center b>
+      <RME w-90 b={'3px solid success'} bw3 bs-dashed bbc-danger>
+        <RME row g32>
+          <RME col12 xs24 sm12 md8 bg-primary>col12 xs24 sm12 md8</RME>
+          <RME col12 xs24 sm12 md8 bg-danger>col12 xs24 sm12 md8</RME>
+          <RME col12 bg-primary>col12</RME>
+          <RME col8 bg-danger>col12</RME>
+          <RME rest bg-success>rest</RME>
         </RME>
-    )
+        <RME row>
+          <RME col17 right txt-right xs24 b lg-hidden xl-display>col13 right</RME>
+        </RME>
+      </RME>
+    </RME>
+  )
 }

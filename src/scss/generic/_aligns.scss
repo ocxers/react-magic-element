@@ -9,11 +9,11 @@
         }
     }
     &--left {
-        text-align: right;
+        margin-right: auto;
         justify-content: flex-start;
     }
     &--right {
-        text-align: right;
+        margin-left: auto;
         justify-content: flex-end;
     }
     &--top {

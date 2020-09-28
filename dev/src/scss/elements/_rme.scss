@@ -1,43 +1,6 @@
 .rme {
     box-sizing: border-box;
 
-    &--flex {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    &--row {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    &--col {
-        display: initial;
-    }
-
-    &--d-row {
-        display: flex;
-        flex-direction: row;
-    }
-    &--d-col {
-        display: flex;
-        flex-direction: column;
-    }
-
-    &--rest {
-        flex: 1 1;
-        display: block;
-    }
-
-    &-container {
-        display: flex;
-        flex: 1 1;
-        flex-direction: row;
-        align-items: normal;
-    }
-
     &--tag, &--btn {
         width: initial;
     }

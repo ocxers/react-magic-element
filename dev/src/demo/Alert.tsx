@@ -25,8 +25,8 @@ export default (props: any) => {
                         Warning Text Warning TextWarning Text</RME>
                 </RME>
             </RME>
-            <RME alert success b={'2px solid red'} row p0>
-                <RME col rest>
+            <RME alert success row p0>
+                <RME rest p15>
                     <RME h1>RME H2</RME>
                     <RME>Warning Text Warning Text Warning Text Warning Text
                         Warning Text Warning TextWarning Text</RME>
@@ -37,7 +37,7 @@ export default (props: any) => {
                     <RME>Warning Text Warning Text Warning Text Warning Text
                         Warning Text Warning TextWarning Text</RME>
                 </RME>
-                <RME avatar bgi={img} w={360}>jjj</RME>
+                <RME bgi={img} w360 right></RME>
             </RME>
         </RME>
     )

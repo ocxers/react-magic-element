@@ -28,7 +28,7 @@ let cssProperties: any = {
             values: Object.keys(colorsValues)
         }, {
             // background, border
-            keys: toArr('bg,bc'),
+            keys: toArr('bg,bc,b'),
             values: colors
         }, {
             // border style
@@ -55,6 +55,12 @@ let cssProperties: any = {
         }, {
             keys: ['w', 'h'],
             values: toArr('-10,-20,-30,-40,-50,-100')
+        }, {
+            keys: toArr('xs,sm,md,lg,xl,xxl'),
+            values: ['-hidden']
+        }, {
+            keys: toArr('xs,sm,md,lg,xl,xxl'),
+            values: ['-display']
         }]
     },
     padding: {
