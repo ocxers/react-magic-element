@@ -44,7 +44,7 @@ let cssProperties: any = {
             values: boxSize
         }, {
             keys: [''],
-            values: toArr(`fixed,absolute,relative,fill,circle,tag,alert,plain,link,left,center,right,top,middle,bottom,txt-left,txt-center,txt-right,underline,hover-underline,line-through,pointer,row,col,flex,rest,d-row,d-col,disabled,group,bgi`)
+            values: toArr(`hidden,visible,fixed,absolute,relative,fill,circle,tag,alert,plain,link,left,center,right,top,middle,bottom,txt-left,txt-center,txt-right,underline,hover-underline,line-through,pointer,row,col,flex,rest,d-row,d-col,disabled,group,bgi`)
         }, {
             keys: ['lc'],
             values: val14
@@ -60,7 +60,7 @@ let cssProperties: any = {
             values: ['-hidden']
         }, {
             keys: toArr('xs,sm,md,lg,xl,xxl'),
-            values: ['-display']
+            values: ['-visible']
         }]
     },
     padding: {

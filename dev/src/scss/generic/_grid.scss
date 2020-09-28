@@ -1,115 +1,127 @@
 @mixin make-grid($class: '') {
-    @for $i from 1 through 24 {
-        &--col#{$class}-#{$i} {
-            flex: 0 0 percentage(($i / 24));
-            max-width: percentage(($i / 24));
-        }
+  @for $i from 1 through 24 {
+    &--col#{$class}-#{$i} {
+      flex: 0 0 percentage(($i / 24));
+      max-width: percentage(($i / 24));
     }
+  }
 
-    &-#{$class}-hidden {
-        display: none;
-        visibility: hidden;
-        overflow: hidden;
-    }
+  &-#{$class}-hidden {
+    display: none;
+    visibility: hidden;
+    overflow: hidden;
+  }
 
-    &-#{$class}-display {
-        display: initial;
-        visibility: visible;
-        overflow: initial;
-    }
+  &-#{$class}-visible {
+    display: initial;
+    visibility: visible;
+    overflow: initial;
+  }
 }
 
 [class*='rme--col-'] {
-    display: block;
+  display: block;
 }
 
 .rme {
-    $percents:
-            10 10%,
-            20 20%,
-            30 30%,
-            40 40%,
-            50 50%,
-            100 100%;
+  $percents: 10 10%,
+  20 20%,
+  30 30%,
+  40 40%,
+  50 50%,
+  100 100%;
 
-    @each $p, $pp in $percents {
-        // width percent
-        &--w-#{$p} {
-            flex: 0 0 $pp;
-            width: $pp;
-        }
-
-        // height percent
-        &--h-#{$p} {
-            height: $pp!important;
-            overflow-y: auto;
-        }
+  @each $p, $pp in $percents {
+    // width percent
+    &--w-#{$p} {
+      flex: 0 0 $pp;
+      width: $pp;
     }
 
-    &--flex, &--row {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+    // height percent
+    &--h-#{$p} {
+      height: $pp !important;
+      overflow-y: auto;
     }
+  }
 
-    &--rest {
-        flex: 1 1;
-        display: block;
+  &--hidden {
+    display: none;
+    visibility: hidden;
+    overflow: hidden;
+  }
+
+  &--visible {
+    display: initial;
+    visibility: visible;
+    overflow: initial;
+  }
+
+  &--flex, &--row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &--rest {
+    flex: 1 1;
+    display: block;
+  }
+
+  &--g {
+    margin-left: var(--gutter);
+    margin-right: var(--gutter);
+
+    > .rme {
+      padding-left: var(--child-gutter);
+      padding-right: var(--child-gutter);
     }
+  }
 
-    &--g {
-        margin-left: var(--gutter);
-        margin-right: var(--gutter);
-        >.rme {
-            padding-left: var(--child-gutter);
-            padding-right: var(--child-gutter);
-        }
-    }
+  @include make-grid(); //
+  //@include make-grid(-xs);  // <576px
 
-    @include make-grid();       //
-    //@include make-grid(-xs);  // <576px
+  // Extra Small grid
+  //
+  // Columns, offsets, pushes, and pulls for the small device range, from phones
+  // to tablets.
+  @media (max-width: $screen-xs-max) {
+    @include make-grid(-xs); // < 576px
+  }
 
-    // Extra Small grid
-    //
-    // Columns, offsets, pushes, and pulls for the small device range, from phones
-    // to tablets.
-    @media (max-width: $screen-xs-max) {
-        @include make-grid(-xs);        // < 576px
-    }
+  // Small grid
+  //
+  // Columns, offsets, pushes, and pulls for the small device range, from phones
+  // to tablets.
+  @media (min-width: $screen-sm-min) {
+    @include make-grid(-sm); // >= 576px
+  }
 
-    // Small grid
-    //
-    // Columns, offsets, pushes, and pulls for the small device range, from phones
-    // to tablets.
-    @media (min-width: $screen-sm-min) {
-        @include make-grid(-sm);        // >= 576px
-    }
+  // Medium grid
+  //
+  // Columns, offsets, pushes, and pulls for the desktop device range.
+  @media (min-width: $screen-md-min) {
+    @include make-grid(-md); // >= 768px
+  }
 
-    // Medium grid
-    //
-    // Columns, offsets, pushes, and pulls for the desktop device range.
-    @media (min-width: $screen-md-min) {
-        @include make-grid(-md);        // >= 768px
-    }
+  // Large grid
+  //
+  // Columns, offsets, pushes, and pulls for the large desktop device range.
+  @media (min-width: $screen-lg-min) {
+    @include make-grid(-lg); // >= 992px
+  }
 
-    // Large grid
-    //
-    // Columns, offsets, pushes, and pulls for the large desktop device range.
-    @media (min-width: $screen-lg-min) {
-        @include make-grid(-lg);        // >= 992px
-    }
+  // Extra Large grid
+  //
+  // Columns, offsets, pushes, and pulls for the full hd device range.
+  @media (min-width: $screen-xl-min) {
+    @include make-grid(-xl); // >= 1200px
+  }
 
-    // Extra Large grid
-    //
-    // Columns, offsets, pushes, and pulls for the full hd device range.
-    @media (min-width: $screen-xl-min) {
-        @include make-grid(-xl);        // >= 1200px
-    }
-
-    // Extra Extra Large grid
-    //
-    // Columns, offsets, pushes, and pulls for the full hd device range.
-    @media (min-width: $screen-xxl-min) {
-        @include make-grid(-xxl);       // >= 1600px
-    }
+  // Extra Extra Large grid
+  //
+  // Columns, offsets, pushes, and pulls for the full hd device range.
+  @media (min-width: $screen-xxl-min) {
+    @include make-grid(-xxl); // >= 1600px
+  }
 }

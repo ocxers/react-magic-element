@@ -49,6 +49,27 @@ function App() {
     }
     return (
         <>
+            <RME flex>
+                <RME w-100 b p15>
+                    <RME row g32>
+                        <RME col6 md-hidden visible>
+                            <RME bgc-primary>col6 md-hidden</RME>
+                        </RME>
+                        <RME col6 md-visible hidden>
+                            <RME bgc-secondary>col6 md-visible</RME>
+                        </RME>
+                        <RME col6>
+                            <RME bgc-danger>col6</RME>
+                        </RME>
+                        <RME col6>
+                            <RME bgc-primary>col6</RME>
+                        </RME>
+                        <RME col6>
+                            <RME bgc-danger>col6</RME>
+                        </RME>
+                    </RME>
+                </RME>
+            </RME>
             {/*<RME>Ellipsis text lines count;</RME>*/}
             {/*<RME primary fs24 mb15 w240 lc1>lc1: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>*/}
             {/*<RME secondary fs24 mb15 w240 lc2>lc2: Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.</RME>*/}
@@ -140,7 +161,7 @@ function App() {
             {/*<Media/>*/}
             {/*<Tag/>*/}
             {/*<Button/>*/}
-            <Alert/>
+            {/*<Alert/>*/}
             {/*<Grid/>*/}
             {/*<RME tc fr bg-primary w240>width-100</RME>*/}
             {/*<RME tc fr bg-gray xs24 sm16 md12 lg10 xl8 xxl6>xs12 sm8 md6 lg5 xl4 xxl2</RME>*/}
