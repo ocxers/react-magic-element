@@ -1,9 +1,5 @@
 .rme {
     // Margin
-    &--m {
-        margin: 0;
-    }
-
     @for $i from 0 through 6 {
         &--m#{$i*5} {
             margin: $i * 5px;

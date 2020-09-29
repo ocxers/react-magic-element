@@ -8,6 +8,10 @@
             border: 1px solid $c;
         }
 
+        &--fc-#{$n} {
+            color: $c;
+        }
+
         &--bc-#{$n} {
             border-color: $c;
         }

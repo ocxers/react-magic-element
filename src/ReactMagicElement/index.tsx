@@ -2,8 +2,8 @@ import React from 'react'
 import '../scss/main.scss'
 import utils from './utils'
 
-const { mappingsAndClasses, isBoolean, colorsValues, getValue, formatKey, reservedWord, checkGridKey, boxSize, getPercentageHandler, getPixelHandler, rmeConfig, setConfig, toArr } = utils
-const { elements, styleMappings, builtinClasses } = mappingsAndClasses()
+const { mappingsAndClasses, isBoolean, colorsValues, getValue, formatKey, checkGridKey, boxSize, getPercentageHandler, getPixelHandler, rmeConfig, setConfig, toArr } = utils
+const { elements, styleMappings, builtinClasses } = mappingsAndClasses
 const RME = (props: any) => {
   let elementType = 'div'
 
@@ -17,7 +17,13 @@ const RME = (props: any) => {
     }
   })
 
-  let keys = Object.keys(props)
+  let keys: string [] = []
+  Object.keys(props).map((key: string) => {
+    if (key !== 'children') {
+      keys.push(key)
+    }
+  })
+
   let classNameList: Array<any> = []
   let styleList: any = {}
   const loopCssProperties = (key: string, val: string) => {
@@ -38,7 +44,7 @@ const RME = (props: any) => {
 
     styleList = {}
 
-    Object.keys(props).map((key: string) => {
+    keys.map((key: string) => {
       if (key.indexOf('cn-') === 0 || key === 'cn') {
         // outside classnames
         if (key.indexOf('cn-') === 0) {
@@ -79,7 +85,7 @@ const RME = (props: any) => {
           classNameList.push(`rme--${fmtKey}`)
         }
 
-        if (reservedWord.indexOf(key) <= -1 || !isBoolean(props[key])) {
+        if (elements.indexOf(key) <= -1 || !isBoolean(props[key])) {
           let gridKey = checkGridKey(key)
 
           if (gridKey) {

@@ -1,9 +1,5 @@
 .rme {
     // Padding
-    &--p {
-        padding: 0;
-    }
-
     @for $i from 0 through 6 {
         &--p#{$i*5} {
             padding: $i * 5px !important;
