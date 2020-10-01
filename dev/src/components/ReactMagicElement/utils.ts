@@ -4,12 +4,25 @@ const toArr = (str: string, spliter: any = ','): string[] => {
 const isBoolean = (b: any): boolean => {
   return typeof b === 'boolean'
 }
-String.prototype.includes = (search: any, start = 0): boolean => {
+String.prototype.includes = Array.prototype.includes = (search: any, start = 0): boolean => {
   if (search instanceof RegExp) {
     throw TypeError('first argument must not be a RegExp')
   }
-  // @ts-ignore
-  return this.indexOf(search, start) !== -1
+
+  if (typeof search === 'string') {
+    // @ts-ignore
+    return this.indexOf(search, start) !== -1
+  } else {
+    const indexes: string[] = []
+    search.map((s: string) => {
+      // @ts-ignore
+      if (this.indexOf(search, start) !== -1) {
+        indexes.push(s)
+      }
+    })
+
+    return !!indexes.length
+  }
 }
 
 const mixArrays = (prevArr: any, nextArr: any, appendPre = false, joiner = '-'): string[] => {
@@ -83,7 +96,7 @@ const builtinClasses: string[] = [
   ...getColors('b'),
   ...getColors('bc'),
   /* border width */
-  ...mixArrays('bw', oneToFour),
+  ...mixArrays('bw', oneToFour, false, ''),
 
   /* border radius */
   'r-100',
@@ -113,9 +126,9 @@ const builtinClasses: string[] = [
   ...getColors(),
   ...getColors('fc'),
   /* font size */
-  ...mixArrays('fs', '9,10,11,12,13,14,15,16,17,18,24,32,48,64,72'),
+  ...mixArrays('fs', '9,10,11,12,13,14,15,16,17,18,24,32,48,64,72', false, ''),
   /* font weight */
-  ...mixArrays('fw', '100,200,300,400,500,600,700,800,900'),
+  ...mixArrays('fw', '100,200,300,400,500,600,700,800,900', false, ''),
 
   /* box size */
   ...boxSize,
@@ -134,7 +147,7 @@ const builtinClasses: string[] = [
   ...mixArrays('m,mh,mv,mt,mr,mb,ml', zeroToThirty, false, ''),
 
   /* others */
-  ...toArr('disabled,group,bgi,circle,tag,alert,plain,link,s')
+  ...toArr('disabled,group,bgi,circle,tag,alert,plain,link,btn,s')
 ]
 
 const mixObjects: any = (short: string, attr: string, values: string[], attrs: string[] = [], append: string = '') => { // padding, top, right, bottom, left
@@ -172,7 +185,24 @@ const mappings: any = {
   ...mixObjects('p', 'padding', direction),
   ...mixObjects('m', 'margin', direction),
   ...mixObjects('b', 'border', direction, toArr('width,style,color')),
-  ...mixObjects('r', 'border', toArr(',topRight,bottomRight,topLeft,bottomLeft'), null, 'Radius'),
+  ...mixObjects('r', 'border', toArr(',topRight,bottomRight,topLeft,bottomLeft'), null, 'Radius')
+}
+
+const getStyles = (key: string, val: string) => {
+  const styles: any = {}
+  if (key !== 'children' && typeof val === 'string') {
+    (toArr(mappings[key] || '') || []).map((k: any) => {
+      if (k === 'zIndex') {
+        styles[k] = Number.parseInt(val)
+      } else {
+        let tempVal = val.split(' ').map((tv: string) => colorsValues[tv] || tv).join(' ')
+        tempVal = tempVal.split(',').map((tv: string) => colorsValues[tv] || tv).join(' ')
+        styles[k] = tempVal
+      }
+    })
+  }
+
+  return styles
 }
 
 const utils = {
@@ -181,70 +211,212 @@ const utils = {
     styleMappings: mappings,
     builtinClasses
   },
-  // getKeyValue (key: string, value: any) {
-  //   const formattedKey = key.replace(/[A-Z]|(\d+)/g, match => {
-  //     return '-' + match.toLowerCase()
-  //   })
-  //   const keyValue: any = {
-  //     key: key,
-  //     value: value
-  //   } // key, value, styles, classNames
-  //   if (isBoolean(value)) {
-  //     /**
-  //      * key:
-  //      * 1. key
-  //      * 2. key-value: fc-primary, bgc-primary
-  //      */
-  //     // 1. key
-  //     if (key === formattedKey) {
-  //       /**
-  //        * For key is class:
-  //        * border:      b
-  //        * position:    fill
-  //        * color:       primary, secondary, success, danger, warning, info, light, dark, white, transparent
-  //        * layout:      flex, row, rest, hidden, visible, fixed, absolute, relative, circle
-  //        * alignment:   left, center, right, top, middle, bottom
-  //        * font/text:   txt-left, txt-center, txt-right, underline,
-  //        */
-  //       keyValue.classNames = [key]
-  //       return keyValue
-  //     }
-  //     if (!key.includes('-')) {
-  //       keyValue.classNames = [key]
-  //
-  //
-  //     }
-  //   }
-  //   /**
-  //    * Key format:
-  //    * 1. key[number]:
-  //    *    a. g32 or gh32:               right=16px,              left=16px
-  //    *    b. gv32:            top=16px,             bottom=16px
-  //    *    c. gt16:            top=16px
-  //    *    d. gr8:                       right=16px
-  //    *    e. gb32:                                  bottom=32px
-  //    *    f. gl4:                                                left=4px
-  //    * 2. key-number: g-32, gb-32
-  //    * 3. key=[number]: g={32}, gb={32}
-  //    * 4. key=[string]:
-  //    *    a. g={'16'}:        top=16px, right=16px, bottom=16px, left=16px
-  //    *    b. g={'h16'}:                 right=16px,              left=16px
-  //    *    b. g={'v16'}:       top=16px,             bottom=16px
-  //    *    b. g={'16,8,,8'}    top=16px, right=8px,  bottom=0,    left=8px
-  //    *    c. g={'t4,b5'}      top=4px,              bottom=5px
-  //    */
-  //
-  //   if (formattedKey === key) {
-  //     // g=
-  //     keyValue.key = key
-  //   } else {
-  //     // g[number]
-  //     const [k, v] = formattedKey.split('-')
-  //
-  //   }
-  //
-  //   return keyValue
-  // },
+  getKeyValue (key: string, value: any) {
+    const keyValue: any = {
+      key: key,
+      value: value,
+      classNames: [],
+      styles: {} as any
+    }
+    const classNames: any = {}
+    /**
+     * Handle customer class names, like:
+     * cn-container               -> 'container'
+     * cn-form-container          -> 'form-container'
+     * cn='form-item,label-left'  -> 'form-item label-left'
+     * cn='form-item label-left'  -> 'form-item label-left'
+     * classNames='form-item label-left'    -> 'form-item label-left'
+     */
+    if (key.includes(toArr('cn-,cn,classNames') as any, 0)) {
+      if (key.includes('cn-', 0)) {
+        classNames[key.split('-').slice(1).join('-')] = 1
+      } else {
+        classNames[toArr(value).join(' ')] = 1
+      }
+
+      keyValue.classNames = classNames
+    }
+
+    /**
+     * If key is in builtinClasses, like:
+     * b, bs-dotted, b-primary, bw1, w-10, flex, xs16, left, txt-left, fc-primary,
+     * fs100, fw100, mini, lc1, bg-primary, bgc-primary, btn, link,
+     */
+    if (builtinClasses.includes(key)) {
+      keyValue.classNames.push(key)
+      /**
+       * If key has no right value
+       */
+      if (isBoolean(value)) {
+        return keyValue
+      }
+    }
+
+    /**
+     * Handle box size, width, height, like:
+     * box-num                -> box-240            => width: 240px,  height: 240px
+     * box-[num]-[num]        -> box-240-160        => width: 240px,  height: 160px
+     *                        -> box--160           =>                height: 160px
+     * box-[w+num]-[h+num]    -> box-w240-h160      => width: 240px,  height: 160px
+     *                        -> box-h160-w240      => width: 240px,  height: 160px
+     *                        -> box-w240           => width: 240px,
+     *                        -> box-h160           =>                height: 160px
+     * box='num[ num]'        -> box='240 160'      => width: 240px,  height: 160px
+     *                        -> box='240'          => width: 240px,  height: 240px
+     * box='[w+num][ h+num]   -> box='w240 h160'    => width: 240px,  height: 160px
+     *                        -> box='h160 w240'    => width: 240px,  height: 160px
+     *                        -> box='w240'         => width: 240px,
+     *                        -> box='h160'         =>                height: 160px
+     * box='num[,num]'        -> box='240,160'      => width: 240px,  height: 160px
+     *                        -> box=',160'         =>                height: 160px
+     * box='[w+num][,h+num]   -> box='w240,h160'    => width: 240px,  height: 160px
+     *                        -> box='h160,w240'    => width: 240px,  height: 160px
+     *                        -> box='w240'         => width: 240px,
+     *                        -> box='h160'         =>                height: 160px
+     */
+    if (key === 'box') {
+      let bw = ''
+      let bh = ''
+      let kvs: any
+      /**
+       * box-number             -> width: number, height: number
+       * box-w-h                -> width: w,      height: h
+       */
+      if (key.includes('-')) {
+        kvs = key.split('-').slice(1)
+      } else {
+        /**
+         * box='w,h'              -> width: w,      height: h
+         * box='w,'               ->                height: h
+         * box=',h'               ->                height: h
+         */
+        kvs = toArr(value)
+      }
+
+      if (kvs.length > 1) {
+        kvs.map((k: string) => {
+          if (k.includes('w', 0)) {
+            bw = k.replace('w', '')
+          } else if (k.includes('h', 0)) {
+            bh = k.replace('h', '')
+          } else if (bw) {
+            bh = k
+          } else {
+            bw = k
+          }
+        })
+      } else {
+        kvs = kvs[0]
+        if (kvs.includes('w', 0)) {
+          bw = kvs.replace('w', '')
+        } else if (kvs.includes('h', 0)) {
+          bh = kvs.replace('h', '')
+        } else {
+          bw = kvs
+          bh = kvs
+        }
+      }
+
+      Object.assign(keyValue.styles, getStyles('w', utils.getValue(bw)))
+      Object.assign(keyValue.styles, getStyles('h', utils.getValue(bw)))
+
+      return keyValue
+    }
+
+    /**
+     * Handle pos (position), top, right, bottom, left, like:
+     * pos-num                                                -> pos-15               => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
+     * pos-[num]-[num]-[num]-[num]                            -> pos-15-15-15-15      => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
+     *                                                        -> pos-15-10            => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos-15-10-5          => top: 15px,   right: 10px,  bottom: 5px,    left: 10px
+     *                                                        -> pos-15-10-5-0        => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos--10-5-0          =>              right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos--10--0           =>              right: 10px,                  left: 0px
+     *                                                        -> pos---15             =>                            bottom: 15px,
+     * pos-[t+num]-[r+num]-[b+num]-[l+num]-[h+num]-[v+num]    -> pos-t15-r10-b5-l0    => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos-h10-v15          => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos-t15-h10          => top: 15px,   right: 10px,                  left: 10px
+     * pos='num[ num][ num][ num]'                            -> pos='15'             => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
+     *                                                        -> pos='15 10'          => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos='15 10 5'        => top: 15px,   right: 10px,  bottom: 5px,    left: 10px
+     *                                                        -> pos='15 10 5 0'      => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     * pos='[t+num][ r+num][ b+num][ l+num][ h+num][ v+num]'  -> pos='t15 r10 b5 l0'  => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos='h10 v15'        => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos='t15 h10'        => top: 15px,   right: 10px,                  left: 10px
+     * pos='num[,num][,num][,num]'                            -> pos='15,10,,5'       => top: 15px,   right: 10px,                  left: 5px
+     * pos='[t+num][,r+num][,b+num][,l+num][,h+num][,v+num]'  -> pos='t15,r10,b5,l0'  => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos='h10,v15'        => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos='t15,h10'        => top: 15px,   right: 10px,                  left: 10px
+     */
+
+    /**
+     * If key is formatted as `key-value`, like
+     * w-32 -> width: 32%, fc-red -> color: red
+     */
+    if (key.includes('-')) {
+
+    }
+
+    const formattedKey = key.replace(/[A-Z]|(\d+)/g, match => {
+      return '-' + match.toLowerCase()
+    })
+    // key, value, styles, classNames
+    if (isBoolean(value)) {
+      /**
+       * key:
+       * 1. key
+       * 2. key-value: fc-primary, bgc-primary
+       */
+      // 1. key
+      if (builtinClasses.includes(key)) {
+        /**
+         * For key is class:
+         * border:      b
+         * position:    fill
+         * color:       primary, secondary, success, danger, warning, info, light, dark, white, transparent
+         * layout:      flex, row, rest, hidden, visible, fixed, absolute, relative, circle
+         * alignment:   left, center, right, top, middle, bottom
+         * font/text:   txt-left, txt-center, txt-right, underline,
+         */
+        keyValue.classNames = [key]
+        return keyValue
+      }
+      if (!key.includes('-')) {
+        keyValue.classNames = [key]
+
+
+      }
+    }
+    /**
+     * Key format:
+     * 1. key[number]:
+     *    a. g32 or gh32:               right=16px,              left=16px
+     *    b. gv32:            top=16px,             bottom=16px
+     *    c. gt16:            top=16px
+     *    d. gr8:                       right=16px
+     *    e. gb32:                                  bottom=32px
+     *    f. gl4:                                                left=4px
+     * 2. key-number: g-32, gb-32
+     * 3. key=[number]: g={32}, gb={32}
+     * 4. key=[string]:
+     *    a. g={'16'}:        top=16px, right=16px, bottom=16px, left=16px
+     *    b. g={'h16'}:                 right=16px,              left=16px
+     *    b. g={'v16'}:       top=16px,             bottom=16px
+     *    b. g={'16,8,,8'}    top=16px, right=8px,  bottom=0,    left=8px
+     *    c. g={'t4,b5'}      top=4px,              bottom=5px
+     */
+
+    if (formattedKey === key) {
+      // g=
+      keyValue.key = key
+    } else {
+      // g[number]
+      const [k, v] = formattedKey.split('-')
+
+    }
+
+    return keyValue
+  },
   formatKey (key: string) {
     return key.replace(/[A-Z]/g, match => {
       return '-' + match.toLowerCase()
