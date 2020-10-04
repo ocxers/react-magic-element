@@ -10,8 +10,7 @@ export default (props: any) => {
             <RME rest>
                 <RME header p15>Header</RME>
                 <RME section>Content
-
-                    <RME rest>
+                    <RME rest fixed pos-12-13>
                         <RME bgc-danger box={[123,234]}>box={[123,234]}</RME>
                     </RME>
                 </RME>

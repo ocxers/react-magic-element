@@ -1,22 +1,22 @@
 import React from 'react'
-import cx from 'classnames'
 import RME from '../components/ReactMagicElement'
+import G1 from './Styles/Grids/G1'
+import G2 from './Styles/Grids/G2'
+import G3 from './Styles/Grids/G3'
+import G4 from './Styles/Grids/G4'
+import G5 from './Styles/Grids/G5'
+import G6 from './Styles/Grids/G6'
 
 export default (props: any) => {
   return (
-    <RME row center b>
-      <RME w-90 b={'3px solid success'} bw3 bs-dashed bbc-danger>
-        <RME row g32>
-          <RME col12 xs24 sm12 md8 bg-primary>col12 xs24 sm12 md8</RME>
-          <RME col12 xs24 sm12 md8 bg-danger>col12 xs24 sm12 md8</RME>
-          <RME col12 bg-primary>col12</RME>
-          <RME col8 bg-danger>col12</RME>
-          <RME rest bg-success>rest</RME>
-        </RME>
-        <RME row>
-          <RME col17 right txt-right xs24 b lg-hidden xl-display>col13 right</RME>
-        </RME>
-      </RME>
+    <RME ph30>
+      <RME h1>Grid</RME>
+      <G1 />
+      <G2 />
+      <G3 />
+      <G4 />
+      <G5 />
+      <G6 />
     </RME>
   )
 }

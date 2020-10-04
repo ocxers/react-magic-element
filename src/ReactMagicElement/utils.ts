@@ -1,79 +1,25 @@
-const toArr = (str: string, spliter: any = ','): string[] => {
-  return str.toString().split(spliter)
-}
-const isBoolean = (b: any): boolean => {
-  return typeof b === 'boolean'
-}
-String.prototype.includes = (search: any, start = 0): boolean => {
-  if (search instanceof RegExp) {
-    throw TypeError('first argument must not be a RegExp')
-  }
-  // @ts-ignore
-  return this.indexOf(search, start) !== -1
-}
+import {
+  gridKeys,
+  gridValues,
+  boxSize,
+  direction,
+  zeroToThirty,
+  oneToFour,
+  colorsValues,
+  fontSizes
+} from './consts'
+import {
+  checkGridKey,
+  toArr,
+  isBoolean,
+  isNumber,
+  mixArrays,
+  getColors,
+  mixObjects,
+  includes,
+  computeTRBLStyles
+} from './fns'
 
-const mixArrays = (prevArr: any, nextArr: any, appendPre = false, joiner = '-'): string[] => {
-  prevArr = typeof prevArr === 'string' ? toArr(prevArr) : prevArr
-  nextArr = typeof nextArr === 'string' ? toArr(nextArr) : nextArr
-  const tempArr = appendPre ? nextArr : []
-  prevArr.map((str: string) => {
-    tempArr.push(...nextArr.map((nxt: string) => {
-      return [str, nxt].join(joiner)
-    }))
-  })
-
-  return tempArr
-}
-
-const colorsValues: any = {
-  primary: '#007bff',
-  secondary: '#6c757d',
-  success: '#28a745',
-  danger: '#dc3545',
-  warning: '#ffc107',
-  info: '#17a2b8',
-  light: '#f8f9fa',
-  dark: '#343a40',
-  white: '#fff',
-  transparent: 'transparent'
-}
-const colors: string[] = Object.keys(colorsValues).map((color: string) => `-${color}`)
-const getColors = (key = ''): string[] => {
-  if (key) {
-    return colors.map((c: string) => key + c)
-  } else {
-    return Object.keys(colorsValues)
-  }
-}
-
-const capitalize = (w: string) => {
-  return w.charAt(0).toUpperCase() + w.slice(1)
-}
-
-const getShortcut = (str: string) => {
-  return toArr(str.replace(/[A-Z]/g, match => {
-    return '-' + match.toLowerCase()
-  }), '-').map(k => k.charAt(0)).join('')
-}
-
-const formatHVValue = (val: string) => {
-  let tempVal = val
-  if (val.toLowerCase().indexOf('horizontal') > -1) {
-    return [tempVal.replace('Horizontal', 'Left'), tempVal.replace('Horizontal', 'Right')].join(',')
-  } else if (val.toLowerCase().indexOf('vertical') > -1) {
-    return [tempVal.replace('Vertical', 'Top'), tempVal.replace('Vertical', 'Bottom')].join(',')
-  } else {
-    return val
-  }
-}
-
-const gridKeys: string[] = toArr('col,xs,sm,md,lg,xl,xxl')
-const gridValues: string[] = toArr('1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24')
-const boxSize: string[] = toArr('mini,small,medium,big,large,huge')
-const direction: string[] = toArr('top,right,bottom,left,horizontal,vertical')
-const zeroToThirty: string[] = toArr('0,5,10,15,20,25,30') // padding, margin default values
-const oneToFour: string[] = toArr('1,2,3,4')
-const elements: string[] = toArr('input,h1,h2,h3,h4,h5,h6,p,nav,label,header,footer,button,btn,a,ul,ol,li,span,section,address')
 const builtinClasses: string[] = [
   /* border */
   'b',
@@ -83,14 +29,14 @@ const builtinClasses: string[] = [
   ...getColors('b'),
   ...getColors('bc'),
   /* border width */
-  ...mixArrays('bw', oneToFour),
+  ...mixArrays('bw', oneToFour, false, ''),
 
   /* border radius */
   'r-100',
   ...mixArrays('r', oneToFour, false, ''),
 
   /* position */
-  'fill',
+  'pos',
 
   /* width/height */
   ...mixArrays('w,h', '10,20,30,40,50,100'),
@@ -113,9 +59,9 @@ const builtinClasses: string[] = [
   ...getColors(),
   ...getColors('fc'),
   /* font size */
-  ...mixArrays('fs', '9,10,11,12,13,14,15,16,17,18,24,32,48,64,72'),
+  ...mixArrays('fs', fontSizes, false, ''),
   /* font weight */
-  ...mixArrays('fw', '100,200,300,400,500,600,700,800,900'),
+  ...mixArrays('fw', '100,200,300,400,500,600,700,800,900', false, ''),
 
   /* box size */
   ...boxSize,
@@ -134,26 +80,9 @@ const builtinClasses: string[] = [
   ...mixArrays('m,mh,mv,mt,mr,mb,ml', zeroToThirty, false, ''),
 
   /* others */
-  ...toArr('disabled,group,bgi,circle,tag,alert,plain,link,s')
+  ...toArr('disabled,group,bgi,circle,tag,alert,plain,link,btn,s')
 ]
-console.log(builtinClasses)
-const mixObjects: any = (short: string, attr: string, values: string[], attrs: string[] = [], append: string = '') => { // padding, top, right, bottom, left
-  let tempObj: any = {}
-  tempObj[short] = attr
-  values.map((val: string) => {
-    tempObj[`${short}${getShortcut(val)}`] = formatHVValue(`${attr}${capitalize(val)}${append}`)
-    if (attrs) {
-      /**
-       * Border Top Width/Style/Color
-       */
-      attrs.map((att: string) => {
-        tempObj[`${short}${getShortcut(val)}${getShortcut(att)}`] = formatHVValue(`${attr}${capitalize(val)}${capitalize(att)}${append}`)
-      })
-    }
-  })
 
-  return tempObj
-}
 const mappings: any = {
   w: 'width',
   h: 'height',
@@ -167,174 +96,289 @@ const mappings: any = {
   fw: 'fontWeight',
   lc: 'WebkitLineClamp',
   s: 'boxShadow',
+  bg: 'backgroundColor',
   bgc: 'backgroundColor',
   bgi: 'backgroundImage',
   ...mixObjects('p', 'padding', direction),
   ...mixObjects('m', 'margin', direction),
   ...mixObjects('b', 'border', direction, toArr('width,style,color')),
-  ...mixObjects('r', 'border', toArr(',topRight,bottomRight,topLeft,bottomLeft'), null, 'Radius'),
+  ...mixObjects('r', 'border', toArr(',topRight,bottomRight,topLeft,bottomLeft'), null, 'Radius')
 }
 
 const utils = {
-  mappingsAndClasses: {
-    elements,
-    styleMappings: mappings,
-    builtinClasses
-  },
-  // getKeyValue (key: string, value: any) {
-  //   const formattedKey = key.replace(/[A-Z]|(\d+)/g, match => {
-  //     return '-' + match.toLowerCase()
-  //   })
-  //   const keyValue: any = {
-  //     key: key,
-  //     value: value
-  //   } // key, value, styles, classNames
-  //   if (isBoolean(value)) {
-  //     /**
-  //      * key:
-  //      * 1. key
-  //      * 2. key-value: fc-primary, bgc-primary
-  //      */
-  //     // 1. key
-  //     if (key === formattedKey) {
-  //       /**
-  //        * For key is class:
-  //        * border:      b
-  //        * position:    fill
-  //        * color:       primary, secondary, success, danger, warning, info, light, dark, white, transparent
-  //        * layout:      flex, row, rest, hidden, visible, fixed, absolute, relative, circle
-  //        * alignment:   left, center, right, top, middle, bottom
-  //        * font/text:   txt-left, txt-center, txt-right, underline,
-  //        */
-  //       keyValue.classNames = [key]
-  //       return keyValue
-  //     }
-  //     if (!key.includes('-')) {
-  //       keyValue.classNames = [key]
-  //
-  //
-  //     }
-  //   }
-  //   /**
-  //    * Key format:
-  //    * 1. key[number]:
-  //    *    a. g32 or gh32:               right=16px,              left=16px
-  //    *    b. gv32:            top=16px,             bottom=16px
-  //    *    c. gt16:            top=16px
-  //    *    d. gr8:                       right=16px
-  //    *    e. gb32:                                  bottom=32px
-  //    *    f. gl4:                                                left=4px
-  //    * 2. key-number: g-32, gb-32
-  //    * 3. key=[number]: g={32}, gb={32}
-  //    * 4. key=[string]:
-  //    *    a. g={'16'}:        top=16px, right=16px, bottom=16px, left=16px
-  //    *    b. g={'h16'}:                 right=16px,              left=16px
-  //    *    b. g={'v16'}:       top=16px,             bottom=16px
-  //    *    b. g={'16,8,,8'}    top=16px, right=8px,  bottom=0,    left=8px
-  //    *    c. g={'t4,b5'}      top=4px,              bottom=5px
-  //    */
-  //
-  //   if (formattedKey === key) {
-  //     // g=
-  //     keyValue.key = key
-  //   } else {
-  //     // g[number]
-  //     const [k, v] = formattedKey.split('-')
-  //
-  //   }
-  //
-  //   return keyValue
-  // },
-  formatKey (key: string) {
-    return key.replace(/[A-Z]/g, match => {
-      return '-' + match.toLowerCase()
-    })
-  },
-  checkGridKey (key: string) {
-    let tempKey = toArr(key, /(\d+)/)
-    if (gridKeys.indexOf(tempKey[0]) > -1) {
-      tempKey.pop()
-      if (tempKey[0] === 'col') {
-        return tempKey.join('-')
-      }
+  getKeyValue (key: string, value?: any) {
+    const keyValue: any = {
+      key: key,
+      value: value,
+      classNames: [],
+      customerClassNames: [],
+      styles: {} as any
+    }
 
-      if (tempKey.length) {
-        return 'col-' + tempKey.join('-')
+    let classNames: any = {}
+    /**
+     * Handle customer class names, like:
+     * cn-container                         -> 'container'              // For one class
+     * cn-form-container                    -> 'form-container'         // For one class
+     * cn='form-item,label-left'            -> 'form-item label-left'   // Mulitple class joined with 'comma'
+     * cn='form-item label-left'            -> 'form-item label-left'   // Mulitple class joined with 'space'
+     */
+    if (includes(key, 'cn-,cn', 0)) {
+      if (includes(key, 'cn-', 0)) {
+        classNames[key.split('-').slice(1).join('-')] = 1
       } else {
-        return key
+        value.replace(/,/g, ' ').split(' ').map((k: string) => {
+          classNames[k] = 1
+        })
       }
-    } else {
-      return null
-    }
-  },
-  getPercentageHandler (k: string) {
-    let arr = toArr(k, /-/g)
-    if (arr.length > 0 && arr[0] !== k) {
-      return arr
+
+      keyValue.customerClassNames = Object.keys(classNames)
+      classNames = {}
     }
 
-    return null
-  },
-  getPixelHandler (k: string) {
-    let arr = toArr(k, /(\d+)/g)
-    if (arr.length > 0 && arr[0] !== k) {
-      return arr
+    /**
+     * If key is in builtinClasses, like:
+     * b, bs-dotted, b-primary, bw1, w-10, flex, xs16, left, txt-left, fc-primary,
+     * fs100, fw100, mini, lc1, bg-primary, bgc-primary, btn, link,
+     */
+    if (includes(builtinClasses, key)) {
+      keyValue.classNames.push(key)
+      /**
+       * If key has no right value
+       */
+      if (isBoolean(value)) {
+        return keyValue
+      }
     }
 
-    return null
-  },
-  isBoolean: isBoolean,
-  setConfig (config: any) {
-    let colorCssProperties: any = {}
-    Object.keys(config.colors).map((key: string) => {
-      const color = config.colors[key]
-      colorsValues[key] = color[0]
-      colorCssProperties['rme--' + key] = {
-        color: color[0]
+    /**
+     * Handle box size, width, height, like:
+     * box-num                -> box-240            => width: 240px,  height: 240px
+     * box-[num]-[num]        -> box-240-160        => width: 240px,  height: 160px
+     *                        -> box--160           =>                height: 160px
+     * box-[w+num]-[h+num]    -> box-w240-h160      => width: 240px,  height: 160px
+     *                        -> box-h160-w240      => width: 240px,  height: 160px
+     *                        -> box-w240           => width: 240px,
+     *                        -> box-h160           =>                height: 160px
+     * box='num[ num]'        -> box='240 160'      => width: 240px,  height: 160px
+     *                        -> box='240'          => width: 240px,  height: 240px
+     * box='[w+num][ h+num]   -> box='w240 h160'    => width: 240px,  height: 160px
+     *                        -> box='h160 w240'    => width: 240px,  height: 160px
+     *                        -> box='w240'         => width: 240px,
+     *                        -> box='h160'         =>                height: 160px
+     * box='num[,num]'        -> box='240,160'      => width: 240px,  height: 160px
+     *                        -> box=',160'         =>                height: 160px
+     * box='[w+num][,h+num]   -> box='w240,h160'    => width: 240px,  height: 160px
+     *                        -> box='h160,w240'    => width: 240px,  height: 160px
+     *                        -> box='w240'         => width: 240px,
+     *                        -> box='h160'         =>                height: 160px
+     */
+    let cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'box-,box',
+      doNotAppend: true,
+      kvObj: {
+        width: '',
+        height: ''
       }
-      colorCssProperties['rme--fc-' + key] = {
-        color: color[0]
-      }
-      colorCssProperties['rme--bc-' + key] = {
-        backgroundColor: color[0]
-      }
-      colorCssProperties['rme--bgc-' + key] = {
-        backgroundColor: color[0]
-      }
-      colorCssProperties['rme--btn-tag'] = {
-        borderColor: color[0],
-        backgroundColor: color[0],
-        color: color[1]
-      }
-      colorCssProperties['rme--btn-tag-plain'] = {
-        borderColor: color[0],
-        color: color[0]
-      }
-    })
+    }, keyValue)
 
-    utils.rmeConfig.colors = colorCssProperties
-  },
-  getValue (val: any) {
-    if (!utils.isBoolean(val) && val) {
-      val = val.toString()
-      if (val.indexOf('%') > -1 || val === 'auto') {
-        return val
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle pos (position), top, right, bottom, left, like:
+     * pos-num                                                -> pos-15               => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
+     * pos-[num]-[num]-[num]-[num]                            -> pos-15-15-15-15      => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
+     *                                                        -> pos-15-10            => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos-15-10-5          => top: 15px,   right: 10px,  bottom: 5px,    left: 10px
+     *                                                        -> pos-15-10-5-0        => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos--10-5-0          =>              right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos--10--0           =>              right: 10px,                  left: 0px
+     *                                                        -> pos---15             =>                            bottom: 15px,
+     * pos-[t+num]-[r+num]-[b+num]-[l+num]-[h+num]-[v+num]    -> pos-t15-r10-b5-l0    => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos-h10-v15          => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos-t15-h10          => top: 15px,   right: 10px,                  left: 10px
+     * pos='num[ num][ num][ num]'                            -> pos='15'             => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
+     *                                                        -> pos='15 10'          => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos='15 10 5'        => top: 15px,   right: 10px,  bottom: 5px,    left: 10px
+     *                                                        -> pos='15 10 5 0'      => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     * pos='[t+num][ r+num][ b+num][ l+num][ h+num][ v+num]'  -> pos='t15 r10 b5 l0'  => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos='h10 v15'        => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos='t15 h10'        => top: 15px,   right: 10px,                  left: 10px
+     * pos='num[,num][,num][,num]'                            -> pos='15,10,,5'       => top: 15px,   right: 10px,                  left: 5px
+     * pos='[t+num][,r+num][,b+num][,l+num][,h+num][,v+num]'  -> pos='t15,r10,b5,l0'  => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+     *                                                        -> pos='h10,v15'        => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
+     *                                                        -> pos='t15,h10'        => top: 15px,   right: 10px,                  left: 10px
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'pos-,pos',
+      doNotAppend: true,
+      kvObj: {
+        top: '',
+        right: '',
+        bottom: '',
+        left: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle p (padding), top, right, bottom, left
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'p-,p',
+      not: 'pos',
+      kvObj: {
+        paddingTop: '',
+        paddingRight: '',
+        paddingBottom: '',
+        paddingLeft: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle m (margin), top, right, bottom, left
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'm-,m',
+      kvObj: {
+        marginTop: '',
+        marginRight: '',
+        marginBottom: '',
+        marginLeft: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle bw (borderWidth), top, right, bottom, left
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'bw-,bw',
+      doNotAppend: true,
+      kvObj: {
+        borderTopWidth: '',
+        borderRightWidth: '',
+        borderBottomWidth: '',
+        borderLeftWidth: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle grid keys
+     * col[1~24], xs[1~24], sm[1~24], md[1~24], lg[1~24], xl[1~24], xxl[1~24]
+     */
+    let gridKey = checkGridKey(key)
+    if (gridKey) {
+      keyValue.classNames.push(gridKey)
+      return keyValue
+    }
+    /**
+     * Handle gutter g[num] g={num}, like:
+     * g32
+     * g=32
+     */
+    if (includes(key, 'g', 0)) {
+      let gutter = toArr(key, /(\d+)/g)
+      let gk = gutter[0]
+      let gv = gutter[1] || value
+      keyValue.classNames.push(gk)
+      if (gv) {
+        // @ts-ignore
+        keyValue.styles['--gutter'] = `-${gv / 2}px`
+        // @ts-ignore
+        keyValue.styles['--child-gutter'] = `${gv / 2}px`
+      }
+
+      return keyValue
+    }
+
+    /**
+     * Handle key-[val] properties, like:
+     * w-[num]                -> w-88         => width: 88%
+     * h-[num]                -> h-88         => height: 88%
+     * fc-[color]             -> fc-primary   => color: [primary]
+     * btc-[color]            -> btc-primary  => border-top-color: [primary]
+     */
+    if (includes(key, '-')) {
+      let sizeKey: any = toArr(key, '-')
+      if (isNumber(sizeKey[1])) {
+        /**
+         * w-[num]                -> w-88         => width: 88%
+         * h-[num]                -> h-88         => height: 88%
+         */
+        keyValue.styles[mappings[sizeKey[0]]] = `${sizeKey[1]}%`
       } else {
-        return val.replace(/px/, '') + 'px'
+        let val = sizeKey[1];
+        (toArr(mappings[sizeKey[0]] || '') || []).map((k: any) => {
+          /**
+           * bhc-[color]        -> bhc-primary  => border-left-color: primary   border-right-color: primary
+           */
+          let tempVal = val.split(' ').map((tv: string) => colorsValues[tv] || tv).join(' ')
+          tempVal = tempVal.split(',').map((tv: string) => colorsValues[tv] || tv).join(' ')
+          keyValue.styles[k] = tempVal
+        })
       }
-    } else {
-      return val
+
+      return keyValue
     }
-  },
-  rmeConfig: {
-    colors: {} as any
-  } as any,
-  colorsValues: colorsValues,
-  boxSize: boxSize,
-  isArray (arr: any) {
-    return Array.isArray(arr)
-  },
-  toArr: toArr
+
+    /**
+     * Handle key[val] properties, like:
+     * w[num]                -> w240         => width: 240px
+     * h[num]                -> h360         => height: 360px
+     */
+    let [iKey, iValue = value] = toArr(key, /(\d+)/g)
+    if (iValue) {
+      (toArr(mappings[iKey] || '') || []).map((k: any) => {
+        if (includes(k, 'zIndex,fontWeight,WebkitLineClamp')) {
+          keyValue.styles[k] = Number.parseInt(iValue)
+        } else if (isNumber(iValue)) {
+          keyValue.styles[k] = `${iValue}px`
+        } else if (typeof iValue === 'string') {
+          /**
+           * brc={color}        -> bhc={primary}  => border-right-color: primary   border-right-color: primary
+           */
+          let tempVal = iValue.split(' ').map((tv: string) => colorsValues[tv] || tv).join(' ')
+          tempVal = tempVal.split(',').map((tv: string) => colorsValues[tv] || tv).join(' ')
+          keyValue.styles[k] = tempVal
+        } else {
+          /**
+           * Other properties like: onChange
+           */
+        }
+      })
+
+      return keyValue
+    }
+
+    return keyValue
+  }
 }
 
 export default utils
