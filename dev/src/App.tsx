@@ -49,9 +49,9 @@ function App () {
       {/*<Elements />*/}
       {/*<Width />*/}
       {/*<Height />*/}
-      <Padding />
+      {/*<Padding />*/}
       {/*<Margin />*/}
-      {/*<Border />*/}
+      <Border />
       {/*<FontSize />*/}
       {/*<FontWeight />*/}
       {/*<TextLines />*/}

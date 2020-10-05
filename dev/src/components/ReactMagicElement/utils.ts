@@ -173,263 +173,65 @@ const utils = {
      *                        -> box='w240'         => width: 240px,
      *                        -> box='h160'         =>                height: 160px
      */
-    let cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'box-,box',
-      doNotAppend: true,
-      kvObj: {
-        width: '',
-        height: ''
-      }
-    }, keyValue)
+    let cptResult: any
 
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle pos (position), top, right, bottom, left, like:
-     * pos-num                                                -> pos-15               => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
-     * pos-[num]-[num]-[num]-[num]                            -> pos-15-15-15-15      => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
-     *                                                        -> pos-15-10            => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
-     *                                                        -> pos-15-10-5          => top: 15px,   right: 10px,  bottom: 5px,    left: 10px
-     *                                                        -> pos-15-10-5-0        => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
-     *                                                        -> pos--10-5-0          =>              right: 10px,  bottom: 5px,    left: 0px
-     *                                                        -> pos--10--0           =>              right: 10px,                  left: 0px
-     *                                                        -> pos---15             =>                            bottom: 15px,
-     * pos-[t+num]-[r+num]-[b+num]-[l+num]-[h+num]-[v+num]    -> pos-t15-r10-b5-l0    => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
-     *                                                        -> pos-h10-v15          => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
-     *                                                        -> pos-t15-h10          => top: 15px,   right: 10px,                  left: 10px
-     * pos='num[ num][ num][ num]'                            -> pos='15'             => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
-     *                                                        -> pos='15 10'          => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
-     *                                                        -> pos='15 10 5'        => top: 15px,   right: 10px,  bottom: 5px,    left: 10px
-     *                                                        -> pos='15 10 5 0'      => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
-     * pos='[t+num][ r+num][ b+num][ l+num][ h+num][ v+num]'  -> pos='t15 r10 b5 l0'  => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
-     *                                                        -> pos='h10 v15'        => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
-     *                                                        -> pos='t15 h10'        => top: 15px,   right: 10px,                  left: 10px
-     * pos='num[,num][,num][,num]'                            -> pos='15,10,,5'       => top: 15px,   right: 10px,                  left: 5px
-     * pos='[t+num][,r+num][,b+num][,l+num][,h+num][,v+num]'  -> pos='t15,r10,b5,l0'  => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
-     *                                                        -> pos='h10,v15'        => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
-     *                                                        -> pos='t15,h10'        => top: 15px,   right: 10px,                  left: 10px
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'pos-,pos',
-      doNotAppend: true,
-      kvObj: {
-        top: '',
-        right: '',
-        bottom: '',
-        left: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle pt (paddingTop)
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'pt-,pt',
-      kvObj: {
-        paddingTop: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle pr (paddingRight)
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'pr-,pr',
-      kvObj: {
-        paddingRight: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle pb (paddingBottom)
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'pb-,pb',
-      kvObj: {
-        paddingBottom: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle pl (paddingLeft)
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'pl-,pl',
-      kvObj: {
-        paddingLeft: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-    /**
-     * Handle p (padding), top, right, bottom, left
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'p-,p',
+    const trbls = [{
+      key: 'box',
+      fills: 'w,h'
+    }, {
+      key: 'pos',
+      fills: 'top,right,bottom,left'
+    }, {
+      key: 'pt'
+    }, {
+      key: 'pr'
+    }, {
+      key: 'pb'
+    }, {
+      key: 'pl'
+    }, {
+      key: 'ph'
+    }, {
+      key: 'pv'
+    }, {
+      key: 'p',
       not: 'pos',
-      kvObj: {
-        paddingTop: '',
-        paddingRight: '',
-        paddingBottom: '',
-        paddingLeft: ''
+      fills: 'pt,pr,pb,pl'
+    }, {
+      key: 'mt'
+    }, {
+      key: 'mr'
+    }, {
+      key: 'mb'
+    }, {
+      key: 'ml'
+    }, {
+      key: 'mh'
+    }, {
+      key: 'mv'
+    }, {
+      key: 'm',
+      fills: 'mt,mr,mb,ml'
+    }, {
+      key: 'bw',
+      fills: 'btw,brw,bbw,blw'
+    }]
+
+    trbls.map((obj: any) => {
+      if (!cptResult) {
+        let kvObj: any = {}
+        toArr(obj.fills || obj.key).map((mapping: string) => {
+          toArr(mappings[mapping]).map((sty: string) => kvObj[sty] = '')
+        })
+
+        cptResult = computeTRBLStyles({
+          key,
+          value,
+          cptKeys: [obj.key + '-', obj.key],
+          kvObj: kvObj
+        }, keyValue)
       }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle m (margin), top, right, bottom, left
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'm-,m',
-      kvObj: {
-        marginTop: '',
-        marginRight: '',
-        marginBottom: '',
-        marginLeft: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle m (margin), top, right, bottom, left
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'mt-,mt',
-      kvObj: {
-        marginTop: '',
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle m (margin), top, right, bottom, left
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'mr-,mr',
-      kvObj: {
-        marginRight: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle m (margin), top, right, bottom, left
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'mb-,mb',
-      kvObj: {
-        marginBottom: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle m (margin), top, right, bottom, left
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'ml-,ml',
-      kvObj: {
-        marginLeft: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle m (margin), top, right, bottom, left
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'm-,m',
-      kvObj: {
-        marginTop: '',
-        marginRight: '',
-        marginBottom: '',
-        marginLeft: ''
-      }
-    }, keyValue)
-
-    if (cptResult) {
-      return keyValue
-    }
-
-    /**
-     * Handle bw (borderWidth), top, right, bottom, left
-     */
-    cptResult = computeTRBLStyles({
-      key,
-      value,
-      cptKeys: 'bw-,bw',
-      doNotAppend: true,
-      kvObj: {
-        borderTopWidth: '',
-        borderRightWidth: '',
-        borderBottomWidth: '',
-        borderLeftWidth: ''
-      }
-    }, keyValue)
+    })
 
     if (cptResult) {
       return keyValue
