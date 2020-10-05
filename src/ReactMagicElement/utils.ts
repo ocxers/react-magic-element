@@ -231,6 +231,69 @@ const utils = {
     }
 
     /**
+     * Handle pt (paddingTop)
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'pt-,pt',
+      kvObj: {
+        paddingTop: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle pr (paddingRight)
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'pr-,pr',
+      kvObj: {
+        paddingRight: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle pb (paddingBottom)
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'pb-,pb',
+      kvObj: {
+        paddingBottom: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle pl (paddingLeft)
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'pl-,pl',
+      kvObj: {
+        paddingLeft: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+    /**
      * Handle p (padding), top, right, bottom, left
      */
     cptResult = computeTRBLStyles({
@@ -243,6 +306,89 @@ const utils = {
         paddingRight: '',
         paddingBottom: '',
         paddingLeft: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle m (margin), top, right, bottom, left
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'm-,m',
+      kvObj: {
+        marginTop: '',
+        marginRight: '',
+        marginBottom: '',
+        marginLeft: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle m (margin), top, right, bottom, left
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'mt-,mt',
+      kvObj: {
+        marginTop: '',
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle m (margin), top, right, bottom, left
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'mr-,mr',
+      kvObj: {
+        marginRight: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle m (margin), top, right, bottom, left
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'mb-,mb',
+      kvObj: {
+        marginBottom: ''
+      }
+    }, keyValue)
+
+    if (cptResult) {
+      return keyValue
+    }
+
+    /**
+     * Handle m (margin), top, right, bottom, left
+     */
+    cptResult = computeTRBLStyles({
+      key,
+      value,
+      cptKeys: 'ml-,ml',
+      kvObj: {
+        marginLeft: ''
       }
     }, keyValue)
 

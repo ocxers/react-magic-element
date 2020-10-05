@@ -174,7 +174,7 @@ export const fillProps = (val: string, propsObj: any, idx: number = 0) => {
 }
 
 export const computeTRBLStyles = (keyValueObj: any, keyValue: any) => {
-  const { key, value, cptKeys, kvObj, not, doNotAppend = false } = keyValueObj
+  const { key, value, cptKeys, kvObj, not } = keyValueObj
   const keyArr = toArr(cptKeys)
   if (not && includes(key, not, 0)) {
     return
@@ -219,18 +219,7 @@ export const computeTRBLStyles = (keyValueObj: any, keyValue: any) => {
          */
         kvs = toArr(value, /,| /g)
       }
-      const append = key.substr(1)
-      if (!doNotAppend && append) {
-        kvs = kvs.map((kv: string) => {
-          if (isNumber(kv)) {
-            return `${append}${kv}`
-          }
-
-          return kv
-        })
-      }
     }
-
     switch (kvs.length) {
       case 1:
         if (isNumber(kvs[0])) {

@@ -33,7 +33,9 @@ export default (props: any) => {
         <RME b-primary mb15 p={'t15,l10'}><RME bg-primary>padding-top: 15px; padding-left: 10px</RME></RME>
         <RME b-primary mb15 p={'t15 l10'}><RME bg-primary>padding-top: 15px; padding-left: 10px</RME></RME>
         <RME b-primary mb15 p={13}><RME bg-primary>padding: 13px</RME></RME>
+        <RME b-primary mb15 p-13><RME bg-primary>padding: 13px</RME></RME>
         <RME b-primary mb15 pr={13}><RME bg-primary>padding-right: 13px</RME></RME>
+        <RME b-primary mb15 pr-13><RME bg-primary>padding-right: 13px</RME></RME>
         <RME b-primary mb15 pl={13}><RME bg-primary>padding-left: 13px</RME></RME>
         <RME b-primary mb15 pv15><RME bg-primary>padding-top: 15px; padding-bottom: 15px;</RME></RME>
         <RME b-primary mb15 ph15><RME bg-primary>padding-left: 15px; padding-right: 15px;</RME></RME>

@@ -17,10 +17,15 @@ const RME = (props: any) => {
     }
   })
 
+  let dataAttrs: Array<string> = []
   let keys: string [] = []
   Object.keys(props).map((key: string) => {
     if (!includes(toArr('children,label,value'), key)) {
-      keys.push(key)
+      if (includes(key, 'data-')) {
+        dataAttrs.push(key)
+      } else {
+        keys.push(key)
+      }
     }
   })
 
@@ -123,6 +128,12 @@ const RME = (props: any) => {
     if (keys.indexOf('bgi') > -1) {
       computerProps.style.backgroundImage = 'url(' + props['bgi'] + ')'
     }
+    /**
+     * Handle data-attrs
+     */
+    dataAttrs.map((prop: string) => {
+      computerProps[prop] = props[prop]
+    })
 
     if (props.style) {
       Object.assign(computerProps.style, props.style)
@@ -145,7 +156,7 @@ const RME = (props: any) => {
     if (elementType === 'input') {
       return (
         <input className={computerProps.className} style={computerProps.style} type={props.type || 'text'}
-               placeholder={props.placeholder} onChange={props.onChange}/>
+               placeholder={props.placeholder} onChange={props.onChange} />
       )
     }
 

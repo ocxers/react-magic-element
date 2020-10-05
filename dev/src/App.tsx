@@ -44,12 +44,12 @@ function App () {
   }
   return (
     <>
-      <Color />
+      {/*<Color />*/}
       {/*<Grid />*/}
       {/*<Elements />*/}
       {/*<Width />*/}
       {/*<Height />*/}
-      {/*<Padding />*/}
+      <Padding />
       {/*<Margin />*/}
       {/*<Border />*/}
       {/*<FontSize />*/}
