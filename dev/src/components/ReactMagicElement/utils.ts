@@ -409,7 +409,7 @@ const utils = {
 
       if (!includes(elements, key) || !isBoolean(props[key])) {
         const iKeyVal = getKeyValue(key, props[key])
-        if (!iKeyVal.classNames.length && !iKeyVal.customerClassNames.length && !Object.keys(iKeyVal.styles).length && !includes(elements, key, NaN, true)) {
+        if (key !== 'className' && key !== 'style' && !iKeyVal.classNames.length && !iKeyVal.customerClassNames.length && !Object.keys(iKeyVal.styles).length && !includes(elements, key, NaN, true)) {
           // unknown prop
           unknownAttrs.push(key)
         }
