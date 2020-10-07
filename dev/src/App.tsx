@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import RME from './components/ReactMagicElement'
 import Color from './demo/Color'
@@ -45,16 +45,18 @@ const img = 'https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/01/02/b1/0102
 const logo = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K'
 
 function App () {
+  const [inputValue, setInputValue] = useState('')
   const handleClick = (ev: any) => {
     console.log('click', ev.target.value)
   }
   const handleChange = (ev: any) => {
     console.log(ev.target.value)
+    setInputValue(ev.target.value)
   }
-  console.log(RME.computeProps({
-    btn: true,
-    'bw-t5': true
-  }))
+  // console.log(RME.computeProps({
+  //   btn: true,
+  //   'bw-t5': true
+  // }))
   return (
     <>
       {/*<Color />*/}
@@ -87,15 +89,11 @@ function App () {
       {/*<RME input id={'id2'} abc={'123'} name={'def'} ccc placeholder={'placeholder'} type={'number'}*/}
       {/*     onChange={handleChange}></RME>*/}
       {/*<input type="text" />*/}
-      <RME header row fixed h60 w-100 center className={'box-bottom-shadow'}>
-        <RME p15 w290 col href='/rme'>
-          <RME row>
-            <RME box-34-30 mr15 bgi={img}></RME>
-            <RME span fs24 fc='white' fw700>React Magic Element</RME>
-          </RME>
-        </RME>
-        <RME rest>abc</RME>
-      </RME>
+      {/*<RME mb15  b bhw14 bvw35 bs-double bc-success btc-danger blc-info brc={'dark'} r-50 bbc={'success'}>*/}
+      {/*  mb15  b bhw14 bvw35 bs-double bc-success btc-danger blc-info brc={'dark'} r-50 bbc={'success'}*/}
+      {/*</RME>*/}
+      <RME input value={inputValue} onChange={handleChange}></RME>
+      {/*<input type="text" value={'abc'}/>*/}
     </>
   )
 }

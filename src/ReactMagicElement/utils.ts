@@ -20,7 +20,8 @@ import {
   getColors,
   mixObjects,
   includes,
-  computeTRBLStyles
+  computeTRBLStyles,
+  isUndefined
 } from './fns'
 
 const builtinClasses: string[] = [
@@ -216,17 +217,17 @@ const getKeyValue = (key: string, value?: any) => {
     not: 'md',
     fills: 'mt,mr,mb,ml'
   }, {
-    key: 'btw',
+    key: 'btw'
   }, {
-    key: 'brw',
+    key: 'brw'
   }, {
-    key: 'bbw',
+    key: 'bbw'
   }, {
-    key: 'blw',
+    key: 'blw'
   }, {
-    key: 'bhw',
+    key: 'bhw'
   }, {
-    key: 'bvw',
+    key: 'bvw'
   }, {
     key: 'bw',
     fills: 'btw,brw,bbw,blw'
@@ -235,13 +236,13 @@ const getKeyValue = (key: string, value?: any) => {
     type: 'color',
     fills: 'btc,brc,bbc,blc'
   }, {
-    key: 'rtl',
+    key: 'rtl'
   }, {
-    key: 'rtr',
+    key: 'rtr'
   }, {
-    key: 'rbl',
+    key: 'rbl'
   }, {
-    key: 'rbr',
+    key: 'rbr'
   }, {
     key: 'r',
     fills: 'rtl,rtr,rbr,rbl'
@@ -403,7 +404,7 @@ const utils = {
       /**
        * Push preset class from line clamp
        */
-      if (includes(key, 'lc')) {
+      if (key.indexOf('lc') === 0) {
         classNameList.push('rme--lc')
       }
 
@@ -449,6 +450,12 @@ const utils = {
     unknownAttrs.map((prop: string) => {
       computerProps[prop] = isBoolean(props[prop]) ? props[prop].toString() : props[prop]
     })
+
+    if (tagName === 'input') {
+      if (!isUndefined(props.value)) {
+        computerProps.value = props.value
+      }
+    }
 
     Object.keys(rmeConfig.colors).map((key: any) => {
       if (computerProps.className.indexOf(key) > -1) {
