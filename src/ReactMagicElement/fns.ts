@@ -33,8 +33,8 @@ export const isBoolean = (b: any): boolean => {
 export const isAuto = (a: any): boolean => {
   return a === 'auto'
 }
-export const isColor = (t: any): boolean => {
-  return t === 'color'
+export const isStrProp = (t: any): boolean => {
+  return t === 'string'
 }
 export const isNumber = (num: any, ignoreEmpty = true): boolean => {
   if (num === '') {
@@ -136,7 +136,7 @@ export const fillProps = (val: string, propsObj: any, idx: number = 0, type?: st
     const keys = Object.keys(propsObj)
     let key = keys[idx]
     let key2 = keys[idx + 2]
-    if (isColor(type)) {
+    if (isStrProp(type)) {
       propsObj[key] = colorsValues[val] || val
     } else if (isNumber(val) || isAuto(val)) {
       propsObj[key] = val
@@ -212,6 +212,25 @@ export const fillProps = (val: string, propsObj: any, idx: number = 0, type?: st
   }
 }
 
+const formatStrValues = (kvs: any, type: string) => {
+  if (isStrProp(type)) {
+    let length = kvs.length
+    switch (length) {
+      case 1:
+        kvs = [kvs[0], kvs[0], kvs[0], kvs[0]]
+        break
+      case 2:
+        kvs = [kvs[0], kvs[1], kvs[0], kvs[1]]
+        break
+      case 3:
+        kvs = [kvs[0], kvs[1], kvs[2], kvs[1]]
+        break
+    }
+  }
+
+  return kvs
+}
+
 export const computeTRBLStyles = (keyValueObj: any, keyValue: any) => {
   const { key, value, cptKeys, kvObj, not, type } = keyValueObj
   const keyArr = toArr(cptKeys)
@@ -236,6 +255,7 @@ export const computeTRBLStyles = (keyValueObj: any, keyValue: any) => {
      */
     if (includes(key, keyArr[0])) {
       kvs = key.split('-').slice(1)
+      kvs = formatStrValues(kvs, type)
     } else {
       if (isBoolean(value)) {
         // key[val]
@@ -244,19 +264,28 @@ export const computeTRBLStyles = (keyValueObj: any, keyValue: any) => {
       } else {
         // key=...
         /**
-         * pos='num[ num][ num][ num]'                            -> pos='15'             => top: 15px,   right: 15px,  bottom: 15px,   left: 15px
-         *                                                        -> pos='15 10'          => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
-         *                                                        -> pos='15 10 5'        => top: 15px,   right: 10px,  bottom: 5px,    left: 10px
-         *                                                        -> pos='15 10 5 0'      => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
-         * pos='[t+num][ r+num][ b+num][ l+num][ h+num][ v+num]'  -> pos='t15 r10 b5 l0'  => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
-         *                                                        -> pos='h10 v15'        => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
-         *                                                        -> pos='t15 h10'        => top: 15px,   right: 10px,                  left: 10px
-         * pos='num[,num][,num][,num]'                            -> pos='15,10,,5'       => top: 15px,   right: 10px,                  left: 5px
-         * pos='[t+num][,r+num][,b+num][,l+num][,h+num][,v+num]'  -> pos='t15,r10,b5,l0'  => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
-         *                                                        -> pos='h10,v15'        => top: 15px,   right: 10px,  bottom: 15px,   left: 10px
-         *                                                        -> pos='t15,h10'        => top: 15px,   right: 10px,                  left: 10px
+         * pos='num[ num][ num][ num]'                            -> pos='15'             => top: 15px,   right: 15px,
+         * bottom: 15px,   left: 15px
+         *                                                        -> pos='15 10'          => top: 15px,   right: 10px,
+         * bottom: 15px,   left: 10px
+         *                                                        -> pos='15 10 5'        => top: 15px,   right: 10px,
+         * bottom: 5px,    left: 10px
+         *                                                        -> pos='15 10 5 0'      => top: 15px,   right: 10px,
+         * bottom: 5px,    left: 0px pos='[t+num][ r+num][ b+num][ l+num][ h+num][ v+num]'  -> pos='t15 r10 b5 l0'  =>
+         * top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+         *                                                        -> pos='h10 v15'        => top: 15px,   right: 10px,
+         * bottom: 15px,   left: 10px
+         *                                                        -> pos='t15 h10'        => top: 15px,   right: 10px,
+         *                 left: 10px pos='num[,num][,num][,num]'                            -> pos='15,10,,5'       =>
+         * top: 15px,   right: 10px,                  left: 5px pos='[t+num][,r+num][,b+num][,l+num][,h+num][,v+num]'
+         * -> pos='t15,r10,b5,l0'  => top: 15px,   right: 10px,  bottom: 5px,    left: 0px
+         *                                                        -> pos='h10,v15'        => top: 15px,   right: 10px,
+         * bottom: 15px,   left: 10px
+         *                                                        -> pos='t15,h10'        => top: 15px,   right: 10px,
+         *                 left: 10px
          */
         kvs = toArr(value, /,| /g)
+        kvs = formatStrValues(kvs, type)
       }
     }
     switch (kvs.length) {
@@ -314,7 +343,7 @@ export const computeTRBLStyles = (keyValueObj: any, keyValue: any) => {
       // @ts-ignore
       if (kvObj[attr]) {
         let attrValue = `${kvObj[attr]}`
-        if (!isColor(type) && !isAuto(kvObj[attr])) {
+        if (!isStrProp(type) && !isAuto(kvObj[attr])) {
           attrValue += 'px'
         }
         // @ts-ignore

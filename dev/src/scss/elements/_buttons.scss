@@ -1,6 +1,8 @@
 .rme {
     &--btn {
-        border: 1px solid $dark;
+        //border: 1px solid $dark;
+        border-width: 1px;
+        border-style: solid;
         background-color: $white;
         color: $dark;
         height: 32px;

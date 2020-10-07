@@ -233,8 +233,12 @@ const getKeyValue = (key: string, value?: any) => {
     fills: 'btw,brw,bbw,blw'
   }, {
     key: 'bc',
-    type: 'color',
+    type: 'string',
     fills: 'btc,brc,bbc,blc'
+  }, {
+    key: 'bs',
+    type: 'string',
+    fills: 'bts,brs,bbs,bls'
   }, {
     key: 'rtl'
   }, {
@@ -269,7 +273,6 @@ const getKeyValue = (key: string, value?: any) => {
   if (cptResult) {
     return keyValue
   }
-
   /**
    * Handle grid keys
    * col[1~24], xs[1~24], sm[1~24], md[1~24], lg[1~24], xl[1~24], xxl[1~24]

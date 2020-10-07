@@ -79,11 +79,14 @@ function App () {
       {/*<Alert/>*/}
       {/*<Media />*/}
       {/*<Main />*/}
-      {/*<RME h2 m0 mb5 primary hover-underline line-through pointer>RME H2</RME>*/}
-      {/*<RME btn bw-t5>Render as span</RME>*/}
-      {/*<RME b-warning r5 p15 mb30 id={'id'} abc={'123'} name={'def'} disabled bbb>*/}
-      {/*  <RME h3>Hidden and Visible</RME>*/}
-      {/*</RME>*/}
+      <RME h2 m0 mb5 primary hover-underline line-through pointer>RME H2</RME>
+      <RME bw-t5 b bw={6} bts-dotted>Render as span</RME>
+      <RME bw-t5 m30 b bw={6} bs-dotted-double>Render as span</RME>
+      <RME mb15 p15 b bw={6} bc={'primary,red,danger'}>border-top-color: primary; border-left-color: danger</RME>
+      <RME bw-t5 b bc-yellow bc-primary>Render as span</RME>
+      <RME b-warning r5 p15 mb30 id={'id'} abc={'123'} name={'def'} disabled bbb>
+        <RME h3>Hidden and Visible</RME>
+      </RME>
       {/*<RME a href={'http://ocxers.github.com/rme'} target='_blank' title='React Magic Element' style={{color: 'red'}}>RME</RME>*/}
       {/*<RME button onClick={handleClick} primary>Button</RME>*/}
       {/*<RME input id={'id2'} abc={'123'} name={'def'} ccc placeholder={'placeholder'} type={'number'}*/}
@@ -92,7 +95,7 @@ function App () {
       {/*<RME mb15  b bhw14 bvw35 bs-double bc-success btc-danger blc-info brc={'dark'} r-50 bbc={'success'}>*/}
       {/*  mb15  b bhw14 bvw35 bs-double bc-success btc-danger blc-info brc={'dark'} r-50 bbc={'success'}*/}
       {/*</RME>*/}
-      <RME input value={inputValue} onChange={handleChange}></RME>
+      {/*<RME input value={inputValue} onChange={handleChange}></RME>*/}
       {/*<input type="text" value={'abc'}/>*/}
     </>
   )
