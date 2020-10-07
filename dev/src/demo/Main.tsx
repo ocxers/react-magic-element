@@ -72,7 +72,7 @@ export default (props:any) => {
                         <RME btn plain m15>Default</RME>
                     </RME>
                     <RME h2 color={'blue'} s={56} ph={45} m={45} r10 bw5 bc-success right bgi={img}>afasdfsd</RME>
-                    <RME h1 weight={100} color={'red'} m30 lc1 hoverUnderline pointer>Heading H1 // _import from 'super-label'
+                    <RME h1 weight={100} color={'red'} m30 lc1 hover-underline pointer>Heading H1 // _import from 'super-label'
                         // _import SuperLemon from "super-lemon"
                         // _import * as RME from './Components/index'
                         // _import RME from './Components/label/index'</RME>

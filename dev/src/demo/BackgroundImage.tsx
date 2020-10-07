@@ -4,8 +4,8 @@ const img = 'https://is4-ssl.mzstatic.com/image/thumb/Purple113/v4/01/02/b1/0102
 export default () => {
     return (
         <>
-            <RME h1 primary>Background Image</RME>
-            <RME b bgi={img} w200 h200>background-image: url(img)</RME>
+            {/*<RME h1 primary>Background Image</RME>*/}
+            <RME b bgi={img} w200 h200 circle>background-image: url(img)</RME>
         </>
     )
 }

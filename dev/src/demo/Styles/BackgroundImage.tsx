@@ -12,7 +12,7 @@ export default (props: any) => {
 <RME b bgi={img} w200 h200>background-image: url(img)</RME>
         `}/>
       </RME>
-      <RME b bgi={img} w200 h200>background-image: url(img)</RME>
+      <RME b bgi={img} w200 h200 circle>background-image: url(img)</RME>
     </RME>
   )
 }

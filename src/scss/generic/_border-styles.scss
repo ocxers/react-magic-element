@@ -19,14 +19,14 @@
 
     @for $i from 1 through 4 {
         &--bw#{$i} {
-            border-width: $i + px !important;
+            border-width: $i + px;
         }
     }
 
     $borderStyles: dotted, dashed, solid, double;
     @each $bs in $borderStyles {
         &--bs-#{$bs} {
-            border-style: $bs !important;
+            border-style: $bs;
         }
     }
 }

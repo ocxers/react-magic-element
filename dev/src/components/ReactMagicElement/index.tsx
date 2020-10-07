@@ -1,57 +1,9 @@
 import React from 'react'
 import '../../scss/main.scss'
-import { isBoolean, setConfig, includes, toArr } from './fns'
-import { elements, rmeConfig } from './consts'
+import { isBoolean, setConfig } from './fns'
 import utils from './utils'
 
 const RME = (props: any) => {
-  let elementType = 'div'
-
-  if (props.link && props.href) {
-    elementType = 'a'
-  }
-
-  elements.map((el: any) => {
-    if (props[el] && isBoolean(props[el])) {
-      elementType = el === 'btn' ? 'button' : el
-    }
-  })
-
-  let dataAttrs: Array<string> = []
-  let keys: string [] = []
-  Object.keys(props).map((key: string) => {
-    if (!includes(toArr('children,label,value'), key)) {
-      if (includes(key, 'data-')) {
-        dataAttrs.push(key)
-      } else {
-        keys.push(key)
-      }
-    }
-  })
-
-  let classNameList: Array<any> = []
-  let styleList: any = {}
-
-  const initialClassesAndStyles = () => {
-    classNameList = []
-
-    styleList = {}
-
-    keys.map((key: string) => {
-      if (includes(key, 'lc')) {
-        classNameList.push('rme--lc')
-      }
-      if (elements.indexOf(key) === -1 || !isBoolean(props[key])) {
-        const iKeyVal = utils.getKeyValue(key, props[key])
-        classNameList.push(iKeyVal.classNames.map((cn: string) => `rme--${cn}`))
-        classNameList.push(...iKeyVal.customerClassNames)
-        Object.assign(styleList, iKeyVal.styles)
-      }
-    })
-  }
-
-  initialClassesAndStyles()
-
   const getCloseIcon = () => {
     if (props.closable || props.onClose) {
       return (
@@ -105,62 +57,18 @@ const RME = (props: any) => {
   }
 
   const renderElement = () => {
-    let computerProps: any = {
-      className: ['rme', props.className, ...classNameList].reduce((cls: Array<string>, cn: any) => {
-        if (cn) {
-          cls.push(cn)
-        }
-        return cls
-      }, []).join(' '),
-      style: styleList
-    }
-
-    if (props.onClick) {
-      computerProps.onClick = props.onClick
-    }
-
-    if (props.href) {
-      computerProps.href = props.href
-    }
-    if (props.target) {
-      computerProps.target = props.target
-    }
-    if (keys.indexOf('bgi') > -1) {
-      computerProps.style.backgroundImage = 'url(' + props['bgi'] + ')'
-    }
-    /**
-     * Handle data-attrs
-     */
-    dataAttrs.map((prop: string) => {
-      computerProps[prop] = props[prop]
-    })
-
-    if (props.style) {
-      Object.assign(computerProps.style, props.style)
-    }
-
-    Object.keys(rmeConfig.colors).map((key: any) => {
-      if (computerProps.className.indexOf(key) > -1) {
-        if (computerProps.className.indexOf('rme--btn') > -1 || computerProps.className.indexOf('rme--tag') > -1) {
-          if (computerProps.className.indexOf('rme--plain') > -1) {
-            computerProps.style = Object.assign(computerProps.style, rmeConfig.colors['rme--btn-tag-plain'])
-          } else {
-            computerProps.style = Object.assign(computerProps.style, rmeConfig.colors['rme--btn-tag'])
-          }
-        } else {
-          computerProps.style = Object.assign(computerProps.style, rmeConfig.colors[key])
-        }
-      }
-    })
-
-    if (elementType === 'input') {
+    let computerProps: any = utils.computeProps(props)
+    let tagName = computerProps.tagName
+    delete computerProps.tagName
+    if (tagName === 'input') {
       return (
-        <input className={computerProps.className} style={computerProps.style} type={props.type || 'text'}
-               placeholder={props.placeholder} onChange={props.onChange} />
+        <input type={props.type || 'text'}
+               {...computerProps}
+        />
       )
     }
 
-    return React.createElement(elementType, computerProps, [getChildren(), getCloseIcon()].map((child: any, key: number) => {
+    return React.createElement(tagName, computerProps, [getChildren(), getCloseIcon()].map((child: any, key: number) => {
       return (
         <React.Fragment key={key}>{child}</React.Fragment>
       )
@@ -176,4 +84,5 @@ const RME = (props: any) => {
 
 RME.displayName = 'RME'
 RME.config = setConfig
+RME.computeProps = utils.computeProps
 export default RME

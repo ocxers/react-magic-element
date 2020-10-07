@@ -1,6 +1,10 @@
 import { colors, colorsValues, gridKeys, rmeConfig } from './consts'
 
 export const toArr = (str: string, spliter: any = /,/g): string[] => {
+  if (isUndefined(str)) {
+    return []
+  }
+
   return str.toString().split(spliter)
 }
 export const checkGridKey = (key: string) => {
@@ -20,8 +24,17 @@ export const checkGridKey = (key: string) => {
     return null
   }
 }
+export const isUndefined = (u: any): boolean => {
+  return typeof u === 'undefined'
+}
 export const isBoolean = (b: any): boolean => {
   return typeof b === 'boolean'
+}
+export const isAuto = (a: any): boolean => {
+  return a === 'auto'
+}
+export const isColor = (t: any): boolean => {
+  return t === 'color'
 }
 export const isNumber = (num: any, ignoreEmpty = true): boolean => {
   if (num === '') {
@@ -96,11 +109,14 @@ export const mixObjects: any = (short: string, attr: string, values: string[], a
   return tempObj
 }
 
-export const includes = (item: any, keys: any, start?: number) => {
+export const includes = (item: any, keys: any, start?: number, ignoreCase: boolean = false) => {
   // keys: 'cn-,cn'
   let keyList = toArr(keys)
   let included = false
   keyList.map((k: string) => {
+    if (ignoreCase) {
+      k = k.toLowerCase()
+    }
     if (isNumber(start)) {
       if (item.indexOf(k) === start) {
         included = true
@@ -115,16 +131,19 @@ export const includes = (item: any, keys: any, start?: number) => {
   return included
 }
 
-export const fillProps = (val: string, propsObj: any, idx: number = 0) => {
+export const fillProps = (val: string, propsObj: any, idx: number = 0, type?: string) => {
   if (val) {
     const keys = Object.keys(propsObj)
     let key = keys[idx]
     let key2 = keys[idx + 2]
-    if (isNumber(val)) {
+    if (isColor(type)) {
+      propsObj[key] = colorsValues[val] || val
+    } else if (isNumber(val) || isAuto(val)) {
       propsObj[key] = val
     } else {
-      const realVal = val.substr(1)
-      switch (val.charAt(0)) {
+      const kv = toArr(val, /(\d+)/)
+      const realVal = kv[1] || val.substr(1)
+      switch (kv[0]) {
         case 'w':
           idx = 0
           key = keys[idx]
@@ -135,7 +154,7 @@ export const fillProps = (val: string, propsObj: any, idx: number = 0) => {
           key = keys[idx]
           propsObj[key] = realVal
           key2 = keys[idx + 2]
-          if (propsObj[key2]) {
+          if (!isUndefined(propsObj[key2])) {
             propsObj[key2] = realVal
           }
           break
@@ -144,7 +163,7 @@ export const fillProps = (val: string, propsObj: any, idx: number = 0) => {
           key = keys[idx]
           propsObj[key] = realVal
           key2 = keys[idx + 2]
-          if (propsObj[key2]) {
+          if (!isUndefined(propsObj[key2])) {
             propsObj[key2] = realVal
           }
           break
@@ -168,13 +187,33 @@ export const fillProps = (val: string, propsObj: any, idx: number = 0) => {
           key = keys[idx]
           propsObj[key] = realVal
           break
+        case 'tl':
+          idx = 0
+          key = keys[idx]
+          propsObj[key] = realVal
+          break
+        case 'tr':
+          idx = 1
+          key = keys[idx]
+          propsObj[key] = realVal
+          break
+        case 'br':
+          idx = 2
+          key = keys[idx]
+          propsObj[key] = realVal
+          break
+        case 'bl':
+          idx = 3
+          key = keys[idx]
+          propsObj[key] = realVal
+          break
       }
     }
   }
 }
 
 export const computeTRBLStyles = (keyValueObj: any, keyValue: any) => {
-  const { key, value, cptKeys, kvObj, not } = keyValueObj
+  const { key, value, cptKeys, kvObj, not, type } = keyValueObj
   const keyArr = toArr(cptKeys)
   if (not && includes(key, not, 0)) {
     return
@@ -228,7 +267,7 @@ export const computeTRBLStyles = (keyValueObj: any, keyValue: any) => {
           fillProps(kvs[0], kvObj, 2)
           fillProps(kvs[0], kvObj, 3)
         } else {
-          fillProps(kvs[0], kvObj)
+          fillProps(kvs[0], kvObj, NaN, type)
         }
         break
       case 2:
@@ -236,46 +275,50 @@ export const computeTRBLStyles = (keyValueObj: any, keyValue: any) => {
           fillProps(kvs[0], kvObj, 0)
           fillProps(kvs[0], kvObj, 2)
         } else {
-          fillProps(kvs[0], kvObj)
+          fillProps(kvs[0], kvObj, NaN, type)
         }
         if (isNumber(kvs[1])) {
           fillProps(kvs[1], kvObj, 1)
           fillProps(kvs[1], kvObj, 3)
         } else {
-          fillProps(kvs[1], kvObj)
+          fillProps(kvs[1], kvObj, NaN, type)
         }
         break
       case 3:
         if (isNumber(kvs[0])) {
           fillProps(kvs[0], kvObj, 0)
         } else {
-          fillProps(kvs[0], kvObj)
+          fillProps(kvs[0], kvObj, NaN, type)
         }
         if (isNumber(kvs[1])) {
           fillProps(kvs[1], kvObj, 1)
           fillProps(kvs[1], kvObj, 3)
         } else {
-          fillProps(kvs[1], kvObj)
+          fillProps(kvs[1], kvObj, NaN, type)
         }
         if (isNumber(kvs[2])) {
           fillProps(kvs[2], kvObj, 2)
         } else {
-          fillProps(kvs[2], kvObj)
+          fillProps(kvs[2], kvObj, NaN, type)
         }
         break
       case 4:
-        fillProps(kvs[0], kvObj, 0)
-        fillProps(kvs[1], kvObj, 1)
-        fillProps(kvs[2], kvObj, 2)
-        fillProps(kvs[3], kvObj, 3)
+        fillProps(kvs[0], kvObj, 0, type)
+        fillProps(kvs[1], kvObj, 1, type)
+        fillProps(kvs[2], kvObj, 2, type)
+        fillProps(kvs[3], kvObj, 3, type)
         break
     }
 
     Object.keys(kvObj).map((attr: string) => {
       // @ts-ignore
       if (kvObj[attr]) {
+        let attrValue = `${kvObj[attr]}`
+        if (!isColor(type) && !isAuto(kvObj[attr])) {
+          attrValue += 'px'
+        }
         // @ts-ignore
-        keyValue.styles[attr] = `${kvObj[attr]}px`
+        keyValue.styles[attr] = attrValue
       }
     })
 

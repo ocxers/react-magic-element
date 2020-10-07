@@ -14,10 +14,10 @@ export default (props: any) => {
 <RME flex>
   <RME w-100 b p15>
     <RME row g32>
-      <RME xs20 sm18 md12 lg10 xl8 xxl6>
+      <RME xs24 sm18 md12 lg10 xl8 xxl6>
         <RME bgc-primary>col12</RME>
       </RME>
-      <RME xs4 sm6 md12 lg14 xl16 xxl18>
+      <RME xs24 sm6 md12 lg14 xl16 xxl18>
         <RME bgc-secondary>xs4 sm6 md12 lg14 xl16 xxl18</RME>
       </RME>
     </RME>
@@ -28,10 +28,10 @@ export default (props: any) => {
       <RME flex>
         <RME w-100 b p15>
           <RME row g32>
-            <RME xs20 sm18 md12 lg10 xl8 xxl6>
+            <RME xs24 sm18 md12 lg10 xl8 xxl6>
               <RME bgc-primary>col12</RME>
             </RME>
-            <RME xs4 sm6 md12 lg14 xl16 xxl18>
+            <RME xs24 sm6 md12 lg14 xl16 xxl18>
               <RME bgc-secondary>xs4 sm6 md12 lg14 xl16 xxl18</RME>
             </RME>
           </RME>
